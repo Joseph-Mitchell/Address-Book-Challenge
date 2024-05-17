@@ -8,12 +8,12 @@ title: Address Book
 ---
 classDiagram
 class AddressBook {
-    +contacts : List~Contact~$
+    +contacts : List~Contact~
     
-    +getContact(int) Contact$
-    +setContact(int, Contact) void$ 
-    +addContact(Contact) void$
-    +removeContact(int) void$
+    +getContact(int) Contact
+    +setContact(int, Contact) void
+    +addContact(Contact) void
+    +removeContact(int) void
 }
 class Contact {
     -firstName : String
@@ -28,15 +28,14 @@ class Contact {
     +removeDetail(int) void
 }
 class Application {
+    -addressBook : AddressBook$
+    
     +main(String[])$ void
     +mainMenu()$ void
-}
-class UserInteraction {
     +findContact()$ void
     +displayContacts()$ void
     +addContact()$ void
     +removeContact()$ void
-    -editContactDetail(int, Contact)$ void
     +editContact()$ void
 }
 class InputReceiver {
@@ -49,9 +48,9 @@ class InputReceiver {
     +receiveDetails()$ Map~String, String~
 }
 class ContactPrinter {
-    +printContact(Contact, bool)$ void
-    +printAllContacts(List~Contact~, bool)$ bool
-    +printMatchingContacts(String)$ bool
+    +printContact(Contact)$ void
+    +printAllContacts(List~Contact~)$ void
+    +printMatchingContacts(List~Contact~, String)$ void
 }
 class Validate {
     +string(String)$ bool
@@ -60,24 +59,27 @@ class Validate {
     +yesNo(String)$ bool
     +details(Map~String, String~)$ bool
 }
-Application ..> UserInteraction
-UserInteraction ..> ContactPrinter
-UserInteraction ..> InputReceiver
+Application o.. AddressBook
+Application ..> ContactPrinter
+Application ..> InputReceiver
+Application ..> Contact
 InputReceiver ..> Validate
 AddressBook --> "0..*" Contact
-AddressBook ..> Validate
 Contact ..> Validate
 ```
 
 ## Test Plan
 
 ### User Story 1
+#### Application.main()
+- [ ] Calls mainMenu()
+
 #### Application.mainMenu()
- - [ ] Calls only UserInteraction.addContact() if InputReceiver.receiveInt() returns matching int
+ - [ ] Calls only addContact() if InputReceiver.receiveInt() returns matching int
 
 #### UserInteraction.addContact()
- - [ ] Calls AddressBook.addContact() with expected parameters if InputReceiver.receiveYesNo() returns true
- - [ ] Does not call AddressBook.addContact() with expected parameters if InputReceiver.receiveYesNo() returns false
+ - [ ] Calls all required InputReceiver methods
+ - [ ] Calls AddressBook.addContact() with correctly constructed Contact
 
 #### Validate.string()
  - [ ] Returns false if string empty
@@ -154,26 +156,7 @@ Contact ..> Validate
  - [ ] Returns empty map if user input uppercase N
 
 #### AddressBook.addContact()
- - [ ] Throws error if firstName empty
- - [ ] Throws error if firstName only whitespace
- - [ ] Throws error if firstName null
- - [ ] Throws error if LastName empty
- - [ ] Throws error if LastName only whitespace
- - [ ] Throws error if LastName null
- - [ ] Throws error if phone empty
- - [ ] Throws error if phone only whitespace
- - [ ] Throws error if phone non-numeric
- - [ ] Throws error if phone null
- - [ ] Throws error if email empty
- - [ ] Throws error if email only whitespace
- - [ ] Throws error if email has no at symbol
- - [ ] Throws error if email has no period
- - [ ] Throws error if email null
- - [ ] Throws error if any String in details is empty
- - [ ] Throws error if any String in details is only whitespace
- - [ ] Throws error if any String in details is null
- - [ ] Throws error if details is null
- - [ ] Doesn't throw error if details is empty
+ - [ ] Throws error if Contact is null
  - [ ] Adds new Contact to contacts list if inputs valid
 
 #### Contact Constructor
@@ -200,13 +183,13 @@ Contact ..> Validate
 
 ### User Story 2
 #### Application.mainMenu()
- - [ ] Calls only UserInteraction.displayContacts() if InputReceiver.receiveInt() returns matching int
+ - [ ] Calls only displayContacts() if InputReceiver.receiveInt() returns matching int
 
 #### UserInteraction.displayContacts()
- - [ ] Calls ContactPrinter.printAllContacts() with AddressBook.getContacts()
+ - [ ] Calls ContactPrinter.printAllContacts() with list of contacts from addressBook
 
 #### ContactPrinter.printAllContacts()
- - [ ] Throws error if contacts is null
+ - [ ] Throws error if List is null
  - [ ] Calls printContact() for each element in contacts
 
 #### ContactPrinter.printContact()
@@ -216,39 +199,40 @@ Contact ..> Validate
 
 ### User Story 3
 #### Application.mainMenu()
-- [ ] Calls only UserInteraction.removeContact() if InputReceiver.receiveInt() returns matching int
+- [ ] Calls only removeContact() if InputReceiver.receiveInt() returns matching int
 
 #### UserInteraction.removeContact()
+- [ ] Does not call later methods if contacts list is empty
 - [ ] Calls ContactPrinter.printAllContacts()
-- [ ] Calls InputReceiver.receiveInt() with expected values
-- [ ] Calls AddressBook.removeContact() with expected values
+- [ ] Calls AddressBook.removeContact() with return value of InputReceiver.receiveInt()
 
 #### AddressBook.removeContact()
 - [ ] Throws exception if index more than list size
 - [ ] Throws exception if index less than 0
-- [ ] Removes correct element from contacts
+- [ ] Removes expected element from contacts
 
 ### User Story 4
 #### Application.mainMenu()
- - [ ] Calls only UserInteraction.editContact() if InputReceiver.receiveInt() returns matching int
+ - [ ] Calls only editContact() if InputReceiver.receiveInt() returns matching int
 
 #### UserInteraction.editContact()
- - [ ] Does not call later methods if ContactPrinter.printAllContacts() returns false
- - [ ] Calls AddressBook.setContact() with correctly constructed Contact if second receiveInt() returns 0
- - [ ] Calls AddressBook.setContact() with correctly constructed Contact if second receiveInt() returns 1
- - [ ] Calls AddressBook.setContact() with correctly constructed Contact if second receiveInt() returns 2
- - [ ] Calls AddressBook.setContact() with correctly constructed Contact if second receiveInt() returns 3
- - [ ] Calls AddressBook.setContact() with correctly constructed Contact if second receiveInt() returns more than 3
- - [ ] Calls removeDetail() if InputReceiver.receiveYesNo() returns true
- - [ ] Calls setDetail() if InputReceiver.receiveYesNo() returns false
- - [ ] Calls AddressBook.setContact() with correctly constructed Contact
+ - [ ] Does not call later methods if contacts list is empty
+ - [ ] Calls ContactPrinter.printAllContacts()
+ - [ ] Calls ContactPrinter.printContact() with Contact chosen by InputReceiver.receiveInt() return value
+ - [ ] Calls Contact.setFirstName() with InputReceiver.receiveString() return value if second InputReceiver.receiveInt() returns 0
+ - [ ] Calls Contact.setLastName() with InputReceiver.receiveString() return value if second InputReceiver.receiveInt() returns 1
+ - [ ] Calls Contact.setPhone() with InputReceiver.receivePhone() return value if second InputReceiver.receiveInt() returns 2
+ - [ ] Calls Contact.setEmail() with InputReceiver.receiveEmail() return value if second InputReceiver.receiveInt() returns 3
+ - [ ] Calls Contact.setDetail() with InputReceiver.receiveString() return value if second InputReceiver.receiveInt() returns more than 3 and InputReceiver.receiveYesNo() returns false
+ - [ ] Calls Contact.removeDetail() if second InputReceiver.receiveInt() returns more than 3 and InputReceiver.receiveYesNo() returns true
+ - [ ] Contact in address book is modified as expected
 
 ### User Story 5
 #### Application.mainMenu()
- - [ ] Calls only UserInteraction.findContact() if InputReceiver.receiveInt() returns matching int
+ - [ ] Calls only findContact() if InputReceiver.receiveInt() returns matching int
 
 #### UserInteraction.findContact()
- - [ ] Does not call later methods if address book is empty
+ - [ ] Does not call later methods if contacts list is empty
  - [ ] Calls ContactPrinter.printMatchingContacts()
 
 #### ContactPrinter.printMatchingContacts()
@@ -261,7 +245,7 @@ Contact ..> Validate
  - [ ] Prints expected contacts if input partially matches start of firstName
  - [ ] Prints expected contacts if input partially matches end of firstName
  - [ ] Prints expected contacts if input partially matches middle of firstName
- - [ ] Print expected contacts if input matches lastName
+ - [ ] Print expected contacts if input fully of partially matches lastName
 
 ### User Story 6
 #### UserInteraction.addContact()
