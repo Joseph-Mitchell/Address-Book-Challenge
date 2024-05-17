@@ -98,7 +98,20 @@ public class ApplicationTest {
         private String testEmail = "joseph-mitchell@example.com";
         private LinkedHashMap<String, String> testDetails = new LinkedHashMap<String, String>();
 
+        @Test
+        @DisplayName("Calls all expected methods in InputReceiver")
+        void CallsInputReceiver() {
+            //Arrange
 
+            //Act
+            Application.addContact();
+
+            //Assert
+            receiverMock.verify(InputReceiver::receiveString, times(2));
+            receiverMock.verify(InputReceiver::receivePhone, times(1));
+            receiverMock.verify(InputReceiver::receiveEmail, times(1));
+            receiverMock.verify(InputReceiver::receiveDetails, times(1));
+        }
 
         @Test
         @DisplayName("Calls Contact constructor with expected parameters")

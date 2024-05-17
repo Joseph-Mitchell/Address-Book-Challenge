@@ -18,7 +18,13 @@ public class Application {
     }
 
     public static void addContact() {
-        Contact contact = new Contact("Joseph", "Mitchell", "01234567891", "joseph-mitchell@example.com", new LinkedHashMap<String, String>());
+        String firstName = InputReceiver.receiveString();
+        String lastName = InputReceiver.receiveString();
+        String phone = InputReceiver.receivePhone();
+        String email = InputReceiver.receiveEmail();
+        LinkedHashMap<String, String> details = InputReceiver.receiveDetails();
+
+        Contact contact = new Contact(firstName, lastName, phone, email, details);
     }
 
     public static void displayContacts() {}
