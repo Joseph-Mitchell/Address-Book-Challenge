@@ -43,24 +43,47 @@ public class ApplicationTest {
 
     @Nested
     class MainMenu {
+        private MockedStatic<Application> appMock;
+
+        @BeforeEach
+        void beforeEach() {
+            appMock = mockStatic(Application.class);
+            appMock.when(Application::mainMenu).thenCallRealMethod();
+        }
+
+        @AfterEach
+        void afterEach() {
+            appMock.close();
+        }
+
+        @Test
+        @DisplayName("Doesn't call addContact() if InputReceiver.receiveInt() returns unmatching int")
+        void doesNotCallAddContact() {
+            //Arrange
+            receiverMock.when(() -> InputReceiver.receiveInt(anyInt())).thenReturn(-1);
+
+            //Act
+            Application.mainMenu();
+
+            //Assert
+            appMock.verify(Application::addContact, times(0));
+        }
+
         @Test
         @DisplayName("Only calls addContact() if InputReceiver.receiveInt() returns matching int")
-        void CallsAddContact() {
+        void callsAddContact() {
             //Arrange
-            try(MockedStatic<Application> appMock = mockStatic(Application.class)) {appMock.when(() -> Application.main(new String[]{})).thenCallRealMethod();
-                appMock.when(Application::mainMenu).thenCallRealMethod();
-                receiverMock.when(() -> InputReceiver.receiveInt(anyInt())).thenReturn(1);
+            receiverMock.when(() -> InputReceiver.receiveInt(anyInt())).thenReturn(1);
 
-                //Act
-                Application.mainMenu();
+            //Act
+            Application.mainMenu();
 
-                //Assert
-                appMock.verify(Application::addContact);
-                appMock.verify(Application::displayContacts, times(0));
-                appMock.verify(Application::removeContact, times(0));
-                appMock.verify(Application::editContact, times(0));
-                appMock.verify(Application::findContact, times(0));
-            }
+            //Assert
+            appMock.verify(Application::addContact);
+            appMock.verify(Application::displayContacts, times(0));
+            appMock.verify(Application::removeContact, times(0));
+            appMock.verify(Application::editContact, times(0));
+            appMock.verify(Application::findContact, times(0));
         }
     }
 }

@@ -6,7 +6,13 @@ public class Application {
     }
 
     public static void mainMenu() {
-        addContact();
+        int choice = InputReceiver.receiveInt(4);
+
+        switch(choice) {
+            case 1:
+                addContact();
+                break;
+        }
     }
 
     public static void addContact() {}

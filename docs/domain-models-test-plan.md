@@ -75,7 +75,7 @@ Contact ..> Validate
  - [x] Calls mainMenu()
 
 #### Application.mainMenu()
- - [ ] Doesn't call addContact() if InputReceiver.receiveInt() returns unmatching int
+ - [x] Doesn't call addContact() if InputReceiver.receiveInt() returns unmatching int
  - [x] Only calls addContact() if InputReceiver.receiveInt() returns matching int
 
 #### Application.addContact()
