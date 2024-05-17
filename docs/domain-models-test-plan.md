@@ -72,12 +72,13 @@ Contact ..> Validate
 
 ### User Story 1
 #### Application.main()
-- [x] Calls mainMenu()
+ - [x] Calls mainMenu()
 
 #### Application.mainMenu()
- - [ ] Calls only addContact() if InputReceiver.receiveInt() returns matching int
+ - [ ] Doesn't call addContact() if InputReceiver.receiveInt() returns unmatching int
+ - [x] Only calls addContact() if InputReceiver.receiveInt() returns matching int
 
-#### UserInteraction.addContact()
+#### Application.addContact()
  - [ ] Calls all required InputReceiver methods
  - [ ] Calls AddressBook.addContact() with correctly constructed Contact
 
@@ -183,9 +184,10 @@ Contact ..> Validate
 
 ### User Story 2
 #### Application.mainMenu()
+ - [ ] Doesn't call displayContacts() if InputReceiver.receiveInt() returns unmatching int
  - [ ] Calls only displayContacts() if InputReceiver.receiveInt() returns matching int
 
-#### UserInteraction.displayContacts()
+#### Application.displayContacts()
  - [ ] Calls ContactPrinter.printAllContacts() with list of contacts from addressBook
 
 #### ContactPrinter.printAllContacts()
@@ -199,23 +201,24 @@ Contact ..> Validate
 
 ### User Story 3
 #### Application.mainMenu()
-- [ ] Calls only removeContact() if InputReceiver.receiveInt() returns matching int
+ - [ ] Doesn't call removeContact() if InputReceiver.receiveInt() returns unmatching int
+ - [ ] Calls only removeContact() if InputReceiver.receiveInt() returns matching int
 
-#### UserInteraction.removeContact()
-- [ ] Does not call later methods if contacts list is empty
-- [ ] Calls ContactPrinter.printAllContacts()
-- [ ] Calls AddressBook.removeContact() with return value of InputReceiver.receiveInt()
+#### Application.removeContact()
+ - [ ] Does not call later methods if contacts list is empty
+ - [ ] Calls ContactPrinter.printAllContacts()
+ - [ ] Calls AddressBook.removeContact() with return value of InputReceiver.receiveInt()
 
 #### AddressBook.removeContact()
-- [ ] Throws exception if index more than list size
-- [ ] Throws exception if index less than 0
-- [ ] Removes expected element from contacts
+ - [ ] Throws exception if index more than list size
+ - [ ] Throws exception if index less than 0
+ - [ ] Removes expected element from contacts
 
 ### User Story 4
 #### Application.mainMenu()
  - [ ] Calls only editContact() if InputReceiver.receiveInt() returns matching int
 
-#### UserInteraction.editContact()
+#### Application.editContact()
  - [ ] Does not call later methods if contacts list is empty
  - [ ] Calls ContactPrinter.printAllContacts()
  - [ ] Calls ContactPrinter.printContact() with Contact chosen by InputReceiver.receiveInt() return value
@@ -229,9 +232,10 @@ Contact ..> Validate
 
 ### User Story 5
 #### Application.mainMenu()
+ - [ ] Doesn't call findContact() if InputReceiver.receiveInt() returns unmatching int
  - [ ] Calls only findContact() if InputReceiver.receiveInt() returns matching int
 
-#### UserInteraction.findContact()
+#### Application.findContact()
  - [ ] Does not call later methods if contacts list is empty
  - [ ] Calls ContactPrinter.printMatchingContacts()
 
@@ -248,14 +252,14 @@ Contact ..> Validate
  - [ ] Print expected contacts if input fully of partially matches lastName
 
 ### User Story 6
-#### UserInteraction.addContact()
+#### Application.addContact()
  - [ ] Print confirmation message when contact is added to address book
  - [ ] Print confirmation message when process is cancelled
 
-#### UserInteraction.removeContact()
+#### Application.removeContact()
  - [ ] Prints confirmation message when contact is removed
 
-#### UserInteraction.editContact()
+#### Application.editContact()
  - [ ] Calls ContactPrinter.printContact() after contact is updated
 
 #### ContactPrinter.printAllContacts()
