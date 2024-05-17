@@ -1,5 +1,7 @@
 package com.digitalfuturesacademy.app;
 
+import java.util.LinkedHashMap;
+
 public class Application {
     public static void main(String[] args) {
         mainMenu();
@@ -15,7 +17,9 @@ public class Application {
         }
     }
 
-    public static void addContact() {}
+    public static void addContact() {
+        Contact contact = new Contact("Joseph", "Mitchell", "01234567891", "joseph-mitchell@example.com", new LinkedHashMap<String, String>());
+    }
 
     public static void displayContacts() {}
 

@@ -79,7 +79,8 @@ Contact ..> Validate
  - [x] Only calls addContact() if InputReceiver.receiveInt() returns matching int
 
 #### Application.addContact()
- - [ ] Calls all required InputReceiver methods
+ - [x] Calls all expected methods in InputReceiver
+ - [x] Calls Contact constructor with expected parameters
  - [ ] Calls AddressBook.addContact() with correctly constructed Contact
 
 #### Validate.string()
