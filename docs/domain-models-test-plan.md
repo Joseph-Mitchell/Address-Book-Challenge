@@ -72,7 +72,7 @@ Contact ..> Validate
 
 ### User Story 1
 #### Application.main()
-- [ ] Calls mainMenu()
+- [x] Calls mainMenu()
 
 #### Application.mainMenu()
  - [ ] Calls only addContact() if InputReceiver.receiveInt() returns matching int
@@ -125,7 +125,7 @@ Contact ..> Validate
  - [ ] Retakes user input if non-numeric
  - [ ] Retakes user input if empty
  - [ ] Retakes user input if only whitespace
- - [ ] Returns correct String if user input valid
+ - [ ] Returns correct int if user input valid
 
 #### InputReceiver.receiveString()
  - [ ] Retakes user input if empty
