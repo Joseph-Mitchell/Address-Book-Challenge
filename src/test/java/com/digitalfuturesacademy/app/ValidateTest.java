@@ -181,18 +181,18 @@ public class ValidateTest {
             //Assert
             assertFalse(actual);
         }
-//
-//        @Test
-//        @DisplayName("Returns true if string valid")
-//        void trueIfValid() {
-//            //Arrange
-//            String testInput = "Joseph";
-//
-//            //Act
-//            boolean actual = Validate.string(testInput);
-//
-//            //Assert
-//            assertTrue(actual);
-//        }
+
+        @Test
+        @DisplayName("Returns true if string valid")
+        void trueIfValid() {
+            //Arrange
+            String testInput = "01234567890";
+
+            //Act
+            boolean actual = Validate.phone(testInput);
+
+            //Assert
+            assertTrue(actual);
+        }
     }
 }
