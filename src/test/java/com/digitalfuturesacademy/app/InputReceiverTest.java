@@ -4,10 +4,8 @@ import org.junit.jupiter.api.*;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 
-import java.io.*;
 import java.util.Scanner;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
@@ -47,13 +45,28 @@ public class InputReceiverTest {
             //Arrange
             Scanner testScanner = mock(Scanner.class);
             InputReceiver.setInput(testScanner);
-            validateMock.when(() -> Validate.integer(anyInt())).thenReturn(true);
+            validateMock.when(() -> Validate.integer(anyInt(), anyInt())).thenReturn(true);
 
             //Act
             InputReceiver.receiveInt(testCap);
 
             //Assert
             verify(testScanner, times(1)).nextInt();
+        }
+
+        @Test
+        @DisplayName("Retakes user input if Validate.int() returns false")
+        void retakesInputIfInvalid() {
+            //Arrange
+            Scanner testScanner = mock(Scanner.class);
+            InputReceiver.setInput(testScanner);
+            validateMock.when(() -> Validate.integer(anyInt(), anyInt())).thenReturn(false).thenReturn(true);
+
+            //Act
+            InputReceiver.receiveInt(testCap);
+
+            //Assert
+            verify(testScanner, times(2)).nextInt();
         }
     }
 }
