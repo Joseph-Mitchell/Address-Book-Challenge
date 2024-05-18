@@ -1,2 +1,5 @@
-package com.digitalfuturesacademy.app;public class AddressBook {
+package com.digitalfuturesacademy.app;
+
+public class AddressBook {
+
 }
