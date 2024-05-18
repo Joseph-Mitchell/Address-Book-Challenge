@@ -44,7 +44,7 @@ class InputReceiver {
     +receivePhone()$ String
     +receiveEmail()$ String
     +receiveYesNo()$ bool
-    -receiveDetail()$ String[]
+    -receiveDetail()$ Map~String, String~
     +receiveDetails()$ Map~String, String~
 }
 class ContactPrinter {
@@ -53,6 +53,7 @@ class ContactPrinter {
     +printMatchingContacts(List~Contact~, String)$ void
 }
 class Validate {
+    +integer(int)$ bool
     +string(String)$ bool
     +phone(String)$ bool
     +email(String)$ bool
@@ -86,38 +87,38 @@ Contact ..> Validate
 
 #### InputReceiver.receiveInt()
  - [x] Throws error if cap negative
- - [x] Accepts user input if Validate.int() returns true
- - [x] Retakes user input if Validate.int() returns false
+ - [x] Accepts user input if Validate.integer() returns true
+ - [x] Retakes user input if Validate.integer() returns false
  - [x] Retakes user input if input.nextInt() throws exception
- - [x] Returns correct int if Validate.int() returns true and no exceptions thrown
+ - [x] Returns correct int if Validate.integer() returns true and no exceptions thrown
 
 #### InputReceiver.receiveString()
- - [ ] Retakes user input if empty
- - [ ] Retakes user input if only whitespace
- - [ ] Returns correct String if user input valid
+ - [x] Accepts user input if Validate.string() returns true
+ - [ ] Retakes user input if Validate.string() returns false
+ - [ ] Returns correct String if Validate.string() returns true
 
 #### InputReceiver.receivePhone()
- - [ ] Retakes user input if empty
- - [ ] Retakes user input if only whitespace
- - [ ] Retakes user input if non-numeric
+ - [ ] Accepts user input if Validate.phone() returns true
+ - [ ] Retakes user input if Validate.phone() returns false
+ - [ ] Returns correct String if Validate.phone() returns true
 
 #### InputReceiver.receiveEmail()
- - [ ] Retakes user input if empty
- - [ ] Retakes user input if only whitespace
- - [ ] Retakes user input if no at symbol
- - [ ] Retakes user input if no period
+ - [ ] Accepts user input if Validate.email() returns true
+ - [ ] Retakes user input if Validate.email() returns false
+ - [ ] Returns correct String if Validate.email() returns true
+
+#### InputReceiver.receiveYesNo()
+ - [ ] Accepts user input if Validate.yesNo() returns true
+ - [ ] Retakes user input if Validate.yesNo() returns false
+ - [ ] Returns correct String if Validate.yesNo() returns true
+
+#### InputReceiver.receiveDetail()
+ - [ ] Returns map with key value given by InputReceiver.receiveString() calls
 
 #### InputReceiver.receiveDetails()
- - [ ] Retakes user input if [a-z] not 'y' or 'n'
- - [ ] Retakes user input if more than one char
- - [ ] Retakes user input if numeric
- - [ ] Retakes user input if special character
- - [ ] Retakes user input if empty
- - [ ] Retakes user input if whitespace
- - [ ] Returns Map with correct elements if user input  lowercase y
- - [ ] Returns Map with correct elements if user input  uppercase Y
- - [ ] Returns empty map if user input  lowercase n
- - [ ] Returns empty map if user input uppercase N
+ - [ ] Does not call InputReceiver.receiveDetail() if InputReceiver.yesNo() returns false
+ - [ ] Calls InputReceiver.receiveDetail() once if InputReceiver.yesNo() returns true then false
+ - [ ] Returns expected map
 
 #### Validate.integer()
  - [ ] Returns false if int less than 0

@@ -24,7 +24,12 @@ public class InputReceiver {
     }
 
     public static String receiveString() {
-        return "";
+        String candidate;
+        while(true) {
+            if (Validate.string(candidate = input.nextLine())) break;
+        }
+
+        return candidate;
     }
 
     public static String receivePhone() {

@@ -15,18 +15,23 @@ import static org.mockito.Mockito.*;
 
 public class InputReceiverTest {
     MockedStatic<Validate> validateMock;
+    Scanner inputMock;
     final int VALID_CAP = 5;
     int testCap;
 
     @BeforeEach
     void beforeEach() {
         validateMock = Mockito.mockStatic(Validate.class);
+        inputMock = mock(Scanner.class);
+        InputReceiver.setInput(inputMock);
     }
 
     @AfterEach
     void afterEach() {
         testCap = VALID_CAP;
         validateMock.close();
+        inputMock.close();
+        InputReceiver.setInput(null);
     }
 
     @Nested
@@ -46,41 +51,33 @@ public class InputReceiverTest {
         @DisplayName("Takes user input only once if Validate.int() returns true")
         void takesInputOnceIfValid() {
             //Arrange
-            Scanner testScanner = mock(Scanner.class);
-            InputReceiver.setInput(testScanner);
-
             validateMock.when(() -> Validate.integer(anyInt(), anyInt())).thenReturn(true);
 
             //Act
             InputReceiver.receiveInt(testCap);
 
             //Assert
-            verify(testScanner, times(1)).nextInt();
+            verify(inputMock, times(1)).nextInt();
         }
 
         @Test
         @DisplayName("Retakes user input if Validate.int() returns false")
         void retakesInputIfInvalid() {
             //Arrange
-            Scanner testScanner = mock(Scanner.class);
-            InputReceiver.setInput(testScanner);
-
             validateMock.when(() -> Validate.integer(anyInt(), anyInt())).thenReturn(false, true);
 
             //Act
             InputReceiver.receiveInt(testCap);
 
             //Assert
-            verify(testScanner, times(2)).nextInt();
+            verify(inputMock, times(2)).nextInt();
         }
 
         @Test
         @DisplayName("Retakes user input if input.nextInt() throws exception")
         void retakesInputIfException() {
             //Arrange
-            Scanner testScanner = mock(Scanner.class);
-            when(testScanner.nextInt()).thenThrow(InputMismatchException.class).thenReturn(0);
-            InputReceiver.setInput(testScanner);
+            when(inputMock.nextInt()).thenThrow(InputMismatchException.class).thenReturn(0);
 
             validateMock.when(() -> Validate.integer(anyInt(), anyInt())).thenReturn(true);
 
@@ -88,7 +85,7 @@ public class InputReceiverTest {
             InputReceiver.receiveInt(testCap);
 
             //Assert
-            verify(testScanner, times(2)).nextInt();
+            verify(inputMock, times(2)).nextInt();
         }
 
         @Test
@@ -96,9 +93,7 @@ public class InputReceiverTest {
         void returnsCorrectly() {
             //Arrange
             int testInput = 0;
-            Scanner testScanner = mock(Scanner.class);
-            when(testScanner.nextInt()).thenReturn(testInput);
-            InputReceiver.setInput(testScanner);
+            when(inputMock.nextInt()).thenReturn(testInput);
 
             validateMock.when(() -> Validate.integer(anyInt(), anyInt())).thenReturn(true);
 
@@ -107,6 +102,22 @@ public class InputReceiverTest {
 
             //Assert
             assertEquals(testInput, actual);
+        }
+    }
+
+    @Nested
+    class ReceiveString {
+        @Test
+        @DisplayName("Accepts user input if Validate.string() returns true")
+        void acceptsInput() {
+            //Arrange
+            validateMock.when(() -> Validate.string(any())).thenReturn(true);
+
+            //Act
+            InputReceiver.receiveString();
+
+            //Assert
+            verify(inputMock, times(1)).nextLine();
         }
     }
 }
