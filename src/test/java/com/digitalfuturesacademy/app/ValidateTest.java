@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ValidateTest {
     @Nested
@@ -42,6 +43,19 @@ public class ValidateTest {
 
             //Assert
             assertFalse(actual);
+        }
+
+        @Test
+        @DisplayName("Returns true if int valid")
+        void trueIfValid() {
+            //Arrange
+            int testInput = 4;
+
+            //Act
+            boolean actual = Validate.integer(testInput, VALID_CAP);
+
+            //Assert
+            assertTrue(actual);
         }
     }
 }
