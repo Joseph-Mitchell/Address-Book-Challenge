@@ -30,5 +30,18 @@ public class ValidateTest {
             //Assert
             assertFalse(actual);
         }
+
+        @Test
+        @DisplayName("Returns false if int more than cap")
+        void falseIfMoreThanCap() {
+            //Arrange
+            int testInput = 6;
+
+            //Act
+            boolean actual = Validate.integer(testInput, VALID_CAP);
+
+            //Assert
+            assertFalse(actual);
+        }
     }
 }
