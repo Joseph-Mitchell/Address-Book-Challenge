@@ -177,7 +177,8 @@ Contact ..> Validate
  - [x] Throws exception if Validate.string returns false for lastName
  - [x] Throws exception if Validate.phone returns false for phone
  - [x] Throws exception if Validate.email returns false for email
- - [ ] Throws exception if Validate.details returns false for details
+ - [x] Throws exception if Validate.details returns false for details
+ - [ ] Does not throw exception if Validate methods all return true
 
 ### User Story 2
 #### UserInteraction.mainMenu()
