@@ -250,6 +250,19 @@ public class ValidateTest {
             assertFalse(actual);
         }
 
+        @Test
+        @DisplayName("Returns false if no text between @ and .")
+        void falseIfNoTextBetweenAtAndDot() {
+            //Arrange
+            String testInput = "joseph@.com";
+
+            //Act
+            boolean actual = Validate.email(testInput);
+
+            //Assert
+            assertFalse(actual);
+        }
+
 //        @Test
 //        @DisplayName("Returns false if string empty")
 //        void falseIfEmpty() {

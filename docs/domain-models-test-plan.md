@@ -142,8 +142,8 @@ Contact ..> Validate
  - [x] Returns false if string has no @
  - [x] Returns false if string has no .
  - [x] Returns false if no text before @
- - [ ] Returns false if no text after .
- - [ ] Returns false if no text between @ and .
+ - [x] Returns false if no text after .
+ - [x] Returns false if no text between @ and .
  - [ ] Returns false if string empty
  - [ ] Returns false if string only whitespace
  - [ ] Returns false if string null
