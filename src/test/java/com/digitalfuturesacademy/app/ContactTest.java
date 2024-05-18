@@ -62,5 +62,15 @@ public class ContactTest {
             //Act, Assert
             assertThrows(IllegalArgumentException.class, () -> new Contact(firstName, lastName, phone, email, details));
         }
+
+        @Test
+        @DisplayName("Throws exception if Validate.email returns false for email")
+        void exceptionIfEmailInvalid() {
+            //Arrange
+            validateMock.when(() -> Validate.email(any())).thenReturn(false);
+
+            //Act, Assert
+            assertThrows(IllegalArgumentException.class, () -> new Contact(firstName, lastName, phone, email, details));
+        }
     }
 }
