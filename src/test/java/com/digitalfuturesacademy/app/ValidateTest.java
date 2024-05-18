@@ -226,9 +226,22 @@ public class ValidateTest {
 
         @Test
         @DisplayName("Returns false if no text before @")
-        void falseIfTextBeforeAt() {
+        void falseIfNoTextBeforeAt() {
             //Arrange
             String testInput = "@example.com";
+
+            //Act
+            boolean actual = Validate.email(testInput);
+
+            //Assert
+            assertFalse(actual);
+        }
+
+        @Test
+        @DisplayName("Returns false if no text after .")
+        void falseIfNoTextAfterDot() {
+            //Arrange
+            String testInput = "joseph@example.";
 
             //Act
             boolean actual = Validate.email(testInput);
