@@ -82,5 +82,12 @@ public class ContactTest {
             //Act, Assert
             assertThrows(IllegalArgumentException.class, () -> new Contact(firstName, lastName, phone, email, details));
         }
+
+        @Test
+        @DisplayName("Does not throw exception if Validate methods all return true")
+        void noExceptionIfAllValid() {
+            //Act
+            new Contact(firstName, lastName, phone, email, details);
+        }
     }
 }
