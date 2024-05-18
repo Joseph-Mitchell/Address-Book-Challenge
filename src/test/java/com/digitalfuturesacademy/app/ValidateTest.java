@@ -413,9 +413,22 @@ public class ValidateTest {
 
         @Test
         @DisplayName("Returns true if string 'y'")
-        void trueIfValid() {
+        void trueIfY() {
             //Arrange
             String testInput = "y";
+
+            //Act
+            boolean actual = Validate.yesNo(testInput);
+
+            //Assert
+            assertTrue(actual);
+        }
+
+        @Test
+        @DisplayName("Returns true if string 'n'")
+        void trueIfN() {
+            //Arrange
+            String testInput = "n";
 
             //Act
             boolean actual = Validate.yesNo(testInput);
