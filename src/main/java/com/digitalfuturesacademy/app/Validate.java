@@ -16,4 +16,8 @@ public class Validate {
     public static boolean email(String candidate) {
         return true;
     }
+
+    public static boolean yesNo(String candidate) {
+        return true;
+    }
 }

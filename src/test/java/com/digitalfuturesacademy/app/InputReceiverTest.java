@@ -190,4 +190,20 @@ public class InputReceiverTest {
             assertEquals(actual, testInput);
         }
     }
+
+    @Nested
+    class ReceiveYesNo {
+        @Test
+        @DisplayName("Retakes user input if Validate.yesNo() returns false")
+        void retakesInput() {
+            //Arrange
+            validateMock.when(() -> Validate.yesNo(any())).thenReturn(false).thenReturn(true);
+
+            //Act
+            InputReceiver.receiveYesNo();
+
+            //Assert
+            verify(inputMock, times(2)).nextLine();
+        }
+    }
 }

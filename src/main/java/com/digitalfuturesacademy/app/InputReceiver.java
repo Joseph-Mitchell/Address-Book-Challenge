@@ -50,6 +50,15 @@ public class InputReceiver {
         return candidate;
     }
 
+    public static String receiveYesNo() {
+        String candidate;
+        while(true) {
+            if (Validate.yesNo(candidate = input.nextLine())) break;
+        }
+
+        return candidate;
+    }
+
     public static LinkedHashMap<String, String> receiveDetails() {
         return new LinkedHashMap<String, String>();
     }

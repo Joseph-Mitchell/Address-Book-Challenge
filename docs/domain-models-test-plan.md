@@ -104,7 +104,7 @@ Contact ..> Validate
  - [x] Returns correct String if Validate.email() returns true
 
 #### InputReceiver.receiveYesNo()
- - [ ] Retakes user input if Validate.yesNo() returns false
+ - [x] Retakes user input if Validate.yesNo() returns false
  - [ ] Returns correct String if Validate.yesNo() returns true
 
 #### InputReceiver.receiveDetail()
