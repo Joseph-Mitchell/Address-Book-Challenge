@@ -496,5 +496,19 @@ public class ValidateTest {
             //Assert
             assertFalse(actual);
         }
+
+        @Test
+        @DisplayName("Returns true if map contains valid entries")
+        void trueIfValid() {
+            //Arrange
+            LinkedHashMap<String, String> testInput = new LinkedHashMap<String, String>();
+            testInput.put("Nickname", "Joe");
+
+            //Act
+            boolean actual = Validate.details(testInput);
+
+            //Assert
+            assertTrue(actual);
+        }
     }
 }
