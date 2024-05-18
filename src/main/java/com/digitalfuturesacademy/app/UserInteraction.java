@@ -21,6 +21,8 @@ public class UserInteraction {
         LinkedHashMap<String, String> details = InputReceiver.receiveDetails();
 
         Contact contact = new Contact(firstName, lastName, phone, email, details);
+
+        addressBook.addContact(contact);
     }
 
     public static void displayContacts(AddressBook addressBook) {}

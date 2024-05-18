@@ -13,19 +13,19 @@ import static org.mockito.Mockito.*;
 
 public class UserInteractionTest {
     private MockedStatic<InputReceiver> receiverMock;
-    private AddressBook addressBook;
+    private AddressBook addressBookMock;
 
     @BeforeEach
     void beforeEach() {
         receiverMock = Mockito.mockStatic(InputReceiver.class);
 
-        addressBook = new AddressBook();
+        addressBookMock = mock(AddressBook.class);
     }
 
     @AfterEach
     void afterEach() {
         receiverMock.close();
-        addressBook = null;
+        addressBookMock = null;
     }
 
     @Nested
@@ -50,7 +50,7 @@ public class UserInteractionTest {
             receiverMock.when(() -> InputReceiver.receiveInt(anyInt())).thenReturn(-1);
 
             //Act
-            UserInteraction.mainMenu(addressBook);
+            UserInteraction.mainMenu(addressBookMock);
 
             //Assert
             UIMock.verify(() -> UserInteraction.addContact(any()), times(0));
@@ -63,7 +63,7 @@ public class UserInteractionTest {
             receiverMock.when(() -> InputReceiver.receiveInt(anyInt())).thenReturn(1);
 
             //Act
-            UserInteraction.mainMenu(addressBook);
+            UserInteraction.mainMenu(addressBookMock);
 
             //Assert
             UIMock.verify(() -> UserInteraction.addContact(any()));
@@ -88,7 +88,7 @@ public class UserInteractionTest {
             //Arrange
 
             //Act
-            UserInteraction.addContact(addressBook);
+            UserInteraction.addContact(addressBookMock);
 
             //Assert
             receiverMock.verify(InputReceiver::receiveString, times(2));
@@ -115,7 +115,7 @@ public class UserInteractionTest {
                 receiverMock.when(InputReceiver::receiveDetails).thenReturn(testDetails);
 
                 //Act
-                UserInteraction.addContact(addressBook);
+                UserInteraction.addContact(addressBookMock);
 
                 //Assert
                 assertEquals(testFirstName, contactMock.constructed().get(0).getFirstName());
@@ -127,16 +127,14 @@ public class UserInteractionTest {
         }
 
         @Test
-        @DisplayName("")
+        @DisplayName("Calls AddressBook.addContact()")
         void callsAddressBookAddContact() {
             //Arrange
-            AddressBook bookMock = mock(AddressBook.class);
-
             //Act
-            UserInteraction.addContact(addressBook);
+            UserInteraction.addContact(addressBookMock);
 
             //Assert
-
+            verify(addressBookMock).addContact(notNull());
         }
     }
 }

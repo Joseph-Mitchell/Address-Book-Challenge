@@ -82,7 +82,7 @@ Contact ..> Validate
 #### UserInteraction.addContact()
  - [x] Calls all expected methods in InputReceiver
  - [x] Calls Contact constructor with expected parameters
- - [ ] Calls AddressBook.addContact()
+ - [x] Calls AddressBook.addContact()
 
 #### Validate.string()
  - [ ] Returns false if string empty
