@@ -224,6 +224,19 @@ public class ValidateTest {
             assertFalse(actual);
         }
 
+        @Test
+        @DisplayName("Returns false if no text before @")
+        void falseIfTextBeforeAt() {
+            //Arrange
+            String testInput = "@example.com";
+
+            //Act
+            boolean actual = Validate.email(testInput);
+
+            //Assert
+            assertFalse(actual);
+        }
+
 //        @Test
 //        @DisplayName("Returns false if string empty")
 //        void falseIfEmpty() {
