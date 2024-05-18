@@ -196,7 +196,7 @@ public class InputReceiverTest {
         @DisplayName("Retakes user input if Validate.yesNo() returns false")
         void retakesInput() {
             //Arrange
-            when(inputMock.nextLine()).thenReturn(" ");
+            when(inputMock.nextLine()).thenReturn("test");
             validateMock.when(() -> Validate.yesNo(any())).thenReturn(false).thenReturn(true);
 
             //Act
@@ -210,7 +210,7 @@ public class InputReceiverTest {
         @DisplayName("Retakes user input if Validate.yesNo() returns false")
         void acceptsInput() {
             //Arrange
-            when(inputMock.nextLine()).thenReturn(" ");
+            when(inputMock.nextLine()).thenReturn("test");
             validateMock.when(() -> Validate.yesNo(any())).thenReturn(true);
 
             //Act
@@ -253,6 +253,20 @@ public class InputReceiverTest {
         void trueIfChar1UppercaseY() {
             //Arrange
             when(inputMock.nextLine()).thenReturn("Yogurt");
+            validateMock.when(() -> Validate.yesNo(any())).thenReturn(true);
+
+            //Act
+            boolean actual = InputReceiver.receiveYesNo();
+
+            //Assert
+            assertTrue(actual);
+        }
+
+        @Test
+        @DisplayName("Returns true if whitespace before y")
+        void trueIfWhitespaceBeforeY() {
+            //Arrange
+            when(inputMock.nextLine()).thenReturn(" Yogurt");
             validateMock.when(() -> Validate.yesNo(any())).thenReturn(true);
 
             //Act

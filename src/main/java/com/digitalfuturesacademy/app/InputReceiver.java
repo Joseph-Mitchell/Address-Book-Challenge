@@ -56,7 +56,7 @@ public class InputReceiver {
             if (Validate.yesNo(candidate = input.nextLine())) break;
         }
 
-        return candidate.toLowerCase().charAt(0) == 'y';
+        return candidate.strip().toLowerCase().charAt(0) == 'y';
     }
 
     public static LinkedHashMap<String, String> receiveDetails() {

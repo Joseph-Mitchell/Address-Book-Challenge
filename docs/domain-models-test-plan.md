@@ -109,7 +109,7 @@ Contact ..> Validate
  - [x] Returns false if first character of input is not y
  - [x] Returns true if first character of input is lowercase y
  - [x] Returns true if first character of input is uppercase y
- - [ ] Returns true if whitespace before y
+ - [x] Returns true if whitespace before y
 
 #### InputReceiver.receiveDetail()
  - [ ] Returns map with key value given by InputReceiver.receiveString() calls
