@@ -87,13 +87,11 @@ Contact ..> Validate
 
 #### InputReceiver.receiveInt()
  - [x] Throws error if cap negative
- - [x] Accepts user input if Validate.integer() returns true
  - [x] Retakes user input if Validate.integer() returns false
  - [x] Retakes user input if input.nextInt() throws exception
  - [x] Returns correct int if Validate.integer() returns true and no exceptions thrown
 
 #### InputReceiver.receiveString()
- - [x] Accepts user input if Validate.string() returns true
  - [ ] Retakes user input if Validate.string() returns false
  - [ ] Returns correct String if Validate.string() returns true
 

@@ -48,19 +48,6 @@ public class InputReceiverTest {
         }
 
         @Test
-        @DisplayName("Takes user input only once if Validate.int() returns true")
-        void takesInputOnceIfValid() {
-            //Arrange
-            validateMock.when(() -> Validate.integer(anyInt(), anyInt())).thenReturn(true);
-
-            //Act
-            InputReceiver.receiveInt(testCap);
-
-            //Assert
-            verify(inputMock, times(1)).nextInt();
-        }
-
-        @Test
         @DisplayName("Retakes user input if Validate.int() returns false")
         void retakesInputIfInvalid() {
             //Arrange
@@ -108,16 +95,33 @@ public class InputReceiverTest {
     @Nested
     class ReceiveString {
         @Test
-        @DisplayName("Accepts user input if Validate.string() returns true")
-        void acceptsInput() {
+        @DisplayName("Retakes user input if Validate.string() returns false")
+        void retakesInput() {
             //Arrange
-            validateMock.when(() -> Validate.string(any())).thenReturn(true);
+            validateMock.when(() -> Validate.string(any())).thenReturn(false).thenReturn(true);
 
             //Act
             InputReceiver.receiveString();
 
             //Assert
+            verify(inputMock, times(2)).nextLine();
+        }
+
+        @Test
+        @DisplayName("Returns correct String if Validate.string() returns true")
+        void acceptsInput() {
+            //Arrange
+            String testInput = "test";
+            when(inputMock.nextLine()).thenReturn(testInput);
+
+            validateMock.when(() -> Validate.string(any())).thenReturn(true);
+
+            //Act
+            String actual = InputReceiver.receiveString();
+
+            //Assert
             verify(inputMock, times(1)).nextLine();
+            assertEquals(actual, testInput);
         }
     }
 }
