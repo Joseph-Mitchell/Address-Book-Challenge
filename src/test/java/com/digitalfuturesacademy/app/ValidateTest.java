@@ -444,10 +444,24 @@ public class ValidateTest {
     class Details {
         @Test
         @DisplayName("Returns false if any String in map is empty")
-        void falseIfNonNumeric() {
+        void falseIfAnyEmpty() {
             //Arrange
             LinkedHashMap<String, String> testInput = new LinkedHashMap<String, String>();
             testInput.put("", "");
+
+            //Act
+            boolean actual = Validate.details(testInput);
+
+            //Assert
+            assertFalse(actual);
+        }
+
+        @Test
+        @DisplayName("Returns false if any String in map is empty")
+        void falseIfAnyBlank() {
+            //Arrange
+            LinkedHashMap<String, String> testInput = new LinkedHashMap<String, String>();
+            testInput.put(" ", " ");
 
             //Act
             boolean actual = Validate.details(testInput);
