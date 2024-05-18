@@ -483,5 +483,18 @@ public class ValidateTest {
             //Assert
             assertFalse(actual);
         }
+
+        @Test
+        @DisplayName("Returns false if map is null")
+        void falseIfNull() {
+            //Arrange
+            LinkedHashMap<String, String> testInput = null;
+
+            //Act
+            boolean actual = Validate.details(testInput);
+
+            //Assert
+            assertFalse(actual);
+        }
     }
 }

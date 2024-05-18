@@ -1,5 +1,6 @@
 package com.digitalfuturesacademy.app;
 
+import java.util.Collection;
 import java.util.LinkedHashMap;
 
 public class Validate {
@@ -23,14 +24,15 @@ public class Validate {
         return candidate != null && candidate.matches("[yn]");
     }
 
-    public static boolean details(LinkedHashMap<String, String> candidate) {
-        for (String s : candidate.keySet()) {
+    private static boolean checkStringsInCollection(Collection<String> collection) {
+        for (String s : collection) {
             if (s == null || s.isBlank()) return false;
         }
-        for (String s : candidate.values()) {
-            if (s == null || s.isBlank()) return false;
-        }
-
         return true;
+    }
+
+    public static boolean details(LinkedHashMap<String, String> candidate) {
+        if (candidate == null) return false;
+        return checkStringsInCollection(candidate.keySet()) && checkStringsInCollection(candidate.values());
     }
 }
