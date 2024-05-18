@@ -211,6 +211,19 @@ public class ValidateTest {
             assertFalse(actual);
         }
 
+        @Test
+        @DisplayName("Returns false if string has no .")
+        void falseIfNoDot() {
+            //Arrange
+            String testInput = "joseph@examplecom";
+
+            //Act
+            boolean actual = Validate.email(testInput);
+
+            //Assert
+            assertFalse(actual);
+        }
+
 //        @Test
 //        @DisplayName("Returns false if string empty")
 //        void falseIfEmpty() {

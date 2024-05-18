@@ -140,7 +140,7 @@ Contact ..> Validate
 
 #### Validate.email()
  - [x] Returns false if string has no @
- - [ ] Returns false if string has no .
+ - [x] Returns false if string has no .
  - [ ] Returns false if no text before @
  - [ ] Returns false if no text after .
  - [ ] Returns false if no text between @ and .
