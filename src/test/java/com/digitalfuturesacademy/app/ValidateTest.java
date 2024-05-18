@@ -1,9 +1,6 @@
 package com.digitalfuturesacademy.app;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -442,11 +439,22 @@ public class ValidateTest {
 
     @Nested
     class Details {
+        LinkedHashMap<String, String> testInput;
+
+        @BeforeEach
+        void beforeEach() {
+            testInput = new LinkedHashMap<String, String>();
+        }
+
+        @AfterEach
+        void afterEach() {
+            testInput = null;
+        }
+
         @Test
         @DisplayName("Returns false if any String in map is empty")
         void falseIfAnyEmpty() {
             //Arrange
-            LinkedHashMap<String, String> testInput = new LinkedHashMap<String, String>();
             testInput.put("", "");
 
             //Act
@@ -460,7 +468,6 @@ public class ValidateTest {
         @DisplayName("Returns false if any String in map is only whitespace")
         void falseIfAnyBlank() {
             //Arrange
-            LinkedHashMap<String, String> testInput = new LinkedHashMap<String, String>();
             testInput.put(" ", " ");
 
             //Act
@@ -474,7 +481,6 @@ public class ValidateTest {
         @DisplayName("Returns false if any String in map is null")
         void falseIfAnyNull() {
             //Arrange
-            LinkedHashMap<String, String> testInput = new LinkedHashMap<String, String>();
             testInput.put(null, null);
 
             //Act
@@ -488,7 +494,7 @@ public class ValidateTest {
         @DisplayName("Returns false if map is null")
         void falseIfNull() {
             //Arrange
-            LinkedHashMap<String, String> testInput = null;
+            testInput = null;
 
             //Act
             boolean actual = Validate.details(testInput);
@@ -501,9 +507,18 @@ public class ValidateTest {
         @DisplayName("Returns true if map contains valid entries")
         void trueIfValid() {
             //Arrange
-            LinkedHashMap<String, String> testInput = new LinkedHashMap<String, String>();
             testInput.put("Nickname", "Joe");
 
+            //Act
+            boolean actual = Validate.details(testInput);
+
+            //Assert
+            assertTrue(actual);
+        }
+
+        @Test
+        @DisplayName("Returns true if map is empty")
+        void trueIfEmpty() {
             //Act
             boolean actual = Validate.details(testInput);
 

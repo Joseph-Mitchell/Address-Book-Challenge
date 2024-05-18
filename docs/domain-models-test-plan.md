@@ -165,8 +165,8 @@ Contact ..> Validate
  - [x] Returns false if any String in map is only whitespace
  - [x] Returns false if any String in map is null
  - [x] Returns false if map is null
- - [ ] Returns true if map contains valid entries
- - [ ] Returns true if map is empty
+ - [x] Returns true if map contains valid entries
+ - [x] Returns true if map is empty
 
 #### AddressBook.addContact()
  - [ ] Throws error if Contact is null
