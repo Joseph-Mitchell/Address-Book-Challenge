@@ -97,7 +97,7 @@ Contact ..> Validate
 
 #### InputReceiver.receivePhone()
  - [x] Retakes user input if Validate.phone() returns false
- - [ ] Returns correct String if Validate.phone() returns true
+ - [x] Returns correct String if Validate.phone() returns true
 
 #### InputReceiver.receiveEmail()
  - [ ] Retakes user input if Validate.email() returns false

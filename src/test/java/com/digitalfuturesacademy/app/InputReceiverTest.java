@@ -139,5 +139,22 @@ public class InputReceiverTest {
             //Assert
             verify(inputMock, times(2)).nextLine();
         }
+
+        @Test
+        @DisplayName("Returns correct String if Validate.phone() returns true")
+        void acceptsInput() {
+            //Arrange
+            String testInput = "test";
+            when(inputMock.nextLine()).thenReturn(testInput);
+
+            validateMock.when(() -> Validate.phone(any())).thenReturn(true);
+
+            //Act
+            String actual = InputReceiver.receivePhone();
+
+            //Assert
+            verify(inputMock, times(1)).nextLine();
+            assertEquals(actual, testInput);
+        }
     }
 }
