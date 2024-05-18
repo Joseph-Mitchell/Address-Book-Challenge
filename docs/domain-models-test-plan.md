@@ -86,10 +86,9 @@ Contact ..> Validate
 
 #### InputReceiver.receiveInt()
  - [x] Throws error if cap negative
- - [ ] Retakes user input if outside of given range
- - [ ] Retakes user input if non-numeric
- - [ ] Retakes user input if empty
- - [ ] Retakes user input if only whitespace
+ - [x] Takes user input only once if Validate.int() returns true
+ - [ ] Retakes user input if Validate.int() returns false
+ - [ ] Retakes user input if input.nextInt() throws error
  - [ ] Returns correct int if user input valid
 
 #### InputReceiver.receiveString()
@@ -119,6 +118,11 @@ Contact ..> Validate
  - [ ] Returns Map with correct elements if user input  uppercase Y
  - [ ] Returns empty map if user input  lowercase n
  - [ ] Returns empty map if user input uppercase N
+
+#### Validate.integer()
+ - [ ] Returns false if int less than 0
+ - [ ] Returns false if int more than cap
+ - [ ] Returns true if int valid
 
 #### Validate.string()
  - [ ] Returns false if string empty

@@ -1,12 +1,19 @@
 package com.digitalfuturesacademy.app;
 
 import java.util.LinkedHashMap;
+import java.util.Scanner;
 
 public class InputReceiver {
+    private static Scanner input = new Scanner(System.in);
+
+    public static void setInput(Scanner input) {
+        InputReceiver.input = input;
+    }
+
     public static int receiveInt(int cap) throws IllegalArgumentException {
         if (cap < 0) throw new IllegalArgumentException("Cap cannot be negative");
 
-        return 0;
+        return input.nextInt();
     }
 
     public static String receiveString() {
