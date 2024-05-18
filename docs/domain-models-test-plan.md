@@ -92,21 +92,18 @@ Contact ..> Validate
  - [x] Returns correct int if Validate.integer() returns true and no exceptions thrown
 
 #### InputReceiver.receiveString()
- - [ ] Retakes user input if Validate.string() returns false
- - [ ] Returns correct String if Validate.string() returns true
+ - [x] Retakes user input if Validate.string() returns false
+ - [x] Returns correct String if Validate.string() returns true
 
 #### InputReceiver.receivePhone()
- - [ ] Accepts user input if Validate.phone() returns true
- - [ ] Retakes user input if Validate.phone() returns false
+ - [x] Retakes user input if Validate.phone() returns false
  - [ ] Returns correct String if Validate.phone() returns true
 
 #### InputReceiver.receiveEmail()
- - [ ] Accepts user input if Validate.email() returns true
  - [ ] Retakes user input if Validate.email() returns false
  - [ ] Returns correct String if Validate.email() returns true
 
 #### InputReceiver.receiveYesNo()
- - [ ] Accepts user input if Validate.yesNo() returns true
  - [ ] Retakes user input if Validate.yesNo() returns false
  - [ ] Returns correct String if Validate.yesNo() returns true
 

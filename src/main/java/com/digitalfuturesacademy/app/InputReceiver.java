@@ -33,7 +33,12 @@ public class InputReceiver {
     }
 
     public static String receivePhone() {
-        return "";
+        String candidate;
+        while(true) {
+            if (Validate.phone(candidate = input.nextLine())) break;
+        }
+
+        return candidate;
     }
 
     public static String receiveEmail() {

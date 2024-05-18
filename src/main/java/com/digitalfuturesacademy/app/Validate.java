@@ -8,4 +8,8 @@ public class Validate {
     public static boolean string(String candidate) {
         return true;
     }
+
+    public static boolean phone(String candidate) {
+        return true;
+    }
 }

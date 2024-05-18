@@ -124,4 +124,20 @@ public class InputReceiverTest {
             assertEquals(actual, testInput);
         }
     }
+
+    @Nested
+    class ReceivePhone {
+        @Test
+        @DisplayName("Retakes user input if Validate.phone() returns false")
+        void retakesInput() {
+            //Arrange
+            validateMock.when(() -> Validate.phone(any())).thenReturn(false).thenReturn(true);
+
+            //Act
+            InputReceiver.receivePhone();
+
+            //Assert
+            verify(inputMock, times(2)).nextLine();
+        }
+    }
 }
