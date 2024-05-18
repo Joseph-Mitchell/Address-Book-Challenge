@@ -349,13 +349,9 @@ public class InputReceiverTest {
                 receiverMock.when(InputReceiver::receiveDetails).thenCallRealMethod();
                 receiverMock.when(InputReceiver::receiveYesNo).thenAnswer(new Answer<Boolean>() {
                     int count = 0;
-                    public Boolean answer(InvocationOnMock invocation) {
-                        if (count++ < times) return true;
-                        else return false;
-                    }
+                    public Boolean answer(InvocationOnMock invocation) {return count++ < times;}
                 });
                 receiverMock.when(InputReceiver::receiveDetail).thenReturn(new String[] {"", ""});
-
 
                 //Act
                 InputReceiver.receiveDetails();

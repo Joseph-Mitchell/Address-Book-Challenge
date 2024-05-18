@@ -120,7 +120,7 @@ Contact ..> Validate
  - [x] Returns expected map
 
 #### Validate.integer()
- - [ ] Returns false if int less than 0
+ - [x] Returns false if int less than 0
  - [ ] Returns false if int more than cap
  - [ ] Returns true if int valid
  - [ ] Returns true if int 0 and cap 0
