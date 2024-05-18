@@ -57,5 +57,18 @@ public class ValidateTest {
             //Assert
             assertTrue(actual);
         }
+
+        @Test
+        @DisplayName("Returns true if int 0 and cap 0")
+        void trueIfInput0AndCap0() {
+            //Arrange
+            int testInput = 0;
+
+            //Act
+            boolean actual = Validate.integer(testInput, 0);
+
+            //Assert
+            assertTrue(actual);
+        }
     }
 }

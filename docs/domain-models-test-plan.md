@@ -122,8 +122,8 @@ Contact ..> Validate
 #### Validate.integer()
  - [x] Returns false if int less than 0
  - [x] Returns false if int more than cap
- - [ ] Returns true if int valid
- - [ ] Returns true if int 0 and cap 0
+ - [x] Returns true if int valid
+ - [x] Returns true if int 0 and cap 0
 
 #### Validate.string()
  - [ ] Returns false if string empty
