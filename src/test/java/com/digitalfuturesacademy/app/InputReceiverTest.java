@@ -219,5 +219,19 @@ public class InputReceiverTest {
             //Assert
             verify(inputMock, times(1)).nextLine();
         }
+
+        @Test
+        @DisplayName("Returns false if first character of input is not y")
+        void falseIfChar1NotY() {
+            //Arrange
+            when(inputMock.nextLine()).thenReturn("test");
+            validateMock.when(() -> Validate.yesNo(any())).thenReturn(true);
+
+            //Act
+            boolean actual = InputReceiver.receiveYesNo();
+
+            //Assert
+            assertFalse(actual);
+        }
     }
 }

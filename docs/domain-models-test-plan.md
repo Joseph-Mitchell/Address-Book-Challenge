@@ -106,7 +106,7 @@ Contact ..> Validate
 #### InputReceiver.receiveYesNo()
  - [x] Retakes user input if Validate.yesNo() returns false
  - [x] Accepts user input if Validate.yesNo() returns true
- - [ ] Returns false if first character of input is not y
+ - [x] Returns false if first character of input is not y
  - [ ] Returns true if first character of input is lowercase y
  - [ ] Returns true if first character of input is uppercase y
  - [ ] Returns true if whitespace before y
