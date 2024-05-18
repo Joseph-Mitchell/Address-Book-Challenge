@@ -127,4 +127,72 @@ public class ValidateTest {
             assertTrue(actual);
         }
     }
+
+    @Nested
+    class Phone {
+        @Test
+        @DisplayName("Returns false if string has non-numeric characters")
+        void falseIfEmpty() {
+            //Arrange
+            String testInput = "abc";
+
+            //Act
+            boolean actual = Validate.phone(testInput);
+
+            //Assert
+            assertFalse(actual);
+        }
+
+//        @Test
+//        @DisplayName("Returns false if string empty")
+//        void falseIfEmpty() {
+//            //Arrange
+//            String testInput = "";
+//
+//            //Act
+//            boolean actual = Validate.string(testInput);
+//
+//            //Assert
+//            assertFalse(actual);
+//        }
+//
+//        @Test
+//        @DisplayName("Returns false if string only whitespace")
+//        void falseIfBlank() {
+//            //Arrange
+//            String testInput = " ";
+//
+//            //Act
+//            boolean actual = Validate.string(testInput);
+//
+//            //Assert
+//            assertFalse(actual);
+//        }
+//
+//        @Test
+//        @DisplayName("Returns false if string null")
+//        void falseIfNull() {
+//            //Arrange
+//            String testInput = null;
+//
+//            //Act
+//            boolean actual = Validate.string(testInput);
+//
+//            //Assert
+//            assertFalse(actual);
+//        }
+//
+//        @Test
+//        @DisplayName("Returns true if string valid")
+//        void trueIfValid() {
+//            //Arrange
+//            String testInput = "Joseph";
+//
+//            //Act
+//            boolean actual = Validate.string(testInput);
+//
+//            //Assert
+//            assertTrue(actual);
+//        }
+    }
 }
