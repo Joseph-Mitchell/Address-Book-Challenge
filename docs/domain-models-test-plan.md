@@ -146,8 +146,8 @@ Contact ..> Validate
  - [x] Returns false if no text between @ and .
  - [x] Returns false if string empty
  - [x] Returns false if string only whitespace
- - [ ] Returns false if string null
- - [ ] Returns true if string valid
+ - [x] Returns false if string null
+ - [x] Returns true if string valid
 
 #### Validate.yesNo()
  - [ ] Returns false if string [a-z] not 'y' or 'n'
