@@ -410,18 +410,18 @@ public class ValidateTest {
             //Assert
             assertFalse(actual);
         }
-//
-//        @Test
-//        @DisplayName("Returns true if string valid")
-//        void trueIfValid() {
-//            //Arrange
-//            String testInput = "01234567890";
-//
-//            //Act
-//            boolean actual = Validate.phone(testInput);
-//
-//            //Assert
-//            assertTrue(actual);
-//        }
+
+        @Test
+        @DisplayName("Returns true if string 'y'")
+        void trueIfValid() {
+            //Arrange
+            String testInput = "y";
+
+            //Act
+            boolean actual = Validate.yesNo(testInput);
+
+            //Assert
+            assertTrue(actual);
+        }
     }
 }
