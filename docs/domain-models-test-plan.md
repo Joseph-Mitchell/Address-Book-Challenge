@@ -107,7 +107,7 @@ Contact ..> Validate
  - [x] Retakes user input if Validate.yesNo() returns false
  - [x] Accepts user input if Validate.yesNo() returns true
  - [x] Returns false if first character of input is not y
- - [ ] Returns true if first character of input is lowercase y
+ - [x] Returns true if first character of input is lowercase y
  - [ ] Returns true if first character of input is uppercase y
  - [ ] Returns true if whitespace before y
 

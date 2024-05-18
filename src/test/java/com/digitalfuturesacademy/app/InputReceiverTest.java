@@ -233,5 +233,19 @@ public class InputReceiverTest {
             //Assert
             assertFalse(actual);
         }
+
+        @Test
+        @DisplayName("Returns false if first character of input is not y")
+        void trueIfChar1LowercaseY() {
+            //Arrange
+            when(inputMock.nextLine()).thenReturn("yogurt");
+            validateMock.when(() -> Validate.yesNo(any())).thenReturn(true);
+
+            //Act
+            boolean actual = InputReceiver.receiveYesNo();
+
+            //Assert
+            assertTrue(actual);
+        }
     }
 }
