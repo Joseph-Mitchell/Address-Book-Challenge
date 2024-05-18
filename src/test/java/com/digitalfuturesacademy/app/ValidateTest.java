@@ -331,6 +331,32 @@ public class ValidateTest {
             assertFalse(actual);
         }
 
+        @Test
+        @DisplayName("Returns false if string more than one char")
+        void falseIfMoreThanOneChar() {
+            //Arrange
+            String testInput = "yyy";
+
+            //Act
+            boolean actual = Validate.yesNo(testInput);
+
+            //Assert
+            assertFalse(actual);
+        }
+
+        @Test
+        @DisplayName("Returns false if string numeric")
+        void falseIfNumeric() {
+            //Arrange
+            String testInput = "0";
+
+            //Act
+            boolean actual = Validate.yesNo(testInput);
+
+            //Assert
+            assertFalse(actual);
+        }
+
 //        @Test
 //        @DisplayName("Returns false if string empty")
 //        void falseIfEmpty() {
