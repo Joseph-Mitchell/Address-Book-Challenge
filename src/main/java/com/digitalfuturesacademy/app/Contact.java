@@ -10,6 +10,10 @@ public class Contact {
     private LinkedHashMap<String, String> details;
 
     public Contact(String firstName, String lastName, String phone, String email, LinkedHashMap<String, String> details) {
+        if (!Validate.string(firstName) || !Validate.string(lastName) || !Validate.phone(phone)
+            || !Validate.email(email) || !Validate.details(details))
+            throw new IllegalArgumentException();
+
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;

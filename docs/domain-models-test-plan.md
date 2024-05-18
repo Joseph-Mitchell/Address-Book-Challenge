@@ -173,26 +173,12 @@ Contact ..> Validate
  - [x] Adds new Contact to contacts list if inputs valid
 
 #### Contact Constructor
- - [ ] Throws error if firstName empty
- - [ ] Throws error if firstName only whitespace
- - [ ] Throws error if firstName null
- - [ ] Throws error if LastName empty
- - [ ] Throws error if LastName only whitespace
- - [ ] Throws error if LastName null
- - [ ] Throws error if phone empty
- - [ ] Throws error if phone only whitespace
- - [ ] Throws error if phone non-numeric
- - [ ] Throws error if phone null
- - [ ] Throws error if email empty
- - [ ] Throws error if email only whitespace
- - [ ] Throws error if email has no at symbol
- - [ ] Throws error if email has no period
- - [ ] Throws error if email null
- - [ ] Throws error if any String in details is empty
- - [ ] Throws error if any String in details is only whitespace
- - [ ] Throws error if any String in details is null
- - [ ] Throws error if details is null
- - [ ] Doesn't throw error if details is empty
+ - [x] Throws exception if Validate.string returns false for firstName
+ - [ ] Throws exception if Validate.string returns false for lastName
+ - [ ] Throws exception if Validate.phone returns false for phone
+ - [ ] Throws exception if Validate.email returns false for email
+ - [ ] Throws exception if Validate.details returns false for details
+ - [ ] Doesn't throw exception if details is empty
 
 ### User Story 2
 #### UserInteraction.mainMenu()
@@ -203,11 +189,11 @@ Contact ..> Validate
  - [ ] Calls ContactPrinter.printAllContacts() with list of contacts from addressBook
 
 #### ContactPrinter.printAllContacts()
- - [ ] Throws error if List is null
+ - [ ] Throws exception if List is null
  - [ ] Calls printContact() for each element in contacts
 
 #### ContactPrinter.printContact()
- - [ ] Throws error if Contact is null
+ - [ ] Throws exception if Contact is null
  - [ ] Prints contact correctly when no additional details
  - [ ] Prints contact correctly when at least one additional detail
 

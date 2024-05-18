@@ -86,15 +86,16 @@ public class UserInteractionTest {
         @DisplayName("Calls all expected methods in InputReceiver")
         void callsInputReceiver() {
             //Arrange
+            try(MockedConstruction<Contact> contactMock = Mockito.mockConstruction(Contact.class)) {
+                //Act
+                UserInteraction.addContact(addressBookMock);
 
-            //Act
-            UserInteraction.addContact(addressBookMock);
-
-            //Assert
-            receiverMock.verify(InputReceiver::receiveString, times(2));
-            receiverMock.verify(InputReceiver::receivePhone, times(1));
-            receiverMock.verify(InputReceiver::receiveEmail, times(1));
-            receiverMock.verify(InputReceiver::receiveDetails, times(1));
+                //Assert
+                receiverMock.verify(InputReceiver::receiveString, times(2));
+                receiverMock.verify(InputReceiver::receivePhone, times(1));
+                receiverMock.verify(InputReceiver::receiveEmail, times(1));
+                receiverMock.verify(InputReceiver::receiveDetails, times(1));
+            }
         }
 
         @Test
@@ -130,11 +131,13 @@ public class UserInteractionTest {
         @DisplayName("Calls AddressBook.addContact()")
         void callsAddressBookAddContact() {
             //Arrange
-            //Act
-            UserInteraction.addContact(addressBookMock);
+            try(MockedConstruction<Contact> contactMock = Mockito.mockConstruction(Contact.class)) {
+                //Act
+                UserInteraction.addContact(addressBookMock);
 
-            //Assert
-            verify(addressBookMock).addContact(notNull());
+                //Assert
+                verify(addressBookMock).addContact(notNull());
+            }
         }
     }
 }
