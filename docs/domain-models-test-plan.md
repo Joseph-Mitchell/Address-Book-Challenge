@@ -154,8 +154,8 @@ Contact ..> Validate
  - [x] Returns false if string more than one char
  - [x] Returns false if string numeric
  - [x] Returns false if string special character
- - [ ] Returns false if string empty
- - [ ] Returns false if string whitespace
+ - [x] Returns false if string empty
+ - [x] Returns false if string whitespace
  - [ ] Returns false if string null
  - [ ] Returns true if string 'y'
  - [ ] Returns true if string 'n'

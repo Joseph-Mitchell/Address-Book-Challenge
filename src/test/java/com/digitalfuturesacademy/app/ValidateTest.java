@@ -384,19 +384,19 @@ public class ValidateTest {
             //Assert
             assertFalse(actual);
         }
-//
-//        @Test
-//        @DisplayName("Returns false if string only whitespace")
-//        void falseIfBlank() {
-//            //Arrange
-//            String testInput = " ";
-//
-//            //Act
-//            boolean actual = Validate.phone(testInput);
-//
-//            //Assert
-//            assertFalse(actual);
-//        }
+
+        @Test
+        @DisplayName("Returns false if string only whitespace")
+        void falseIfBlank() {
+            //Arrange
+            String testInput = " ";
+
+            //Act
+            boolean actual = Validate.yesNo(testInput);
+
+            //Assert
+            assertFalse(actual);
+        }
 //
 //        @Test
 //        @DisplayName("Returns false if string null")
