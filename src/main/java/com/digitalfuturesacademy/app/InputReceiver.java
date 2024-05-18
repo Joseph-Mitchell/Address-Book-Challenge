@@ -13,10 +13,16 @@ public class InputReceiver {
     public static int receiveInt(int cap) throws IllegalArgumentException {
         if (cap < 0) throw new IllegalArgumentException("Cap cannot be negative");
 
-        int candidate;
+        int candidate = 0;
+        boolean valid = false;
         do {
-            candidate = input.nextInt();
-        } while(!Validate.integer(candidate, cap));
+            try {
+                candidate = input.nextInt();
+                valid = Validate.integer(candidate, cap);
+            } catch(Exception e) {
+                valid = false;
+            }
+        } while(!valid);
 
         return candidate;
     }

@@ -4,6 +4,7 @@ import org.junit.jupiter.api.*;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -45,6 +46,7 @@ public class InputReceiverTest {
             //Arrange
             Scanner testScanner = mock(Scanner.class);
             InputReceiver.setInput(testScanner);
+
             validateMock.when(() -> Validate.integer(anyInt(), anyInt())).thenReturn(true);
 
             //Act
@@ -60,7 +62,25 @@ public class InputReceiverTest {
             //Arrange
             Scanner testScanner = mock(Scanner.class);
             InputReceiver.setInput(testScanner);
-            validateMock.when(() -> Validate.integer(anyInt(), anyInt())).thenReturn(false).thenReturn(true);
+
+            validateMock.when(() -> Validate.integer(anyInt(), anyInt())).thenReturn(false, true);
+
+            //Act
+            InputReceiver.receiveInt(testCap);
+
+            //Assert
+            verify(testScanner, times(2)).nextInt();
+        }
+
+        @Test
+        @DisplayName("Retakes user input if input.nextInt() throws exception")
+        void retakesInputIfException() {
+            //Arrange
+            Scanner testScanner = mock(Scanner.class);
+            when(testScanner.nextInt()).thenThrow(InputMismatchException.class).thenReturn(0);
+            InputReceiver.setInput(testScanner);
+
+            validateMock.when(() -> Validate.integer(anyInt(), anyInt())).thenReturn(true);
 
             //Act
             InputReceiver.receiveInt(testCap);
