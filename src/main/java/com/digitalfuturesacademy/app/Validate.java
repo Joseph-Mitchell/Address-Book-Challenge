@@ -25,10 +25,10 @@ public class Validate {
 
     public static boolean details(LinkedHashMap<String, String> candidate) {
         for (String s : candidate.keySet()) {
-            if (s.isBlank()) return false;
+            if (s == null || s.isBlank()) return false;
         }
         for (String s : candidate.values()) {
-            if (s.isBlank()) return false;
+            if (s == null || s.isBlank()) return false;
         }
 
         return true;

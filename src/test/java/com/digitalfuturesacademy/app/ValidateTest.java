@@ -457,11 +457,25 @@ public class ValidateTest {
         }
 
         @Test
-        @DisplayName("Returns false if any String in map is empty")
+        @DisplayName("Returns false if any String in map is only whitespace")
         void falseIfAnyBlank() {
             //Arrange
             LinkedHashMap<String, String> testInput = new LinkedHashMap<String, String>();
             testInput.put(" ", " ");
+
+            //Act
+            boolean actual = Validate.details(testInput);
+
+            //Assert
+            assertFalse(actual);
+        }
+
+        @Test
+        @DisplayName("Returns false if any String in map is null")
+        void falseIfAnyNull() {
+            //Arrange
+            LinkedHashMap<String, String> testInput = new LinkedHashMap<String, String>();
+            testInput.put(null, null);
 
             //Act
             boolean actual = Validate.details(testInput);

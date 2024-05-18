@@ -162,7 +162,7 @@ Contact ..> Validate
 
 #### Validate.details()
  - [x] Returns false if any String in map is empty
- - [ ] Returns false if any String in map is only whitespace
+ - [x] Returns false if any String in map is only whitespace
  - [ ] Returns false if any String in map is null
  - [ ] Returns false if map is null
  - [ ] Returns true if map contains valid entries
