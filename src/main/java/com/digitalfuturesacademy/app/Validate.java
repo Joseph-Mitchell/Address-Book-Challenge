@@ -6,7 +6,7 @@ public class Validate {
     }
 
     public static boolean string(String candidate) {
-        return !candidate.isBlank();
+        return candidate != null && !candidate.isBlank();
     }
 
     public static boolean phone(String candidate) {

@@ -128,7 +128,7 @@ Contact ..> Validate
 #### Validate.string()
  - [x] Returns false if string empty
  - [x] Returns false if string only whitespace
- - [ ] Returns false if string null
+ - [x] Returns false if string null
  - [ ] Returns true if string valid
 
 #### Validate.phone()

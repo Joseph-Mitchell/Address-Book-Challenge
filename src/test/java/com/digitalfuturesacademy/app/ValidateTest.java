@@ -100,5 +100,18 @@ public class ValidateTest {
             //Assert
             assertFalse(actual);
         }
+
+        @Test
+        @DisplayName("Returns false if string null")
+        void falseIfNull() {
+            //Arrange
+            String testInput = null;
+
+            //Act
+            boolean actual = Validate.string(testInput);
+
+            //Assert
+            assertFalse(actual);
+        }
     }
 }
