@@ -174,7 +174,7 @@ Contact ..> Validate
 
 #### Contact Constructor
  - [x] Throws exception if Validate.string returns false for firstName
- - [ ] Throws exception if Validate.string returns false for lastName
+ - [x] Throws exception if Validate.string returns false for lastName
  - [ ] Throws exception if Validate.phone returns false for phone
  - [ ] Throws exception if Validate.email returns false for email
  - [ ] Throws exception if Validate.details returns false for details
