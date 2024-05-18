@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.LinkedHashMap;
+
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -435,6 +437,23 @@ public class ValidateTest {
 
             //Assert
             assertTrue(actual);
+        }
+    }
+
+    @Nested
+    class Details {
+        @Test
+        @DisplayName("Returns false if any String in map is empty")
+        void falseIfNonNumeric() {
+            //Arrange
+            LinkedHashMap<String, String> testInput = new LinkedHashMap<String, String>();
+            testInput.put("", "");
+
+            //Act
+            boolean actual = Validate.details(testInput);
+
+            //Assert
+            assertFalse(actual);
         }
     }
 }

@@ -161,7 +161,7 @@ Contact ..> Validate
  - [x] Returns true if string 'n'
 
 #### Validate.details()
- - [ ] Returns false if any String in map is empty
+ - [x] Returns false if any String in map is empty
  - [ ] Returns false if any String in map is only whitespace
  - [ ] Returns false if any String in map is null
  - [ ] Returns false if map is null
