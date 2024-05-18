@@ -1,9 +1,13 @@
 package com.digitalfuturesacademy.app;
 
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.ArgumentMatchers;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 
 import java.util.InputMismatchException;
 import java.util.LinkedHashMap;
@@ -316,6 +320,45 @@ public class InputReceiverTest {
 
                 //Assert
                 receiverMock.verify(InputReceiver::receiveDetail, times(0));
+            }
+        }
+
+        @Test
+        @DisplayName("Calls InputReceiver.receiveDetail() once if InputReceiver.yesNo() returns true")
+        void getDetailIfYesNoTrue() {
+            //Arrange
+            try (MockedStatic<InputReceiver> receiverMock = Mockito.mockStatic(InputReceiver.class)) {
+                receiverMock.when(InputReceiver::receiveDetails).thenCallRealMethod();
+                receiverMock.when(InputReceiver::receiveYesNo).thenReturn(true, false);
+
+                //Act
+                InputReceiver.receiveDetails();
+
+                //Assert
+                receiverMock.verify(InputReceiver::receiveDetail, times(1));
+            }
+        }
+
+        @ParameterizedTest
+        @ValueSource(ints = {1, 2, 5, 7})
+        @DisplayName("Calls InputReceiver.receiveDetail() as many times as InputReceiver.yesNo() returns true")
+        void getDetailIfYesNoTrueTwice(int times) {
+            //Arrange
+            try (MockedStatic<InputReceiver> receiverMock = Mockito.mockStatic(InputReceiver.class)) {
+                receiverMock.when(InputReceiver::receiveDetails).thenCallRealMethod();
+                receiverMock.when(InputReceiver::receiveYesNo).thenAnswer(new Answer<Boolean>() {
+                    int count = 0;
+                    public Boolean answer(InvocationOnMock invocation) {
+                        if (count++ < times) return true;
+                        else return false;
+                    }
+                });
+
+                //Act
+                InputReceiver.receiveDetails();
+
+                //Assert
+                receiverMock.verify(InputReceiver::receiveDetail, times(times));
             }
         }
     }

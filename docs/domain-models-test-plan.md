@@ -116,7 +116,7 @@ Contact ..> Validate
 
 #### InputReceiver.receiveDetails()
  - [x] Does not call InputReceiver.receiveDetail() if InputReceiver.yesNo() returns false
- - [ ] Calls InputReceiver.receiveDetail() once if InputReceiver.yesNo() returns true then false
+ - [ ] Calls InputReceiver.receiveDetail() as many times as InputReceiver.yesNo() returns true
  - [ ] Returns expected map
 
 #### Validate.integer()
