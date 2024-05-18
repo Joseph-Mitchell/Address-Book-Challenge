@@ -10,7 +10,7 @@ public class Validate {
     }
 
     public static boolean phone(String candidate) {
-        return candidate.matches("/[0-9]+/g");
+        return candidate != null && candidate.matches("/[0-9]+/g");
     }
 
     public static boolean email(String candidate) {

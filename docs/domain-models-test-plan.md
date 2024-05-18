@@ -133,9 +133,9 @@ Contact ..> Validate
 
 #### Validate.phone()
  - [x] Returns false if string has non-numeric characters
- - [ ] Returns false if string empty
- - [ ] Returns false if string only whitespace
- - [ ] Returns false if string null
+ - [x] Returns false if string empty
+ - [x] Returns false if string only whitespace
+ - [x] Returns false if string null
  - [ ] Returns true if string valid
 
 #### Validate.email()
