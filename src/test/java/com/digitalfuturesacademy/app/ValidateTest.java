@@ -1,8 +1,6 @@
 package com.digitalfuturesacademy.app;
 
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.LinkedHashMap;
 
@@ -28,7 +26,7 @@ public class ValidateTest {
             int testInput = -1;
 
             //Act
-            boolean actual = Validate.integer(testInput, VALID_CAP);
+            actual = Validate.integer(testInput, VALID_CAP);
 
             //Assert
             assertFalse(actual);
@@ -41,7 +39,7 @@ public class ValidateTest {
             int testInput = 6;
 
             //Act
-            boolean actual = Validate.integer(testInput, VALID_CAP);
+            actual = Validate.integer(testInput, VALID_CAP);
 
             //Assert
             assertFalse(actual);
@@ -54,7 +52,7 @@ public class ValidateTest {
             int testInput = 4;
 
             //Act
-            boolean actual = Validate.integer(testInput, VALID_CAP);
+            actual = Validate.integer(testInput, VALID_CAP);
 
             //Assert
             assertTrue(actual);
@@ -67,7 +65,7 @@ public class ValidateTest {
             int testInput = 0;
 
             //Act
-            boolean actual = Validate.integer(testInput, 0);
+            actual = Validate.integer(testInput, 0);
 
             //Assert
             assertTrue(actual);
@@ -83,7 +81,7 @@ public class ValidateTest {
             String testInput = "";
 
             //Act
-            boolean actual = Validate.string(testInput);
+            actual = Validate.string(testInput);
 
             //Assert
             assertFalse(actual);
@@ -96,7 +94,7 @@ public class ValidateTest {
             String testInput = " ";
 
             //Act
-            boolean actual = Validate.string(testInput);
+            actual = Validate.string(testInput);
 
             //Assert
             assertFalse(actual);
@@ -109,7 +107,7 @@ public class ValidateTest {
             String testInput = null;
 
             //Act
-            boolean actual = Validate.string(testInput);
+            actual = Validate.string(testInput);
 
             //Assert
             assertFalse(actual);
@@ -122,7 +120,7 @@ public class ValidateTest {
             String testInput = "Joseph";
 
             //Act
-            boolean actual = Validate.string(testInput);
+            actual = Validate.string(testInput);
 
             //Assert
             assertTrue(actual);
@@ -138,7 +136,7 @@ public class ValidateTest {
             String testInput = "abc";
 
             //Act
-            boolean actual = Validate.phone(testInput);
+            actual = Validate.phone(testInput);
 
             //Assert
             assertFalse(actual);
@@ -151,7 +149,7 @@ public class ValidateTest {
             String testInput = "";
 
             //Act
-            boolean actual = Validate.phone(testInput);
+            actual = Validate.phone(testInput);
 
             //Assert
             assertFalse(actual);
@@ -164,7 +162,7 @@ public class ValidateTest {
             String testInput = " ";
 
             //Act
-            boolean actual = Validate.phone(testInput);
+            actual = Validate.phone(testInput);
 
             //Assert
             assertFalse(actual);
@@ -177,7 +175,7 @@ public class ValidateTest {
             String testInput = null;
 
             //Act
-            boolean actual = Validate.phone(testInput);
+            actual = Validate.phone(testInput);
 
             //Assert
             assertFalse(actual);
@@ -190,7 +188,7 @@ public class ValidateTest {
             String testInput = "01234567890";
 
             //Act
-            boolean actual = Validate.phone(testInput);
+            actual = Validate.phone(testInput);
 
             //Assert
             assertTrue(actual);
@@ -206,7 +204,7 @@ public class ValidateTest {
             String testInput = "josephexample.com";
 
             //Act
-            boolean actual = Validate.email(testInput);
+            actual = Validate.email(testInput);
 
             //Assert
             assertFalse(actual);
@@ -219,7 +217,7 @@ public class ValidateTest {
             String testInput = "joseph@examplecom";
 
             //Act
-            boolean actual = Validate.email(testInput);
+            actual = Validate.email(testInput);
 
             //Assert
             assertFalse(actual);
@@ -232,7 +230,7 @@ public class ValidateTest {
             String testInput = "@example.com";
 
             //Act
-            boolean actual = Validate.email(testInput);
+            actual = Validate.email(testInput);
 
             //Assert
             assertFalse(actual);
@@ -245,7 +243,7 @@ public class ValidateTest {
             String testInput = "joseph@example.";
 
             //Act
-            boolean actual = Validate.email(testInput);
+            actual = Validate.email(testInput);
 
             //Assert
             assertFalse(actual);
@@ -258,7 +256,7 @@ public class ValidateTest {
             String testInput = "joseph@.com";
 
             //Act
-            boolean actual = Validate.email(testInput);
+            actual = Validate.email(testInput);
 
             //Assert
             assertFalse(actual);
@@ -271,7 +269,7 @@ public class ValidateTest {
             String testInput = "";
 
             //Act
-            boolean actual = Validate.email(testInput);
+            actual = Validate.email(testInput);
 
             //Assert
             assertFalse(actual);
@@ -284,7 +282,7 @@ public class ValidateTest {
             String testInput = " ";
 
             //Act
-            boolean actual = Validate.email(testInput);
+            actual = Validate.email(testInput);
 
             //Assert
             assertFalse(actual);
@@ -297,7 +295,7 @@ public class ValidateTest {
             String testInput = null;
 
             //Act
-            boolean actual = Validate.email(testInput);
+            actual = Validate.email(testInput);
 
             //Assert
             assertFalse(actual);
@@ -310,7 +308,7 @@ public class ValidateTest {
             String testInput = "joseph@example.com";
 
             //Act
-            boolean actual = Validate.email(testInput);
+            actual = Validate.email(testInput);
 
             //Assert
             assertTrue(actual);
@@ -326,7 +324,7 @@ public class ValidateTest {
             String testInput = "g";
 
             //Act
-            boolean actual = Validate.yesNo(testInput);
+            actual = Validate.yesNo(testInput);
 
             //Assert
             assertFalse(actual);
@@ -339,7 +337,7 @@ public class ValidateTest {
             String testInput = "yyy";
 
             //Act
-            boolean actual = Validate.yesNo(testInput);
+            actual = Validate.yesNo(testInput);
 
             //Assert
             assertFalse(actual);
@@ -352,7 +350,7 @@ public class ValidateTest {
             String testInput = "0";
 
             //Act
-            boolean actual = Validate.yesNo(testInput);
+            actual = Validate.yesNo(testInput);
 
             //Assert
             assertFalse(actual);
@@ -365,7 +363,7 @@ public class ValidateTest {
             String testInput = "@";
 
             //Act
-            boolean actual = Validate.yesNo(testInput);
+            actual = Validate.yesNo(testInput);
 
             //Assert
             assertFalse(actual);
@@ -378,7 +376,7 @@ public class ValidateTest {
             String testInput = "";
 
             //Act
-            boolean actual = Validate.yesNo(testInput);
+            actual = Validate.yesNo(testInput);
 
             //Assert
             assertFalse(actual);
@@ -391,7 +389,7 @@ public class ValidateTest {
             String testInput = " ";
 
             //Act
-            boolean actual = Validate.yesNo(testInput);
+            actual = Validate.yesNo(testInput);
 
             //Assert
             assertFalse(actual);
@@ -404,7 +402,7 @@ public class ValidateTest {
             String testInput = null;
 
             //Act
-            boolean actual = Validate.yesNo(testInput);
+            actual = Validate.yesNo(testInput);
 
             //Assert
             assertFalse(actual);
@@ -417,7 +415,7 @@ public class ValidateTest {
             String testInput = "y";
 
             //Act
-            boolean actual = Validate.yesNo(testInput);
+            actual = Validate.yesNo(testInput);
 
             //Assert
             assertTrue(actual);
@@ -430,7 +428,7 @@ public class ValidateTest {
             String testInput = "n";
 
             //Act
-            boolean actual = Validate.yesNo(testInput);
+            actual = Validate.yesNo(testInput);
 
             //Assert
             assertTrue(actual);
@@ -458,7 +456,7 @@ public class ValidateTest {
             testInput.put("", "");
 
             //Act
-            boolean actual = Validate.details(testInput);
+            actual = Validate.details(testInput);
 
             //Assert
             assertFalse(actual);
@@ -471,7 +469,7 @@ public class ValidateTest {
             testInput.put(" ", " ");
 
             //Act
-            boolean actual = Validate.details(testInput);
+            actual = Validate.details(testInput);
 
             //Assert
             assertFalse(actual);
@@ -484,7 +482,7 @@ public class ValidateTest {
             testInput.put(null, null);
 
             //Act
-            boolean actual = Validate.details(testInput);
+            actual = Validate.details(testInput);
 
             //Assert
             assertFalse(actual);
@@ -497,7 +495,7 @@ public class ValidateTest {
             testInput = null;
 
             //Act
-            boolean actual = Validate.details(testInput);
+            actual = Validate.details(testInput);
 
             //Assert
             assertFalse(actual);
@@ -510,7 +508,7 @@ public class ValidateTest {
             testInput.put("Nickname", "Joe");
 
             //Act
-            boolean actual = Validate.details(testInput);
+            actual = Validate.details(testInput);
 
             //Assert
             assertTrue(actual);
@@ -520,7 +518,7 @@ public class ValidateTest {
         @DisplayName("Returns true if map is empty")
         void trueIfEmpty() {
             //Act
-            boolean actual = Validate.details(testInput);
+            actual = Validate.details(testInput);
 
             //Assert
             assertTrue(actual);

@@ -169,7 +169,7 @@ Contact ..> Validate
  - [x] Returns true if map is empty
 
 #### AddressBook.addContact()
- - [ ] Throws error if Contact is null
+ - [x] Throws error if Contact is null
  - [ ] Adds new Contact to contacts list if inputs valid
 
 #### Contact Constructor
