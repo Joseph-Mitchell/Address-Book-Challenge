@@ -172,5 +172,22 @@ public class InputReceiverTest {
             //Assert
             verify(inputMock, times(2)).nextLine();
         }
+
+        @Test
+        @DisplayName("Returns correct String if Validate.email() returns true")
+        void acceptsInput() {
+            //Arrange
+            String testInput = "test";
+            when(inputMock.nextLine()).thenReturn(testInput);
+
+            validateMock.when(() -> Validate.email(any())).thenReturn(true);
+
+            //Act
+            String actual = InputReceiver.receiveEmail();
+
+            //Assert
+            verify(inputMock, times(1)).nextLine();
+            assertEquals(actual, testInput);
+        }
     }
 }
