@@ -18,6 +18,6 @@ public class Validate {
     }
 
     public static boolean yesNo(String candidate) {
-        return true;
+        return candidate.matches("[yn]");
     }
 }
