@@ -300,4 +300,23 @@ public class InputReceiverTest {
             }
         }
     }
+
+    @Nested
+    class ReceiveDetails {
+        @Test
+        @DisplayName("Does not call InputReceiver.receiveDetail() if InputReceiver.yesNo() returns false")
+        void noDetailsIfYesNoFalse() {
+            //Arrange
+            try (MockedStatic<InputReceiver> receiverMock = Mockito.mockStatic(InputReceiver.class)) {
+                receiverMock.when(InputReceiver::receiveDetails).thenCallRealMethod();
+                receiverMock.when(InputReceiver::receiveYesNo).thenReturn(false);
+
+                //Act
+                InputReceiver.receiveDetails();
+
+                //Assert
+                receiverMock.verify(InputReceiver::receiveDetail, times(0));
+            }
+        }
+    }
 }

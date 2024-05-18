@@ -115,7 +115,7 @@ Contact ..> Validate
  - [x] Returns map with key value given by InputReceiver.receiveString() calls
 
 #### InputReceiver.receiveDetails()
- - [ ] Does not call InputReceiver.receiveDetail() if InputReceiver.yesNo() returns false
+ - [x] Does not call InputReceiver.receiveDetail() if InputReceiver.yesNo() returns false
  - [ ] Calls InputReceiver.receiveDetail() once if InputReceiver.yesNo() returns true then false
  - [ ] Returns expected map
 
