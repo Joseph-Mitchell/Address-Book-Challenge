@@ -87,5 +87,18 @@ public class ValidateTest {
             //Assert
             assertFalse(actual);
         }
+
+        @Test
+        @DisplayName("Returns false if string only whitespace")
+        void falseIfBlank() {
+            //Arrange
+            String testInput = " ";
+
+            //Act
+            boolean actual = Validate.string(testInput);
+
+            //Assert
+            assertFalse(actual);
+        }
     }
 }
