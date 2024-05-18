@@ -152,7 +152,7 @@ Contact ..> Validate
 #### Validate.yesNo()
  - [x] Returns false if string not 'y' or 'n'
  - [x] Returns false if string more than one char
- - [ ] Returns false if string numeric
+ - [x] Returns false if string numeric
  - [ ] Returns false if string special character
  - [ ] Returns false if string empty
  - [ ] Returns false if string whitespace

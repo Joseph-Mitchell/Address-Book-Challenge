@@ -4,6 +4,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -349,6 +351,19 @@ public class ValidateTest {
         void falseIfNumeric() {
             //Arrange
             String testInput = "0";
+
+            //Act
+            boolean actual = Validate.yesNo(testInput);
+
+            //Assert
+            assertFalse(actual);
+        }
+
+        @Test
+        @DisplayName("Returns false if string special character")
+        void falseIfSpecialCharacter() {
+            //Arrange
+            String testInput = "@";
 
             //Act
             boolean actual = Validate.yesNo(testInput);
