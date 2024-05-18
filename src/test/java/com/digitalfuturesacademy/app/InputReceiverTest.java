@@ -6,6 +6,7 @@ import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 
 import java.util.InputMismatchException;
+import java.util.LinkedHashMap;
 import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -274,6 +275,29 @@ public class InputReceiverTest {
 
             //Assert
             assertTrue(actual);
+        }
+    }
+
+    @Nested
+    class ReceiveDetail {
+        @Test
+        @DisplayName("Returns LinkedHashMap with key value given by InputReceiver.receiveString() calls")
+        void returnsCorrectly() {
+            //Arrange
+            try (MockedStatic<InputReceiver> receiverMock = Mockito.mockStatic(InputReceiver.class)) {
+                String testKey = "Nickname";
+                String testValue = "Joe";
+                receiverMock.when(InputReceiver::receiveDetail).thenCallRealMethod();
+                receiverMock.when(InputReceiver::receiveString).thenReturn(testKey, testValue);
+
+                //Act
+                String[] actual = InputReceiver.receiveDetail();
+
+                //Assert
+                receiverMock.verify(InputReceiver::receiveString, times(2));
+                assertEquals(actual[0], testKey);
+                assertEquals(actual[1], testValue);
+            }
         }
     }
 }

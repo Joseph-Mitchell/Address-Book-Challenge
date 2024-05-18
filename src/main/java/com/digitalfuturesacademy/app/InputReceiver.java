@@ -59,6 +59,13 @@ public class InputReceiver {
         return candidate.strip().toLowerCase().charAt(0) == 'y';
     }
 
+    public static String[] receiveDetail() {
+        String key = receiveString();
+        String value = receiveString();
+
+        return new String[] {key, value};
+    }
+
     public static LinkedHashMap<String, String> receiveDetails() {
         return new LinkedHashMap<String, String>();
     }

@@ -44,7 +44,7 @@ class InputReceiver {
     +receivePhone()$ String
     +receiveEmail()$ String
     +receiveYesNo()$ bool
-    -receiveDetail()$ Map~String, String~
+    -receiveDetail()$ String[]
     +receiveDetails()$ Map~String, String~
 }
 class ContactPrinter {
@@ -112,7 +112,7 @@ Contact ..> Validate
  - [x] Returns true if whitespace before y
 
 #### InputReceiver.receiveDetail()
- - [ ] Returns map with key value given by InputReceiver.receiveString() calls
+ - [x] Returns map with key value given by InputReceiver.receiveString() calls
 
 #### InputReceiver.receiveDetails()
  - [ ] Does not call InputReceiver.receiveDetail() if InputReceiver.yesNo() returns false
