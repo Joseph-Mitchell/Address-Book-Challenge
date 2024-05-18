@@ -195,4 +195,72 @@ public class ValidateTest {
             assertTrue(actual);
         }
     }
+
+    @Nested
+    class Email {
+        @Test
+        @DisplayName("Returns false if string has no @")
+        void falseIfNoAt() {
+            //Arrange
+            String testInput = "josephexample.com";
+
+            //Act
+            boolean actual = Validate.email(testInput);
+
+            //Assert
+            assertFalse(actual);
+        }
+
+//        @Test
+//        @DisplayName("Returns false if string empty")
+//        void falseIfEmpty() {
+//            //Arrange
+//            String testInput = "";
+//
+//            //Act
+//            boolean actual = Validate.phone(testInput);
+//
+//            //Assert
+//            assertFalse(actual);
+//        }
+//
+//        @Test
+//        @DisplayName("Returns false if string only whitespace")
+//        void falseIfBlank() {
+//            //Arrange
+//            String testInput = " ";
+//
+//            //Act
+//            boolean actual = Validate.phone(testInput);
+//
+//            //Assert
+//            assertFalse(actual);
+//        }
+//
+//        @Test
+//        @DisplayName("Returns false if string null")
+//        void falseIfNull() {
+//            //Arrange
+//            String testInput = null;
+//
+//            //Act
+//            boolean actual = Validate.phone(testInput);
+//
+//            //Assert
+//            assertFalse(actual);
+//        }
+//
+//        @Test
+//        @DisplayName("Returns true if string valid")
+//        void trueIfValid() {
+//            //Arrange
+//            String testInput = "01234567890";
+//
+//            //Act
+//            boolean actual = Validate.phone(testInput);
+//
+//            //Assert
+//            assertTrue(actual);
+//        }
+    }
 }

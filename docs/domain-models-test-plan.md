@@ -139,10 +139,13 @@ Contact ..> Validate
  - [x] Returns true if string valid
 
 #### Validate.email()
+ - [x] Returns false if string has no @
+ - [ ] Returns false if string has no .
+ - [ ] Returns false if no text before @
+ - [ ] Returns false if no text after .
+ - [ ] Returns false if no text between @ and .
  - [ ] Returns false if string empty
  - [ ] Returns false if string only whitespace
- - [ ] Returns false if string has no at symbol
- - [ ] Returns false if string has no period
  - [ ] Returns false if string null
  - [ ] Returns true if string valid
 

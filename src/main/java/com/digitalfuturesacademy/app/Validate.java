@@ -14,7 +14,7 @@ public class Validate {
     }
 
     public static boolean email(String candidate) {
-        return true;
+        return candidate.matches("[a-z]+@[a-z]+\\.[a-z]+");
     }
 
     public static boolean yesNo(String candidate) {
