@@ -84,6 +84,42 @@ Contact ..> Validate
  - [x] Calls Contact constructor with expected parameters
  - [x] Calls AddressBook.addContact()
 
+#### InputReceiver.receiveInt()
+ - [x] Throws error if cap negative
+ - [ ] Retakes user input if outside of given range
+ - [ ] Retakes user input if non-numeric
+ - [ ] Retakes user input if empty
+ - [ ] Retakes user input if only whitespace
+ - [ ] Returns correct int if user input valid
+
+#### InputReceiver.receiveString()
+ - [ ] Retakes user input if empty
+ - [ ] Retakes user input if only whitespace
+ - [ ] Returns correct String if user input valid
+
+#### InputReceiver.receivePhone()
+ - [ ] Retakes user input if empty
+ - [ ] Retakes user input if only whitespace
+ - [ ] Retakes user input if non-numeric
+
+#### InputReceiver.receiveEmail()
+ - [ ] Retakes user input if empty
+ - [ ] Retakes user input if only whitespace
+ - [ ] Retakes user input if no at symbol
+ - [ ] Retakes user input if no period
+
+#### InputReceiver.receiveDetails()
+ - [ ] Retakes user input if [a-z] not 'y' or 'n'
+ - [ ] Retakes user input if more than one char
+ - [ ] Retakes user input if numeric
+ - [ ] Retakes user input if special character
+ - [ ] Retakes user input if empty
+ - [ ] Retakes user input if whitespace
+ - [ ] Returns Map with correct elements if user input  lowercase y
+ - [ ] Returns Map with correct elements if user input  uppercase Y
+ - [ ] Returns empty map if user input  lowercase n
+ - [ ] Returns empty map if user input uppercase N
+
 #### Validate.string()
  - [ ] Returns false if string empty
  - [ ] Returns false if string only whitespace
@@ -121,42 +157,6 @@ Contact ..> Validate
  - [ ] Returns false if map is null
  - [ ] Returns true if map contains valid entries
  - [ ] Returns true if map is empty
-
-#### InputReceiver.receiveInt()
- - [ ] Throws error if cap negative
- - [ ] Retakes user input if outside of given range
- - [ ] Retakes user input if non-numeric
- - [ ] Retakes user input if empty
- - [ ] Retakes user input if only whitespace
- - [ ] Returns correct int if user input valid
-
-#### InputReceiver.receiveString()
- - [ ] Retakes user input if empty
- - [ ] Retakes user input if only whitespace
- - [ ] Returns correct String if user input valid
-
-#### InputReceiver.receivePhone()
- - [ ] Retakes user input if empty
- - [ ] Retakes user input if only whitespace
- - [ ] Retakes user input if non-numeric
-
-#### InputReceiver.receiveEmail()
- - [ ] Retakes user input if empty
- - [ ] Retakes user input if only whitespace
- - [ ] Retakes user input if no at symbol
- - [ ] Retakes user input if no period
-
-#### InputReceiver.receiveDetails()
- - [ ] Retakes user input if [a-z] not 'y' or 'n'
- - [ ] Retakes user input if more than one char
- - [ ] Retakes user input if numeric
- - [ ] Retakes user input if special character
- - [ ] Retakes user input if empty
- - [ ] Retakes user input if whitespace
- - [ ] Returns Map with correct elements if user input  lowercase y
- - [ ] Returns Map with correct elements if user input  uppercase Y
- - [ ] Returns empty map if user input  lowercase n
- - [ ] Returns empty map if user input uppercase N
 
 #### AddressBook.addContact()
  - [ ] Throws error if Contact is null

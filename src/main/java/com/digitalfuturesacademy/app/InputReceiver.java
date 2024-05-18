@@ -3,7 +3,9 @@ package com.digitalfuturesacademy.app;
 import java.util.LinkedHashMap;
 
 public class InputReceiver {
-    public static int receiveInt(int cap) {
+    public static int receiveInt(int cap) throws IllegalArgumentException {
+        if (cap < 0) throw new IllegalArgumentException("Cap cannot be negative");
+
         return 0;
     }
 
