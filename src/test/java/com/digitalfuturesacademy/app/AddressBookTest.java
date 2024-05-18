@@ -2,6 +2,7 @@ package com.digitalfuturesacademy.app;
 
 import org.junit.jupiter.api.*;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 
@@ -29,6 +30,20 @@ public class AddressBookTest {
 
             //Act, Assert
             assertThrows(IllegalArgumentException.class, () -> addressBook.addContact(contactMock));
+        }
+
+        @Test
+        @DisplayName("Adds new Contact to contacts list if inputs valid")
+        void addToList() {
+            //Arrange
+            Contact contactMock = mock(Contact.class);
+            AddressBook addressBook = new AddressBook();
+
+            //Act
+            addressBook.addContact(contactMock);
+
+            //Assert
+            assertEquals(contactMock, addressBook.getContact(0));
         }
     }
 }

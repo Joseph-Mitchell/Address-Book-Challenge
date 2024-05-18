@@ -170,7 +170,7 @@ Contact ..> Validate
 
 #### AddressBook.addContact()
  - [x] Throws error if Contact is null
- - [ ] Adds new Contact to contacts list if inputs valid
+ - [x] Adds new Contact to contacts list if inputs valid
 
 #### Contact Constructor
  - [ ] Throws error if firstName empty
