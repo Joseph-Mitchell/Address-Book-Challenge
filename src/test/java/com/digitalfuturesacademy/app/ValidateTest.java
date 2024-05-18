@@ -9,15 +9,16 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ValidateTest {
+    boolean actual;
+
+    @AfterEach
+    void afterEach() {
+        actual = false;
+    }
+
     @Nested
     class Integer {
         int VALID_CAP = 5;
-        boolean actual;
-
-        @AfterEach
-        void afterEach() {
-            actual = false;
-        }
 
         @Test
         @DisplayName("Returns false if int less than 0")
@@ -69,6 +70,22 @@ public class ValidateTest {
 
             //Assert
             assertTrue(actual);
+        }
+    }
+
+    @Nested
+    class StringTests {
+        @Test
+        @DisplayName("Returns false if string empty")
+        void falseIfEmpty() {
+            //Arrange
+            String testInput = "";
+
+            //Act
+            boolean actual = Validate.string(testInput);
+
+            //Assert
+            assertFalse(actual);
         }
     }
 }

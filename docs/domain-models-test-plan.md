@@ -126,7 +126,7 @@ Contact ..> Validate
  - [x] Returns true if int 0 and cap 0
 
 #### Validate.string()
- - [ ] Returns false if string empty
+ - [x] Returns false if string empty
  - [ ] Returns false if string only whitespace
  - [ ] Returns false if string null
  - [ ] Returns true if string valid
