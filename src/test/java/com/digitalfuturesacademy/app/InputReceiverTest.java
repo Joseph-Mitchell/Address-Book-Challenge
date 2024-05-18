@@ -8,8 +8,7 @@ import org.mockito.Mockito;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
 
@@ -197,6 +196,7 @@ public class InputReceiverTest {
         @DisplayName("Retakes user input if Validate.yesNo() returns false")
         void retakesInput() {
             //Arrange
+            when(inputMock.nextLine()).thenReturn(" ");
             validateMock.when(() -> Validate.yesNo(any())).thenReturn(false).thenReturn(true);
 
             //Act
@@ -204,6 +204,20 @@ public class InputReceiverTest {
 
             //Assert
             verify(inputMock, times(2)).nextLine();
+        }
+
+        @Test
+        @DisplayName("Retakes user input if Validate.yesNo() returns false")
+        void acceptsInput() {
+            //Arrange
+            when(inputMock.nextLine()).thenReturn(" ");
+            validateMock.when(() -> Validate.yesNo(any())).thenReturn(true);
+
+            //Act
+            InputReceiver.receiveYesNo();
+
+            //Assert
+            verify(inputMock, times(1)).nextLine();
         }
     }
 }

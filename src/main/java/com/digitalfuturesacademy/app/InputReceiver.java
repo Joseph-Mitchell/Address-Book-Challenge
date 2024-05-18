@@ -50,13 +50,13 @@ public class InputReceiver {
         return candidate;
     }
 
-    public static String receiveYesNo() {
+    public static boolean receiveYesNo() {
         String candidate;
         while(true) {
             if (Validate.yesNo(candidate = input.nextLine())) break;
         }
 
-        return candidate;
+        return candidate.toLowerCase().charAt(0) == 'y';
     }
 
     public static LinkedHashMap<String, String> receiveDetails() {
