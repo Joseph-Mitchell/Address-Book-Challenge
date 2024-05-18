@@ -67,11 +67,12 @@ public class InputReceiver {
     }
 
     public static LinkedHashMap<String, String> receiveDetails() {
-
+        LinkedHashMap<String, String> details = new LinkedHashMap<String, String>();
         while(receiveYesNo()) {
-            receiveDetail();
+            String[] detail = receiveDetail();
+            details.put(detail[0], detail[1]);
         }
 
-        return new LinkedHashMap<String, String>();
+        return details;
     }
 }

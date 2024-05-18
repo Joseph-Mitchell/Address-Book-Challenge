@@ -330,6 +330,7 @@ public class InputReceiverTest {
             try (MockedStatic<InputReceiver> receiverMock = Mockito.mockStatic(InputReceiver.class)) {
                 receiverMock.when(InputReceiver::receiveDetails).thenCallRealMethod();
                 receiverMock.when(InputReceiver::receiveYesNo).thenReturn(true, false);
+                receiverMock.when(InputReceiver::receiveDetail).thenReturn(new String[] {"", ""});
 
                 //Act
                 InputReceiver.receiveDetails();
@@ -353,12 +354,34 @@ public class InputReceiverTest {
                         else return false;
                     }
                 });
+                receiverMock.when(InputReceiver::receiveDetail).thenReturn(new String[] {"", ""});
+
 
                 //Act
                 InputReceiver.receiveDetails();
 
                 //Assert
                 receiverMock.verify(InputReceiver::receiveDetail, times(times));
+            }
+        }
+
+        @Test
+        @DisplayName("Returns expected map")
+        void returnsCorrectly() {
+            //Arrange
+            try (MockedStatic<InputReceiver> receiverMock = Mockito.mockStatic(InputReceiver.class)) {
+                String testKey = "Nickname";
+                String testValue = "Joe";
+
+                receiverMock.when(InputReceiver::receiveDetails).thenCallRealMethod();
+                receiverMock.when(InputReceiver::receiveYesNo).thenReturn(true, false);
+                receiverMock.when(InputReceiver::receiveDetail).thenReturn(new String[] {testKey, testValue});
+
+                //Act
+                LinkedHashMap<String, String> actual = InputReceiver.receiveDetails();
+
+                //Assert
+                assertEquals(testKey + "=" + testValue, actual.entrySet().toArray()[0].toString());
             }
         }
     }
