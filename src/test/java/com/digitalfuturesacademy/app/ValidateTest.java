@@ -113,5 +113,18 @@ public class ValidateTest {
             //Assert
             assertFalse(actual);
         }
+
+        @Test
+        @DisplayName("Returns true if string valid")
+        void trueIfValid() {
+            //Arrange
+            String testInput = "Joseph";
+
+            //Act
+            boolean actual = Validate.string(testInput);
+
+            //Assert
+            assertTrue(actual);
+        }
     }
 }

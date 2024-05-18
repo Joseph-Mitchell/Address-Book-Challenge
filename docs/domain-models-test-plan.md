@@ -129,7 +129,7 @@ Contact ..> Validate
  - [x] Returns false if string empty
  - [x] Returns false if string only whitespace
  - [x] Returns false if string null
- - [ ] Returns true if string valid
+ - [x] Returns true if string valid
 
 #### Validate.phone()
  - [ ] Returns false if string has non-numeric characters
