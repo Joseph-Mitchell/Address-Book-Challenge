@@ -132,7 +132,7 @@ public class ValidateTest {
     class Phone {
         @Test
         @DisplayName("Returns false if string has non-numeric characters")
-        void falseIfEmpty() {
+        void falseIfNonNumeric() {
             //Arrange
             String testInput = "abc";
 
@@ -143,18 +143,18 @@ public class ValidateTest {
             assertFalse(actual);
         }
 
-//        @Test
-//        @DisplayName("Returns false if string empty")
-//        void falseIfEmpty() {
-//            //Arrange
-//            String testInput = "";
-//
-//            //Act
-//            boolean actual = Validate.string(testInput);
-//
-//            //Assert
-//            assertFalse(actual);
-//        }
+        @Test
+        @DisplayName("Returns false if string empty")
+        void falseIfEmpty() {
+            //Arrange
+            String testInput = "";
+
+            //Act
+            boolean actual = Validate.phone(testInput);
+
+            //Assert
+            assertFalse(actual);
+        }
 //
 //        @Test
 //        @DisplayName("Returns false if string only whitespace")
