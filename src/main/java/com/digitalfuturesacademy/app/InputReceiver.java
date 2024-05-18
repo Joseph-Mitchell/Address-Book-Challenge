@@ -42,7 +42,12 @@ public class InputReceiver {
     }
 
     public static String receiveEmail() {
-        return "";
+        String candidate;
+        while(true) {
+            if (Validate.email(candidate = input.nextLine())) break;
+        }
+
+        return candidate;
     }
 
     public static LinkedHashMap<String, String> receiveDetails() {

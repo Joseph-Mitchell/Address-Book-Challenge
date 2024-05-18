@@ -12,4 +12,8 @@ public class Validate {
     public static boolean phone(String candidate) {
         return true;
     }
+
+    public static boolean email(String candidate) {
+        return true;
+    }
 }

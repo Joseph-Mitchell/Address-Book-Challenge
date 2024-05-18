@@ -157,4 +157,20 @@ public class InputReceiverTest {
             assertEquals(actual, testInput);
         }
     }
+
+    @Nested
+    class ReceiveEmail {
+        @Test
+        @DisplayName("Retakes user input if Validate.email() returns false")
+        void retakesInput() {
+            //Arrange
+            validateMock.when(() -> Validate.email(any())).thenReturn(false).thenReturn(true);
+
+            //Act
+            InputReceiver.receiveEmail();
+
+            //Assert
+            verify(inputMock, times(2)).nextLine();
+        }
+    }
 }
