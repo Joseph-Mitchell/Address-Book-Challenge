@@ -1,12 +1,14 @@
 package com.digitalfuturesacademy.app;
 
 import org.junit.jupiter.api.*;
+import org.mockito.ArgumentMatchers;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
@@ -87,6 +89,24 @@ public class InputReceiverTest {
 
             //Assert
             verify(testScanner, times(2)).nextInt();
+        }
+
+        @Test
+        @DisplayName("Returns correct int if Validate.int() returns true and no exceptions thrown")
+        void returnsCorrectly() {
+            //Arrange
+            int testInput = 0;
+            Scanner testScanner = mock(Scanner.class);
+            when(testScanner.nextInt()).thenReturn(testInput);
+            InputReceiver.setInput(testScanner);
+
+            validateMock.when(() -> Validate.integer(anyInt(), anyInt())).thenReturn(true);
+
+            //Act
+            int actual = InputReceiver.receiveInt(testCap);
+
+            //Assert
+            assertEquals(testInput, actual);
         }
     }
 }

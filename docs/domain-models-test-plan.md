@@ -89,8 +89,7 @@ Contact ..> Validate
  - [x] Accepts user input if Validate.int() returns true
  - [x] Retakes user input if Validate.int() returns false
  - [x] Retakes user input if input.nextInt() throws exception
- - [ ] Returns correct int if user input valid
- - [ ] Accepts user input if input.nextInt() returns 0 and cap is 0
+ - [x] Returns correct int if Validate.int() returns true and no exceptions thrown
 
 #### InputReceiver.receiveString()
  - [ ] Retakes user input if empty
@@ -124,6 +123,7 @@ Contact ..> Validate
  - [ ] Returns false if int less than 0
  - [ ] Returns false if int more than cap
  - [ ] Returns true if int valid
+ - [ ] Returns true if int 0 and cap 0
 
 #### Validate.string()
  - [ ] Returns false if string empty
