@@ -293,7 +293,7 @@ As a user, I want to find a contact by searching for it, so that I can find the 
  - [x] Print message if input was invalid
 
 #### InputReceiver.receiveEmail()
- - [ ] Print message if input was invalid
+ - [x] Print message if input was invalid
 
 #### InputReceiver.receiveYesNo()
  - [ ] Print message if input was invalid

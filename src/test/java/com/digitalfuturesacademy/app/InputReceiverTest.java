@@ -3,7 +3,6 @@ package com.digitalfuturesacademy.app;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.mockito.ArgumentMatchers;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
@@ -119,12 +118,12 @@ public class InputReceiverTest {
     class ReceiveString {
         @Test
         @DisplayName("Retakes user input if Validate.string() returns false")
-        void retakesInput() {
+        void retakesInput() throws Exception {
             //Arrange
             validateMock.when(() -> Validate.string(any())).thenReturn(false).thenReturn(true);
 
             //Act
-            InputReceiver.receiveString();
+            muteSystemOut(InputReceiver::receiveString);
 
             //Assert
             verify(inputMock, times(2)).nextLine();
@@ -165,12 +164,12 @@ public class InputReceiverTest {
     class ReceivePhone {
         @Test
         @DisplayName("Retakes user input if Validate.phone() returns false")
-        void retakesInput() {
+        void retakesInput() throws Exception {
             //Arrange
             validateMock.when(() -> Validate.phone(any())).thenReturn(false).thenReturn(true);
 
             //Act
-            InputReceiver.receivePhone();
+            muteSystemOut(InputReceiver::receivePhone);
 
             //Assert
             verify(inputMock, times(2)).nextLine();
@@ -220,6 +219,19 @@ public class InputReceiverTest {
 
             //Assert
             verify(inputMock, times(2)).nextLine();
+        }
+
+        @Test
+        @DisplayName("Retakes user input if Validate.email() returns false")
+        void printMessageIfInvalid() throws Exception {
+            //Arrange
+            validateMock.when(() -> Validate.email(any())).thenReturn(false).thenReturn(true);
+
+            //Act
+            String actual = tapSystemOutNormalized(InputReceiver::receiveEmail);
+
+            //Assert
+            assertTrue(actual.contains("Please enter an email e.g.: person@example.com"));
         }
 
         @Test

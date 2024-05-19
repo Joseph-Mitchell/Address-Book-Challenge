@@ -44,8 +44,8 @@ public class InputReceiver {
 
     public static String receiveEmail() {
         String candidate;
-        while(true) {
-            if (Validate.email(candidate = input.nextLine())) break;
+        while (!Validate.email(candidate = input.nextLine())) {
+            System.out.println("Please enter an email e.g.: person@example.com");
         }
 
         return candidate;
