@@ -312,7 +312,7 @@ As a user, I want to find a contact by searching for it, so that I can find the 
  - [x] Prints confirmation message when canceled
 
 #### ContactPrinter.printAllContacts()
- - [ ] Print numbers for each contact
+ - [x] Print numbers for each contact
 
 #### UserInteraction.editContact()
  - [ ] Calls ContactPrinter.printContact() after contact is updated

@@ -5,8 +5,6 @@ import org.mockito.MockedConstruction;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
@@ -177,11 +175,11 @@ public class UserInteractionTest {
 
     @Nested
     class AddContact {
-        private String testFirstName = "Joseph";
-        private String testLastName = "Mitchell";
-        private String testPhone = "01234567891";
-        private String testEmail = "joseph-mitchell@example.com";
-        private LinkedHashMap<String, String> testDetails = new LinkedHashMap<String, String>();
+        private final String testFirstName = "Joseph";
+        private final String testLastName = "Mitchell";
+        private final String testPhone = "01234567891";
+        private final String testEmail = "joseph-mitchell@example.com";
+        private final LinkedHashMap<String, String> testDetails = new LinkedHashMap<>();
 
         @Test
         @DisplayName("Calls all expected methods in InputReceiver")
@@ -509,7 +507,7 @@ public class UserInteractionTest {
             when(addressBookMock.getContacts()).thenReturn(testList);
 
             //Act
-            UserInteraction.editContact(addressBookMock);
+            muteSystemOut(() -> UserInteraction.editContact(addressBookMock));
 
             //Assert
             printerMock.verify(() -> ContactPrinter.printAllContacts(any()));
@@ -517,12 +515,12 @@ public class UserInteractionTest {
 
         @Test
         @DisplayName("Calls ContactPrinter.printContact() with Contact chosen by InputReceiver.receiveInt() return value")
-        void printsChosenContact() {
+        void printsChosenContact() throws Exception {
             //Arrange
             receiverMock.when(() -> InputReceiver.receiveInt(anyInt())).thenReturn(1);
 
             //Act
-            UserInteraction.editContact(addressBookMock);
+            muteSystemOut(() -> UserInteraction.editContact(addressBookMock));
 
             //Assert
             printerMock.verify(() -> ContactPrinter.printContact(any()));
@@ -530,7 +528,7 @@ public class UserInteractionTest {
 
         @Test
         @DisplayName("Calls Contact.setFirstName() with InputReceiver.receiveString() return value if second InputReceiver.receiveInt() returns 0")
-        void setsContactName() {
+        void setsContactName() throws Exception {
             //Arrange
             receiverMock.when(() -> InputReceiver.receiveInt(anyInt())).thenReturn(1, 0);
 
@@ -538,7 +536,7 @@ public class UserInteractionTest {
             receiverMock.when(InputReceiver::receiveString).thenReturn(testInput);
 
             //Act
-            UserInteraction.editContact(addressBookMock);
+            muteSystemOut(() -> UserInteraction.editContact(addressBookMock));
 
             //Assert
             verify(contactMock1).setFirstName(testInput);
@@ -546,7 +544,7 @@ public class UserInteractionTest {
 
         @Test
         @DisplayName("Calls Contact.setLastName() with InputReceiver.receiveString() return value if second InputReceiver.receiveInt() returns 1")
-        void setsContactLastName() {
+        void setsContactLastName() throws Exception {
             //Arrange
             receiverMock.when(() -> InputReceiver.receiveInt(anyInt())).thenReturn(1, 1);
 
@@ -554,7 +552,7 @@ public class UserInteractionTest {
             receiverMock.when(InputReceiver::receiveString).thenReturn(testInput);
 
             //Act
-            UserInteraction.editContact(addressBookMock);
+            muteSystemOut(() -> UserInteraction.editContact(addressBookMock));
 
             //Assert
             verify(contactMock1).setLastName(testInput);
@@ -562,7 +560,7 @@ public class UserInteractionTest {
 
         @Test
         @DisplayName("Calls Contact.setPhone() with InputReceiver.receivePhone() return value if second InputReceiver.receiveInt() returns 2")
-        void setsContactPhone() {
+        void setsContactPhone() throws Exception {
             //Arrange
             receiverMock.when(() -> InputReceiver.receiveInt(anyInt())).thenReturn(1, 2);
 
@@ -570,7 +568,7 @@ public class UserInteractionTest {
             receiverMock.when(InputReceiver::receivePhone).thenReturn(testInput);
 
             //Act
-            UserInteraction.editContact(addressBookMock);
+            muteSystemOut(() -> UserInteraction.editContact(addressBookMock));
 
             //Assert
             verify(contactMock1).setPhone(testInput);
@@ -578,7 +576,7 @@ public class UserInteractionTest {
 
         @Test
         @DisplayName("Calls Contact.setEmail() with InputReceiver.receiveEmail() return value if second InputReceiver.receiveInt() returns 3")
-        void setsContactEmail() {
+        void setsContactEmail() throws Exception {
             //Arrange
             receiverMock.when(() -> InputReceiver.receiveInt(anyInt())).thenReturn(1, 3);
 
@@ -586,7 +584,7 @@ public class UserInteractionTest {
             receiverMock.when(InputReceiver::receiveEmail).thenReturn(testInput);
 
             //Act
-            UserInteraction.editContact(addressBookMock);
+            muteSystemOut(() -> UserInteraction.editContact(addressBookMock));
 
             //Assert
             verify(contactMock1).setEmail(testInput);
@@ -594,12 +592,12 @@ public class UserInteractionTest {
 
         @Test
         @DisplayName("Calls InputReceiver.yesNo() if InputReceiver.receiveInt() returns 4")
-        void editDetails() {
+        void editDetails() throws Exception {
             //Arrange
             receiverMock.when(() -> InputReceiver.receiveInt(anyInt())).thenReturn(1, 4);
 
             //Act
-            UserInteraction.editContact(addressBookMock);
+            muteSystemOut(() -> UserInteraction.editContact(addressBookMock));
 
             //Assert
             receiverMock.verify(InputReceiver::receiveYesNo, atLeast(1));
@@ -607,7 +605,7 @@ public class UserInteractionTest {
 
         @Test
         @DisplayName("Calls Contact.addDetail with return of InputReceiver.receiveDetail() if first InputReceiver.yesNo() returns true")
-        void addDetail() {
+        void addDetail() throws Exception {
             //Arrange
             String testKey = "TestKey";
             String testValue = "TestValue";
@@ -617,7 +615,7 @@ public class UserInteractionTest {
             receiverMock.when(InputReceiver::receiveDetail).thenReturn(new String[] {testKey, testValue});
 
             //Act
-            UserInteraction.editContact(addressBookMock);
+            muteSystemOut(() -> UserInteraction.editContact(addressBookMock));
 
             //Assert
             verify(contactMock1).addDetail(testKey, testValue);
@@ -625,7 +623,7 @@ public class UserInteractionTest {
 
         @Test
         @DisplayName("Calls Contact.removeDetail() if second InputReceiver.receiveYesNo() returns true")
-        void removeDetail() {
+        void removeDetail() throws Exception {
             //Arrange
             LinkedHashMap<String, String> testDetails = new LinkedHashMap<>();
             String testKey = "Nickname";
@@ -638,7 +636,7 @@ public class UserInteractionTest {
             receiverMock.when(InputReceiver::receiveString).thenReturn(testKey);
 
             //Act
-            UserInteraction.editContact(addressBookMock);
+            muteSystemOut(() -> UserInteraction.editContact(addressBookMock));
 
             //Assert
             verify(contactMock1).removeDetail(testKey);
@@ -646,7 +644,7 @@ public class UserInteractionTest {
 
         @Test
         @DisplayName("Calls Contact.setDetail() if second InputReceiver.receiveYesNo() returns false")
-        void editDetail() {
+        void editDetail() throws Exception {
             //Arrange
             LinkedHashMap<String, String> testDetails = new LinkedHashMap<>();
             String testKey = "Nickname";
@@ -660,56 +658,11 @@ public class UserInteractionTest {
             receiverMock.when(InputReceiver::receiveString).thenReturn(testKey, testValue);
 
             //Act
-            UserInteraction.editContact(addressBookMock);
+            muteSystemOut(() -> UserInteraction.editContact(addressBookMock));
 
             //Assert
             verify(contactMock1).setDetail(testKey, testValue);
         }
-
-//        @Test
-//        @DisplayName("Calls Contact.setEmail() with InputReceiver.receiveEmail() return value if second InputReceiver.receiveInt() returns 3")
-//        void setsContactDetail() {
-//            //Arrange
-//            LinkedHashMap<String, String> testDetails = new LinkedHashMap<>();
-//            String testDetailKey = "Nickname";
-//            testDetails.put(testDetailKey, "Joe");
-//            testDetails.put("Address", "123 Place St");
-//            when(contactMock1.getDetails()).thenReturn(testDetails);
-//
-//            receiverMock.when(() -> InputReceiver.receiveInt(anyInt())).thenReturn(1, 4);
-//
-//            receiverMock.when(InputReceiver::receiveYesNo).thenReturn(false);
-//
-//            String testInput = "Test";
-//            receiverMock.when(InputReceiver::receiveString).thenReturn(testInput);
-//
-//            //Act
-//            UserInteraction.editContact(addressBookMock);
-//
-//            //Assert
-//            verify(contactMock1).setDetail(testDetailKey, testInput);
-//        }
-
-//        @Test
-//        @DisplayName("Calls Contact.setEmail() with InputReceiver.receiveEmail() return value if second InputReceiver.receiveInt() returns 3")
-//        void removesContactDetail() {
-//            //Arrange
-//            LinkedHashMap<String, String> testDetails = new LinkedHashMap<>();
-//            String testDetailKey = "Nickname";
-//            testDetails.put(testDetailKey, "Joe");
-//            testDetails.put("Address", "123 Place St");
-//            when(contactMock1.getDetails()).thenReturn(testDetails);
-//
-//            receiverMock.when(() -> InputReceiver.receiveInt(anyInt())).thenReturn(1, 4);
-//
-//            receiverMock.when(InputReceiver::receiveYesNo).thenReturn(true);
-//
-//            //Act
-//            UserInteraction.editContact(addressBookMock);
-//
-//            //Assert
-//            verify(contactMock1).removeDetail(testDetailKey);
-//        }
     }
 
     @Nested

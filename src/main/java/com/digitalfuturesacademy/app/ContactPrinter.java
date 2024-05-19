@@ -31,8 +31,9 @@ public class ContactPrinter {
     public static void printAllContacts(ArrayList<Contact> contacts) throws IllegalArgumentException {
         if (contacts == null) throw new IllegalArgumentException("Contact list was null");
 
-        for (Contact c : contacts) {
-            printContact(c);
+        for (int i = 0; i < contacts.size(); i++) {
+            System.out.println(i);
+            printContact(contacts.get(i));
         }
     }
 

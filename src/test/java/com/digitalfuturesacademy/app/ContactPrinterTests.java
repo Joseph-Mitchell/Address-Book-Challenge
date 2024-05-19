@@ -4,13 +4,12 @@ import org.junit.jupiter.api.*;
 import org.mockito.MockedStatic;
 
 import static com.github.stefanbirkner.systemlambda.SystemLambda.tapSystemOutNormalized;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 public class ContactPrinterTests {
@@ -25,7 +24,7 @@ public class ContactPrinterTests {
 
         @Test
         @DisplayName("Calls printContact() for each element in contacts")
-        void printsEachElement() {
+        void printsEachElement() throws Exception {
             //Arrange
             Contact contactMock1 = mock(Contact.class);
             Contact contactMock2 = mock(Contact.class);
@@ -35,11 +34,13 @@ public class ContactPrinterTests {
             try(MockedStatic<ContactPrinter> printerMock = mockStatic(ContactPrinter.class)) {
                 printerMock.when(() -> ContactPrinter.printAllContacts(any())).thenCallRealMethod();
                 //Act
-                ContactPrinter.printAllContacts(testList);
+                String actual = tapSystemOutNormalized(() -> ContactPrinter.printAllContacts(testList));
 
                 //Assert
                 printerMock.verify(() -> ContactPrinter.printContact(contactMock1));
                 printerMock.verify(() -> ContactPrinter.printContact(contactMock2));
+                assertTrue(actual.contains("0"));
+                assertTrue(actual.contains("1"));
             }
         }
     }
