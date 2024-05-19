@@ -43,4 +43,14 @@ public class ContactPrinterTests {
             }
         }
     }
+
+    @Nested
+    class PrintContact {
+        @Test
+        @DisplayName("Throws exception if Contact is null")
+        void exceptionIfNull() {
+            //Assert
+            assertThrows(IllegalArgumentException.class, () -> ContactPrinter.printContact(null));
+        }
+    }
 }
