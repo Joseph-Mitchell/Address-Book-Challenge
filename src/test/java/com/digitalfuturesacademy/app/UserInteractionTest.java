@@ -116,6 +116,23 @@ public class UserInteractionTest {
             UIMock.verify(() -> UserInteraction.editContact(any()), times(0));
             UIMock.verify(() -> UserInteraction.findContact(any()), times(0));
         }
+
+        @Test
+        @DisplayName("Calls only editContact() if InputReceiver.receiveInt() returns matching int")
+        void callsEditContact() {
+            //Arrange
+            receiverMock.when(() -> InputReceiver.receiveInt(anyInt())).thenReturn(3);
+
+            //Act
+            UserInteraction.mainMenu(addressBookMock);
+
+            //Assert
+            UIMock.verify(() -> UserInteraction.editContact(any()));
+            UIMock.verify(() -> UserInteraction.displayContacts(any()), times(0));
+            UIMock.verify(() -> UserInteraction.addContact(any()), times(0));
+            UIMock.verify(() -> UserInteraction.removeContact(any()), times(0));
+            UIMock.verify(() -> UserInteraction.findContact(any()), times(0));
+        }
     }
 
     @Nested

@@ -16,6 +16,9 @@ public class UserInteraction {
             case 2:
                 removeContact(addressBook);
                 break;
+            case 3:
+                editContact(addressBook);
+                break;
         }
     }
 
