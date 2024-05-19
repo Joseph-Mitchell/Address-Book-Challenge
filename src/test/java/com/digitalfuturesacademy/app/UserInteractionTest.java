@@ -374,5 +374,21 @@ public class UserInteractionTest {
             //Assert
             verify(contactMock1).setLastName(testInput);
         }
+
+        @Test
+        @DisplayName("Calls Contact.setPhone() with InputReceiver.receivePhone() return value if second InputReceiver.receiveInt() returns 2")
+        void setsContactPhone() {
+            //Arrange
+            receiverMock.when(() -> InputReceiver.receiveInt(anyInt())).thenReturn(1, 2);
+
+            String testInput = "Test";
+            receiverMock.when(InputReceiver::receivePhone).thenReturn(testInput);
+
+            //Act
+            UserInteraction.editContact(addressBookMock);
+
+            //Assert
+            verify(contactMock1).setPhone(testInput);
+        }
     }
 }
