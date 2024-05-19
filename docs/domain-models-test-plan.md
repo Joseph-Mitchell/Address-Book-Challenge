@@ -295,10 +295,10 @@ As a user, I want to find a contact by searching for it, so that I can find the 
 #### InputReceiver.receiveEmail()
  - [x] Print message if input was invalid
 
-#### InputReceiver.receiveYesNo()
- - [ ] Print message if input was invalid
-
 #### InputReceiver.receiveDetails()
+ - [x] Print message asking if user wants to add detail
+
+#### InputReceiver.receiveYesNo()
  - [ ] Print message if input was invalid
 
 #### UserInteraction.removeContact()

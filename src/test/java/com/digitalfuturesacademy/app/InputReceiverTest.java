@@ -210,12 +210,12 @@ public class InputReceiverTest {
     class ReceiveEmail {
         @Test
         @DisplayName("Retakes user input if Validate.email() returns false")
-        void retakesInput() {
+        void retakesInput() throws Exception {
             //Arrange
             validateMock.when(() -> Validate.email(any())).thenReturn(false).thenReturn(true);
 
             //Act
-            InputReceiver.receiveEmail();
+            muteSystemOut(InputReceiver::receiveEmail);
 
             //Assert
             verify(inputMock, times(2)).nextLine();
@@ -364,78 +364,94 @@ public class InputReceiverTest {
 
     @Nested
     class ReceiveDetails {
+        MockedStatic<InputReceiver> receiverMock;
+
+        @BeforeEach
+        void beforeEach() {
+            receiverMock = Mockito.mockStatic(InputReceiver.class);
+            receiverMock.when(InputReceiver::receiveDetails).thenCallRealMethod();
+        }
+
+        @AfterEach
+        void afterEach() {
+            receiverMock.close();
+        }
+
         @Test
         @DisplayName("Does not call InputReceiver.receiveDetail() if InputReceiver.yesNo() returns false")
-        void noDetailsIfYesNoFalse() {
+        void noDetailsIfYesNoFalse() throws Exception {
             //Arrange
-            try (MockedStatic<InputReceiver> receiverMock = Mockito.mockStatic(InputReceiver.class)) {
-                receiverMock.when(InputReceiver::receiveDetails).thenCallRealMethod();
-                receiverMock.when(InputReceiver::receiveYesNo).thenReturn(false);
+            receiverMock.when(InputReceiver::receiveYesNo).thenReturn(false);
 
-                //Act
-                InputReceiver.receiveDetails();
+            //Act
+            muteSystemOut(InputReceiver::receiveDetails);
 
-                //Assert
-                receiverMock.verify(InputReceiver::receiveDetail, times(0));
-            }
+            //Assert
+            receiverMock.verify(InputReceiver::receiveDetail, times(0));
+        }
+
+        @Test
+        @DisplayName("Does not call InputReceiver.receiveDetail() if InputReceiver.yesNo() returns false")
+        void confirmAddDetail() throws Exception {
+            //Arrange
+            receiverMock.when(InputReceiver::receiveYesNo).thenReturn(false);
+
+            //Act
+            String actual = tapSystemOutNormalized(InputReceiver::receiveDetails);
+
+            //Assert
+            assertTrue(actual.contains("Add an extra detail? (y/n):"));
         }
 
         @Test
         @DisplayName("Calls InputReceiver.receiveDetail() once if InputReceiver.yesNo() returns true")
-        void getDetailIfYesNoTrue() {
+        void getDetailIfYesNoTrue() throws Exception {
             //Arrange
-            try (MockedStatic<InputReceiver> receiverMock = Mockito.mockStatic(InputReceiver.class)) {
-                receiverMock.when(InputReceiver::receiveDetails).thenCallRealMethod();
-                receiverMock.when(InputReceiver::receiveYesNo).thenReturn(true, false);
-                receiverMock.when(InputReceiver::receiveDetail).thenReturn(new String[] {"", ""});
+            receiverMock.when(InputReceiver::receiveYesNo).thenReturn(true, false);
+            receiverMock.when(InputReceiver::receiveDetail).thenReturn(new String[] {"", ""});
 
-                //Act
-                InputReceiver.receiveDetails();
+            //Act
+            muteSystemOut(InputReceiver::receiveDetails);
 
-                //Assert
-                receiverMock.verify(InputReceiver::receiveDetail, times(1));
-            }
+            //Assert
+            receiverMock.verify(InputReceiver::receiveDetail, times(1));
         }
 
         @ParameterizedTest
         @ValueSource(ints = {1, 2, 5, 7})
         @DisplayName("Calls InputReceiver.receiveDetail() as many times as InputReceiver.yesNo() returns true")
-        void getDetailIfYesNoTrueTwice(int times) {
+        void getDetailIfYesNoTrueTwice(int times) throws Exception {
             //Arrange
-            try (MockedStatic<InputReceiver> receiverMock = Mockito.mockStatic(InputReceiver.class)) {
-                receiverMock.when(InputReceiver::receiveDetails).thenCallRealMethod();
-                receiverMock.when(InputReceiver::receiveYesNo).thenAnswer(new Answer<Boolean>() {
-                    int count = 0;
-                    public Boolean answer(InvocationOnMock invocation) {return count++ < times;}
-                });
-                receiverMock.when(InputReceiver::receiveDetail).thenReturn(new String[] {"", ""});
+            receiverMock.when(InputReceiver::receiveYesNo).thenAnswer(new Answer<Boolean>() {
+                int count = 0;
+                public Boolean answer(InvocationOnMock invocation) {return count++ < times;}
+            });
+            receiverMock.when(InputReceiver::receiveDetail).thenReturn(new String[] {"", ""});
 
-                //Act
-                InputReceiver.receiveDetails();
+            //Act
+            muteSystemOut(InputReceiver::receiveDetails);
 
-                //Assert
-                receiverMock.verify(InputReceiver::receiveDetail, times(times));
-            }
+            //Assert
+            receiverMock.verify(InputReceiver::receiveDetail, times(times));
         }
 
         @Test
         @DisplayName("Returns expected map")
-        void returnsCorrectly() {
+        void returnsCorrectly() throws Exception {
             //Arrange
-            try (MockedStatic<InputReceiver> receiverMock = Mockito.mockStatic(InputReceiver.class)) {
-                String testKey = "Nickname";
-                String testValue = "Joe";
+            String testKey = "Nickname";
+            String testValue = "Joe";
 
-                receiverMock.when(InputReceiver::receiveDetails).thenCallRealMethod();
-                receiverMock.when(InputReceiver::receiveYesNo).thenReturn(true, false);
-                receiverMock.when(InputReceiver::receiveDetail).thenReturn(new String[] {testKey, testValue});
+            receiverMock.when(InputReceiver::receiveYesNo).thenReturn(true, false);
+            receiverMock.when(InputReceiver::receiveDetail).thenReturn(new String[] {testKey, testValue});
 
-                //Act
+            //Act
+            muteSystemOut(() -> {
                 LinkedHashMap<String, String> actual = InputReceiver.receiveDetails();
 
                 //Assert
                 assertEquals(testKey + "=" + testValue, actual.entrySet().toArray()[0].toString());
-            }
+            });
         }
     }
 }
