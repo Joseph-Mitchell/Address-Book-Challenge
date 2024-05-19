@@ -304,7 +304,7 @@ As a user, I want to find a contact by searching for it, so that I can find the 
  - [x] Prompts user for each input
 
 #### InputReceiver.receiveYesNo()
- - [ ] Print message if input was invalid
+ - [x] Print message if input was invalid
 
 #### UserInteraction.removeContact()
  - [ ] Prints confirmation message when contact is removed

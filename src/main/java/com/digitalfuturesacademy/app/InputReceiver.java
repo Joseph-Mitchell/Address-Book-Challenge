@@ -53,8 +53,8 @@ public class InputReceiver {
 
     public static boolean receiveYesNo() {
         String candidate;
-        while(true) {
-            if (Validate.yesNo(candidate = input.nextLine())) break;
+        while (!Validate.yesNo(candidate = input.nextLine())) {
+            System.out.println("Please enter 'y' or 'n'");
         }
 
         return candidate.strip().toLowerCase().charAt(0) == 'y';

@@ -256,16 +256,30 @@ public class InputReceiverTest {
     class ReceiveYesNo {
         @Test
         @DisplayName("Retakes user input if Validate.yesNo() returns false")
-        void retakesInput() {
+        void retakesInput() throws Exception {
             //Arrange
             when(inputMock.nextLine()).thenReturn("test");
             validateMock.when(() -> Validate.yesNo(any())).thenReturn(false).thenReturn(true);
 
             //Act
-            InputReceiver.receiveYesNo();
+            muteSystemOut(InputReceiver::receiveYesNo);
 
             //Assert
             verify(inputMock, times(2)).nextLine();
+        }
+
+        @Test
+        @DisplayName("Print message if input was invalid")
+        void printMessageIfInvalid() throws Exception {
+            //Arrange
+            when(inputMock.nextLine()).thenReturn("test");
+            validateMock.when(() -> Validate.yesNo(any())).thenReturn(false).thenReturn(true);
+
+            //Act
+            String actual = tapSystemOutNormalized(InputReceiver::receiveYesNo);
+
+            //Assert
+            assertTrue(actual.contains("Please enter 'y' or 'n'"));
         }
 
         @Test
