@@ -224,8 +224,12 @@ Contact ..> Validate
  - [x] Calls Contact.setLastName() with InputReceiver.receiveString() return value if InputReceiver.receiveInt() returns 1
  - [x] Calls Contact.setPhone() with InputReceiver.receivePhone() return value if InputReceiver.receiveInt() returns 2
  - [x] Calls Contact.setEmail() with InputReceiver.receiveEmail() return value if InputReceiver.receiveInt() returns 3
- - [x] Calls Contact.setDetail() with InputReceiver.receiveString() return value if InputReceiver.receiveInt() returns more than 3 and InputReceiver.receiveYesNo() returns false
- - [x] Calls Contact.removeDetail() if second InputReceiver.receiveInt() returns more than 3 and InputReceiver.receiveYesNo() returns true
+ - [x] Calls InputReceiver.yesNo() if InputReceiver.receiveInt() returns 4
+
+#### UserInteraction.editContact(): Edit Detail
+ - [ ] Calls InputReceiver.receiveDetail() if first InputReceiver.yesNo() returns true
+ - [ ] Calls Contact.removeDetail() if second InputReceiver.receiveYesNo() returns true
+ - [ ] Calls Contact.setDetail() if second InputReceiver.receiveYesNo() returns false
 
 ### User Story 5
 #### UserInteraction.mainMenu()

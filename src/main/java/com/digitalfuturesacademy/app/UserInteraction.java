@@ -70,10 +70,7 @@ public class UserInteraction {
                 break;
             default:
                 if (InputReceiver.receiveYesNo()) {
-                    contact.removeDetail(contact.getDetails().keySet().toArray()[choice-4].toString());
-                }
-                else {
-                    contact.setDetail(contact.getDetails().keySet().toArray()[choice-4].toString(), InputReceiver.receiveString());
+
                 }
                 break;
         }
