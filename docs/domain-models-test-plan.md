@@ -194,7 +194,7 @@ Contact ..> Validate
 #### ContactPrinter.printContact()
  - [x] Throws exception if Contact is null
  - [x] Prints contact correctly when no additional details
- - [ ] Prints contact correctly when at least one additional detail
+ - [ ] Prints contact correctly with details
 
 ### User Story 3
 #### UserInteraction.mainMenu()

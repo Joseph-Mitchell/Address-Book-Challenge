@@ -1,12 +1,13 @@
 package com.digitalfuturesacademy.app;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class ContactPrinter {
     public static void printContact(Contact contact) throws IllegalArgumentException {
         if (contact == null) throw new IllegalArgumentException("Contact was null");
 
-        String mainBlock = """
+        String output = """
                 --------------------
                 First Name: %s
                 
@@ -15,10 +16,16 @@ public class ContactPrinter {
                 Phone: %s
                 
                 Email: %s
-                --------------------""".formatted(contact.getFirstName(), contact.getLastName(),
+                """.formatted(contact.getFirstName(), contact.getLastName(),
                                                   contact.getPhone(), contact.getEmail());
 
-        System.out.print(mainBlock);
+        for (Map.Entry<String, String> e : contact.getDetails().entrySet()) {
+            output = output.concat("\n%s: %s\n".formatted(e.getKey(), e.getValue()));
+        }
+
+        output += "--------------------";
+
+        System.out.print(output);
     }
 
     public static void printAllContacts(ArrayList<Contact> contacts) throws IllegalArgumentException {

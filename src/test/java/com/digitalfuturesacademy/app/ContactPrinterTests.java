@@ -92,5 +92,55 @@ public class ContactPrinterTests {
                     Email: %s
                     --------------------""".formatted(testFirstName, testLastName, testPhone, testEmail), actual);
         }
+
+        @Test
+        @DisplayName("Prints contact correctly with details")
+        void printsContactCorrectlyWithDetails() {
+            //Arrange
+            String testFirstName = "Joseph";
+            String testLastName = "Mitchell";
+            String testPhone = "01234567890";
+            String testEmail = "joseph@example.com";
+
+            String testKey1 = "Nickname";
+            String testValue1 = "Joe";
+            String testKey2 = "Address";
+            String testValue2 = "5 Somewhere Street";
+            LinkedHashMap<String, String> testDetails = new LinkedHashMap<>();
+            testDetails.put(testKey1, testValue1);
+            testDetails.put(testKey2, testValue2);
+
+            Contact contactMock = mock(Contact.class);
+            when(contactMock.getFirstName()).thenReturn(testFirstName);
+            when(contactMock.getLastName()).thenReturn(testLastName);
+            when(contactMock.getPhone()).thenReturn(testPhone);
+            when(contactMock.getEmail()).thenReturn(testEmail);
+            when(contactMock.getDetails()).thenReturn(testDetails);
+
+            ByteArrayOutputStream testOutput = new ByteArrayOutputStream();
+            System.setOut(new PrintStream(testOutput));
+
+            //Act
+            ContactPrinter.printContact(contactMock);
+
+            //Assert
+            String actual = testOutput.toString();
+            assertEquals("""
+                    --------------------
+                    First Name: %s
+                    
+                    Last Name: %s
+                    
+                    Phone: %s
+                    
+                    Email: %s
+                    
+                    %s: %s
+                    
+                    %s: %s
+                    --------------------""".formatted(testFirstName, testLastName, testPhone, testEmail,
+                                                      testKey1, testValue1, testKey2, testValue2),
+                    actual);
+        }
     }
 }
