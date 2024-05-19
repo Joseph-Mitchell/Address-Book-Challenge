@@ -35,4 +35,8 @@ public class ContactPrinter {
             printContact(c);
         }
     }
+
+    public static void printMatchingContacts(ArrayList<Contact> contacts, String comparitor) {
+
+    }
 }

@@ -558,5 +558,22 @@ public class UserInteractionTest {
             //Assert
             assertEquals("There are no contacts in the address book.\n", actual);
         }
+
+        @Test
+        @DisplayName("Calls ContactPrinter.printMatchingContacts() with return of InputReceiver.receiveString()")
+        void printMatching() throws Exception {
+            //Arrange
+            String testInput = "Test";
+            receiverMock.when(InputReceiver::receiveString).thenReturn(testInput);
+
+            ArrayList<Contact> testList = new ArrayList<>();
+            when(addressBookMock.getContacts()).thenReturn(testList);
+
+            //Act
+            UserInteraction.findContact(addressBookMock);
+
+            //Assert
+            printerMock.verify(() -> ContactPrinter.printMatchingContacts(testList, testInput));
+        }
     }
 }
