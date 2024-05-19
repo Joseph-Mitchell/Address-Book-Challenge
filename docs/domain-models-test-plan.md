@@ -212,10 +212,10 @@ Contact ..> Validate
 
 ### User Story 4
 #### UserInteraction.mainMenu()
- - [ ] Calls only editContact() if InputReceiver.receiveInt() returns matching int
+ - [x] Calls only editContact() if InputReceiver.receiveInt() returns matching int
 
 #### UserInteraction.editContact()
- - [ ] Does not call later methods if contacts list is empty
+ - [ ] Prints message if no contacts
  - [ ] Calls ContactPrinter.printAllContacts()
  - [ ] Calls ContactPrinter.printContact() with Contact chosen by InputReceiver.receiveInt() return value
  - [ ] Calls Contact.setFirstName() with InputReceiver.receiveString() return value if second InputReceiver.receiveInt() returns 0

@@ -271,4 +271,21 @@ public class UserInteractionTest {
             verify(addressBookMock).removeContact(testInput);
         }
     }
+
+    @Nested
+    class EditContact {
+        @Test
+        @DisplayName("Prints message if no contacts")
+        void messageIfNoContacts() throws Exception {
+            //Arrange
+
+            //Act
+            String actual = tapSystemOutNormalized(() -> {
+                UserInteraction.editContact(addressBookMock);
+            });
+
+            //Assert
+            assertEquals("There are no contacts in the address book.\n", actual);
+        }
+    }
 }

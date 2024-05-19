@@ -49,7 +49,12 @@ public class UserInteraction {
         addressBook.removeContact(InputReceiver.receiveInt(addressBook.getContacts().size() - 1));
     }
 
-    public static void editContact(AddressBook addressBook) {}
+    public static void editContact(AddressBook addressBook) {
+        if (addressBook.getContacts().isEmpty()) {
+            System.out.print("There are no contacts in the address book.\n");
+            return;
+        }
+    }
 
     public static void findContact(AddressBook addressBook) {}
 }
