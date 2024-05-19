@@ -35,8 +35,8 @@ public class InputReceiver {
 
     public static String receivePhone() {
         String candidate;
-        while(true) {
-            if (Validate.phone(candidate = input.nextLine())) break;
+        while (!Validate.phone(candidate = input.nextLine())) {
+            System.out.println("Please enter a number");
         }
 
         return candidate;

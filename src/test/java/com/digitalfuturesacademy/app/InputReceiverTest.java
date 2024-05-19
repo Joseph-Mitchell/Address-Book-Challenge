@@ -177,6 +177,19 @@ public class InputReceiverTest {
         }
 
         @Test
+        @DisplayName("Print message if input was invalid")
+        void printMessageIfInvalid() throws Exception {
+            //Arrange
+            validateMock.when(() -> Validate.phone(any())).thenReturn(false).thenReturn(true);
+
+            //Act
+            String actual = tapSystemOutNormalized(InputReceiver::receivePhone);
+
+            //Assert
+            assertTrue(actual.contains("Please enter a number"));
+        }
+
+        @Test
         @DisplayName("Returns correct String if Validate.phone() returns true")
         void acceptsInput() {
             //Arrange

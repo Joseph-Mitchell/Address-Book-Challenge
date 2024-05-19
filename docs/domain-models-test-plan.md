@@ -289,6 +289,18 @@ As a user, I want to find a contact by searching for it, so that I can find the 
 #### InputReceiver.receiveString()
  - [x] Print message if input was invalid
 
+#### InputReceiver.receivePhone()
+ - [x] Print message if input was invalid
+
+#### InputReceiver.receiveEmail()
+ - [ ] Print message if input was invalid
+
+#### InputReceiver.receiveYesNo()
+ - [ ] Print message if input was invalid
+
+#### InputReceiver.receiveDetails()
+ - [ ] Print message if input was invalid
+
 #### UserInteraction.removeContact()
  - [ ] Prints confirmation message when contact is removed
 
