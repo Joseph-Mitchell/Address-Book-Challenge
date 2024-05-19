@@ -229,7 +229,7 @@ Contact ..> Validate
 #### UserInteraction.editContact(): Edit Detail
  - [x] Calls Contact.addDetail with return of InputReceiver.receiveDetail() if first InputReceiver.yesNo() returns true
  - [x] Calls Contact.removeDetail() if second InputReceiver.receiveYesNo() returns true
- - [ ] Calls Contact.setDetail() if second InputReceiver.receiveYesNo() returns false
+ - [x] Calls Contact.setDetail() if second InputReceiver.receiveYesNo() returns false
 
 ### User Story 5
 #### UserInteraction.mainMenu()

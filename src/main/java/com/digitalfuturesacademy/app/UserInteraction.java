@@ -76,6 +76,9 @@ public class UserInteraction {
                 else if (InputReceiver.receiveYesNo()) {
                     contact.removeDetail(InputReceiver.receiveString());
                 }
+                else {
+                    contact.setDetail(InputReceiver.receiveString(), InputReceiver.receiveString());
+                }
                 break;
         }
     }
