@@ -282,5 +282,23 @@ public class ContactPrinterTests {
                 printerMock.verify(() -> ContactPrinter.printContact(mockContact2));
             }
         }
+
+        @Test
+        @DisplayName("Prints expected contacts if input partially matches end of firstName")
+        void someContactsMatchEnd() {
+            //Arrange
+            testInput = "hn";
+
+            try(MockedStatic<ContactPrinter> printerMock = mockStatic(ContactPrinter.class)) {
+                printerMock.when(() -> ContactPrinter.printMatchingContacts(any(), any())).thenCallRealMethod();
+
+                //Act
+                ContactPrinter.printMatchingContacts(testList, testInput);
+
+                //Assert
+                printerMock.verify(() -> ContactPrinter.printContact(mockContact1));
+                printerMock.verify(() -> ContactPrinter.printContact(mockContact2));
+            }
+        }
     }
 }
