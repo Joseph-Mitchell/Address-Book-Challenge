@@ -7,6 +7,9 @@ public class UserInteraction {
         int choice = InputReceiver.receiveInt(4);
 
         switch(choice) {
+            case 0:
+                displayContacts(addressBook);
+                break;
             case 1:
                 addContact(addressBook);
                 break;

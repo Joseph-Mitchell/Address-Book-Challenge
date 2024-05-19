@@ -77,7 +77,7 @@ Contact ..> Validate
  - [x] Calls mainMenu()
 
 #### UserInteraction.mainMenu()
- - [x] Doesn't call addContact() if InputReceiver.receiveInt() returns unmatching int
+ - [x] Doesn't call any method if InputReceiver.receiveInt() returns no matching int
  - [x] Only calls addContact() if InputReceiver.receiveInt() returns matching int
 
 #### UserInteraction.addContact()
@@ -182,8 +182,7 @@ Contact ..> Validate
 
 ### User Story 2
 #### UserInteraction.mainMenu()
- - [ ] Doesn't call displayContacts() if InputReceiver.receiveInt() returns unmatching int
- - [ ] Calls only displayContacts() if InputReceiver.receiveInt() returns matching int
+ - [x] Calls only displayContacts() if InputReceiver.receiveInt() returns matching int
 
 #### UserInteraction.displayContacts()
  - [ ] Calls ContactPrinter.printAllContacts() with list of contacts from addressBook

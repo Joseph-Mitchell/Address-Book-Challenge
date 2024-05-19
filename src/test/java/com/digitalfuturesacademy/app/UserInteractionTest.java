@@ -44,8 +44,8 @@ public class UserInteractionTest {
         }
 
         @Test
-        @DisplayName("Doesn't call addContact() if InputReceiver.receiveInt() returns unmatching int")
-        void doesNotCallAddContact() {
+        @DisplayName("Doesn't call any method if InputReceiver.receiveInt() returns no matching int")
+        void doesNotCallIfNoMatch() {
             //Arrange
             receiverMock.when(() -> InputReceiver.receiveInt(anyInt())).thenReturn(-1);
 
@@ -54,10 +54,31 @@ public class UserInteractionTest {
 
             //Assert
             UIMock.verify(() -> UserInteraction.addContact(any()), times(0));
+            UIMock.verify(() -> UserInteraction.displayContacts(any()), times(0));
+            UIMock.verify(() -> UserInteraction.removeContact(any()), times(0));
+            UIMock.verify(() -> UserInteraction.editContact(any()), times(0));
+            UIMock.verify(() -> UserInteraction.findContact(any()), times(0));
         }
 
         @Test
-        @DisplayName("Only calls addContact() if InputReceiver.receiveInt() returns matching int")
+        @DisplayName("Calls only displayContacts() if InputReceiver.receiveInt() returns matching int")
+        void callsDisplayContacts() {
+            //Arrange
+            receiverMock.when(() -> InputReceiver.receiveInt(anyInt())).thenReturn(0);
+
+            //Act
+            UserInteraction.mainMenu(addressBookMock);
+
+            //Assert
+            UIMock.verify(() -> UserInteraction.displayContacts(any()));
+            UIMock.verify(() -> UserInteraction.addContact(any()), times(0));
+            UIMock.verify(() -> UserInteraction.removeContact(any()), times(0));
+            UIMock.verify(() -> UserInteraction.editContact(any()), times(0));
+            UIMock.verify(() -> UserInteraction.findContact(any()), times(0));
+        }
+
+        @Test
+        @DisplayName("Calls only addContact() if InputReceiver.receiveInt() returns matching int")
         void callsAddContact() {
             //Arrange
             receiverMock.when(() -> InputReceiver.receiveInt(anyInt())).thenReturn(1);
