@@ -2,10 +2,19 @@ package com.digitalfuturesacademy.app;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.Objects;
 
 public class UserInteraction {
     public static void mainMenu(AddressBook addressBook) {
+        System.out.print("""
+                Please choose an option:
+                
+                0. Display contacts
+                1. Add a new contact
+                2. Remove a contact
+                3. Edit a contact
+                4. Search contacts
+                """);
+
         int choice = InputReceiver.receiveInt(4);
 
         switch(choice) {

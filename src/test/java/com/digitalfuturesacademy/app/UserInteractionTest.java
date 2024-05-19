@@ -10,6 +10,7 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
+import static com.github.stefanbirkner.systemlambda.SystemLambda.muteSystemOut;
 import static com.github.stefanbirkner.systemlambda.SystemLambda.tapSystemOutNormalized;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -51,12 +52,12 @@ public class UserInteractionTest {
 
         @Test
         @DisplayName("Doesn't call any method if InputReceiver.receiveInt() returns no matching int")
-        void doesNotCallIfNoMatch() {
+        void doesNotCallIfNoMatch() throws Exception {
             //Arrange
             receiverMock.when(() -> InputReceiver.receiveInt(anyInt())).thenReturn(-1);
 
             //Act
-            UserInteraction.mainMenu(addressBookMock);
+            muteSystemOut(() -> UserInteraction.mainMenu(addressBookMock));
 
             //Assert
             UIMock.verify(() -> UserInteraction.addContact(any()), times(0));
@@ -68,12 +69,12 @@ public class UserInteractionTest {
 
         @Test
         @DisplayName("Calls only displayContacts() if InputReceiver.receiveInt() returns matching int")
-        void callsDisplayContacts() {
+        void callsDisplayContacts() throws Exception {
             //Arrange
             receiverMock.when(() -> InputReceiver.receiveInt(anyInt())).thenReturn(0);
 
             //Act
-            UserInteraction.mainMenu(addressBookMock);
+            muteSystemOut(() -> UserInteraction.mainMenu(addressBookMock));
 
             //Assert
             UIMock.verify(() -> UserInteraction.displayContacts(any()));
@@ -85,12 +86,12 @@ public class UserInteractionTest {
 
         @Test
         @DisplayName("Calls only addContact() if InputReceiver.receiveInt() returns matching int")
-        void callsAddContact() {
+        void callsAddContact() throws Exception {
             //Arrange
             receiverMock.when(() -> InputReceiver.receiveInt(anyInt())).thenReturn(1);
 
             //Act
-            UserInteraction.mainMenu(addressBookMock);
+            muteSystemOut(() -> UserInteraction.mainMenu(addressBookMock));
 
             //Assert
             UIMock.verify(() -> UserInteraction.addContact(any()));
@@ -102,12 +103,12 @@ public class UserInteractionTest {
 
         @Test
         @DisplayName("Calls only removeContact() if InputReceiver.receiveInt() returns matching int")
-        void callsRemoveContact() {
+        void callsRemoveContact() throws Exception {
             //Arrange
             receiverMock.when(() -> InputReceiver.receiveInt(anyInt())).thenReturn(2);
 
             //Act
-            UserInteraction.mainMenu(addressBookMock);
+            muteSystemOut(() -> UserInteraction.mainMenu(addressBookMock));
 
             //Assert
             UIMock.verify(() -> UserInteraction.removeContact(any()));
@@ -119,12 +120,12 @@ public class UserInteractionTest {
 
         @Test
         @DisplayName("Calls only editContact() if InputReceiver.receiveInt() returns matching int")
-        void callsEditContact() {
+        void callsEditContact() throws Exception {
             //Arrange
             receiverMock.when(() -> InputReceiver.receiveInt(anyInt())).thenReturn(3);
 
             //Act
-            UserInteraction.mainMenu(addressBookMock);
+            muteSystemOut(() -> UserInteraction.mainMenu(addressBookMock));
 
             //Assert
             UIMock.verify(() -> UserInteraction.editContact(any()));
@@ -136,12 +137,12 @@ public class UserInteractionTest {
 
         @Test
         @DisplayName("Calls only findContact() if InputReceiver.receiveInt() returns matching int")
-        void callsFindContacts() {
+        void callsFindContacts() throws Exception {
             //Arrange
             receiverMock.when(() -> InputReceiver.receiveInt(anyInt())).thenReturn(4);
 
             //Act
-            UserInteraction.mainMenu(addressBookMock);
+            muteSystemOut(() -> UserInteraction.mainMenu(addressBookMock));
 
             //Assert
             UIMock.verify(() -> UserInteraction.findContact(any()));
@@ -149,6 +150,27 @@ public class UserInteractionTest {
             UIMock.verify(() -> UserInteraction.addContact(any()), times(0));
             UIMock.verify(() -> UserInteraction.removeContact(any()), times(0));
             UIMock.verify(() -> UserInteraction.editContact(any()), times(0));
+        }
+
+        @Test
+        @DisplayName("Print message showing options")
+        void printOptions() throws Exception {
+            //Arrange
+            receiverMock.when(() -> InputReceiver.receiveInt(anyInt())).thenReturn(-1);
+
+            //Act
+            String actual = tapSystemOutNormalized(() -> UserInteraction.mainMenu(addressBookMock));
+
+            //Assert
+            assertEquals("""
+                    Please choose an option:
+                    
+                    0. Display contacts
+                    1. Add a new contact
+                    2. Remove a contact
+                    3. Edit a contact
+                    4. Search contacts
+                    """, actual);
         }
     }
 

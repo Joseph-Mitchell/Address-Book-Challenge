@@ -70,6 +70,23 @@ AddressBook --> "0..*" Contact
 Contact ..> Validate
 ```
 
+## User Stories
+
+### User Story 1
+As a user, I want to add a contact to the address book, so I can remember their details
+
+### User Story 2
+As a user, I want to view the contacts in the address book, so I can look through all my contacts
+
+### User Story 3
+As a user, I want to be able to view contacts in pages, so that I do not get overwhelmed with information
+
+### User Story 4
+As a user, I want to edit a contacts details, so that I can fix mistakes and update details
+
+### User Story 5
+As a user, I want to find a contact by searching for it, so that I can find the contact I want
+
 ## Test Plan
 
 ### User Story 1
@@ -253,6 +270,9 @@ Contact ..> Validate
  - [x] Print expected contacts if input fully of partially matches lastName
 
 ### User Story 6
+#### UserInteraction.mainMenu()
+ - [x] Print message showing options
+
 #### UserInteraction.addContact()
  - [ ] Print confirmation message when contact is added to address book
  - [ ] Print confirmation message when process is cancelled
