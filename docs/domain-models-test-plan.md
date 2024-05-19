@@ -194,11 +194,10 @@ Contact ..> Validate
 #### ContactPrinter.printContact()
  - [x] Throws exception if Contact is null
  - [x] Prints contact correctly when no additional details
- - [ ] Prints contact correctly with details
+ - [x] Prints contact correctly with details
 
 ### User Story 3
 #### UserInteraction.mainMenu()
- - [ ] Doesn't call removeContact() if InputReceiver.receiveInt() returns unmatching int
  - [ ] Calls only removeContact() if InputReceiver.receiveInt() returns matching int
 
 #### UserInteraction.removeContact()
@@ -229,7 +228,6 @@ Contact ..> Validate
 
 ### User Story 5
 #### UserInteraction.mainMenu()
- - [ ] Doesn't call findContact() if InputReceiver.receiveInt() returns unmatching int
  - [ ] Calls only findContact() if InputReceiver.receiveInt() returns matching int
 
 #### UserInteraction.findContact()
