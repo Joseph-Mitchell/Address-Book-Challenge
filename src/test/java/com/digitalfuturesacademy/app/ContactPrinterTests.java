@@ -147,5 +147,16 @@ public class ContactPrinterTests {
             //Act, Assert
             assertThrows(IllegalArgumentException.class, () -> ContactPrinter.printMatchingContacts(testList, testInput));
         }
+
+        @Test
+        @DisplayName("Throws exception if name only whitespace")
+        void exceptionIfBlank() {
+            //Arrange
+            String testInput = " ";
+            ArrayList<Contact> testList = new ArrayList<>();
+
+            //Act, Assert
+            assertThrows(IllegalArgumentException.class, () -> ContactPrinter.printMatchingContacts(testList, testInput));
+        }
     }
 }
