@@ -277,8 +277,6 @@ public class UserInteractionTest {
         @Test
         @DisplayName("Prints message if no contacts")
         void messageIfNoContacts() throws Exception {
-            //Arrange
-
             //Act
             String actual = tapSystemOutNormalized(() -> {
                 UserInteraction.editContact(addressBookMock);
@@ -286,6 +284,23 @@ public class UserInteractionTest {
 
             //Assert
             assertEquals("There are no contacts in the address book.\n", actual);
+        }
+
+        @Test
+        @DisplayName("Calls ContactPrinter.printAllContacts()")
+        void printsAllContacts() throws Exception {
+            //Arrange
+            Contact contactMock = mock(Contact.class);
+            ArrayList<Contact> testList = new ArrayList<>();
+            testList.add(contactMock);
+
+            when(addressBookMock.getContacts()).thenReturn(testList);
+
+            //Act
+            UserInteraction.editContact(addressBookMock);
+
+            //Assert
+            printerMock.verify(() -> ContactPrinter.printAllContacts(any()));
         }
     }
 }

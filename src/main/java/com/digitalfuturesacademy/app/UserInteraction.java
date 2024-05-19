@@ -54,6 +54,8 @@ public class UserInteraction {
             System.out.print("There are no contacts in the address book.\n");
             return;
         }
+
+        ContactPrinter.printAllContacts(addressBook.getContacts());
     }
 
     public static void findContact(AddressBook addressBook) {}
