@@ -287,6 +287,20 @@ public class UserInteractionTest {
         }
 
         @Test
+        @DisplayName("Print confirmation message when contact is added to address book")
+        void printMessageWhenAdded() throws Exception {
+            //Arrange
+            receiverMock.when(InputReceiver::receiveYesNo).thenReturn(true);
+            try(MockedConstruction<Contact> contactMock = Mockito.mockConstruction(Contact.class)) {
+                //Act
+                String actual = tapSystemOutNormalized(() -> UserInteraction.addContact(addressBookMock));
+
+                //Assert
+                assertTrue(actual.contains("Contact was added"));
+            }
+        }
+
+        @Test
         @DisplayName("AddressBook.addContact() not called if user cancels")
         void doNotAddIfUserCancels() throws Exception {
             //Arrange
@@ -668,7 +682,7 @@ public class UserInteractionTest {
             when(addressBookMock.getContacts()).thenReturn(testList);
 
             //Act
-            UserInteraction.findContact(addressBookMock);
+            muteSystemOut(() -> UserInteraction.findContact(addressBookMock));
 
             //Assert
             printerMock.verify(() -> ContactPrinter.printMatchingContacts(testList, testInput));

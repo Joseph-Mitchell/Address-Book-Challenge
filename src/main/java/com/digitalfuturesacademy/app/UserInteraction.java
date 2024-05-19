@@ -52,8 +52,10 @@ public class UserInteraction {
         ContactPrinter.printContact(contact);
         System.out.println("Add this contact? (y/n):");
 
-        if (InputReceiver.receiveYesNo())
+        if (InputReceiver.receiveYesNo()) {
             addressBook.addContact(contact);
+            System.out.println("Contact was added");
+        }
     }
 
     public static void displayContacts(AddressBook addressBook) {
