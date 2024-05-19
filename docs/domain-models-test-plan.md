@@ -233,7 +233,7 @@ Contact ..> Validate
 
 ### User Story 5
 #### UserInteraction.mainMenu()
- - [ ] Calls only findContact() if InputReceiver.receiveInt() returns matching int
+ - [x] Calls only findContact() if InputReceiver.receiveInt() returns matching int
 
 #### UserInteraction.findContact()
  - [ ] Does not call later methods if contacts list is empty

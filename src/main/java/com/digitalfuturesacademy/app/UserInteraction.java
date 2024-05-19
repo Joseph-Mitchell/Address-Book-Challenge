@@ -21,6 +21,9 @@ public class UserInteraction {
             case 3:
                 editContact(addressBook);
                 break;
+            case 4:
+                findContact(addressBook);
+                break;
         }
     }
 
@@ -54,6 +57,19 @@ public class UserInteraction {
         catch (IllegalStateException e) { System.out.println(e.getMessage()); }
     }
 
+    private static void editDetail(Contact contact) {
+        if (InputReceiver.receiveYesNo()) {
+            String[] detail = InputReceiver.receiveDetail();
+            contact.addDetail(detail[0], detail[1]);
+        }
+        else if (InputReceiver.receiveYesNo()) {
+            contact.removeDetail(InputReceiver.receiveString());
+        }
+        else {
+            contact.setDetail(InputReceiver.receiveString(), InputReceiver.receiveString());
+        }
+    }
+
     private static void chooseEdit(int choice, Contact contact) {
         switch (choice) {
             case 0:
@@ -69,16 +85,7 @@ public class UserInteraction {
                 contact.setEmail(InputReceiver.receiveEmail());
                 break;
             default:
-                if (InputReceiver.receiveYesNo()) {
-                    String[] detail = InputReceiver.receiveDetail();
-                    contact.addDetail(detail[0], detail[1]);
-                }
-                else if (InputReceiver.receiveYesNo()) {
-                    contact.removeDetail(InputReceiver.receiveString());
-                }
-                else {
-                    contact.setDetail(InputReceiver.receiveString(), InputReceiver.receiveString());
-                }
+                editDetail(contact);
                 break;
         }
     }
