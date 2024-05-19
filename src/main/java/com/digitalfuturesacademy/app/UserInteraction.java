@@ -70,7 +70,8 @@ public class UserInteraction {
                 break;
             default:
                 if (InputReceiver.receiveYesNo()) {
-
+                    String[] detail = InputReceiver.receiveDetail();
+                    contact.addDetail(detail[0], detail[1]);
                 }
                 break;
         }

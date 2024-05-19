@@ -227,7 +227,7 @@ Contact ..> Validate
  - [x] Calls InputReceiver.yesNo() if InputReceiver.receiveInt() returns 4
 
 #### UserInteraction.editContact(): Edit Detail
- - [ ] Calls InputReceiver.receiveDetail() if first InputReceiver.yesNo() returns true
+ - [x] Calls Contact.addDetail with return of InputReceiver.receiveDetail() if first InputReceiver.yesNo() returns true
  - [ ] Calls Contact.removeDetail() if second InputReceiver.receiveYesNo() returns true
  - [ ] Calls Contact.setDetail() if second InputReceiver.receiveYesNo() returns false
 

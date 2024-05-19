@@ -61,6 +61,10 @@ public class Contact {
         return details;
     }
 
+    public void addDetail(String key, String value) {
+        details.put(key, value);
+    }
+
     public void setDetail(String key, String value) {
         details.replace(key, value);
     }

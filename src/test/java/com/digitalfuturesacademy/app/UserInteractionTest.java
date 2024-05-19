@@ -420,6 +420,24 @@ public class UserInteractionTest {
             receiverMock.verify(InputReceiver::receiveYesNo);
         }
 
+        @Test
+        @DisplayName("Calls Contact.addDetail with return of InputReceiver.receiveDetail() if first InputReceiver.yesNo() returns true")
+        void addDetails() {
+            //Arrange
+            String testKey = "TestKey";
+            String testValue = "TestValue";
+
+            receiverMock.when(() -> InputReceiver.receiveInt(anyInt())).thenReturn(1, 4);
+            receiverMock.when(InputReceiver::receiveYesNo).thenReturn(true);
+            receiverMock.when(InputReceiver::receiveDetail).thenReturn(new String[] {testKey, testValue});
+
+            //Act
+            UserInteraction.editContact(addressBookMock);
+
+            //Assert
+            verify(contactMock1).addDetail(testKey, testValue);
+        }
+
 //        @Test
 //        @DisplayName("Calls Contact.setEmail() with InputReceiver.receiveEmail() return value if second InputReceiver.receiveInt() returns 3")
 //        void setsContactDetail() {
