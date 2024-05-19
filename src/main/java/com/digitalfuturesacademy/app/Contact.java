@@ -60,4 +60,8 @@ public class Contact {
     public LinkedHashMap<String, String> getDetails() {
         return details;
     }
+
+    public void setDetail(String key, String value) {
+        details.replace(key, value);
+    }
 }

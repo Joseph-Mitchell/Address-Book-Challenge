@@ -65,7 +65,8 @@ public class UserInteraction {
             return;
         }
 
-        switch (InputReceiver.receiveInt(4)) {
+        int choice = InputReceiver.receiveInt(4);
+        switch (choice) {
             case 0:
                 contact.setFirstName(InputReceiver.receiveString());
                 break;
@@ -77,6 +78,14 @@ public class UserInteraction {
                 break;
             case 3:
                 contact.setEmail(InputReceiver.receiveEmail());
+                break;
+            default:
+                if (InputReceiver.receiveYesNo()) {
+
+                }
+                else {
+                    contact.setDetail(contact.getDetails().keySet().toArray()[choice-4].toString(), InputReceiver.receiveString());
+                }
                 break;
         }
     }
