@@ -75,6 +75,9 @@ public class UserInteraction {
             case 2:
                 contact.setPhone(InputReceiver.receivePhone());
                 break;
+            case 3:
+                contact.setEmail(InputReceiver.receiveEmail());
+                break;
         }
     }
 
