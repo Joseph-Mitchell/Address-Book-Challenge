@@ -36,7 +36,7 @@ public class ContactPrinter {
         }
     }
 
-    public static void printMatchingContacts(ArrayList<Contact> contacts, String comparitor) {
-
+    public static void printMatchingContacts(ArrayList<Contact> contacts, String comparitor) throws IllegalArgumentException {
+        if (!Validate.string(comparitor)) throw new IllegalArgumentException();
     }
 }

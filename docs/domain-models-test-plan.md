@@ -240,9 +240,10 @@ Contact ..> Validate
  - [x] Calls ContactPrinter.printMatchingContacts() with return of InputReceiver.receiveString()
 
 #### ContactPrinter.printMatchingContacts()
- - [ ] Throws exception if name empty
+ - [x] Throws exception if name empty
  - [ ] Throws exception if name only whitespace
  - [ ] Throws exception if name null
+ - [ ] Throws exception if contacts null
  - [ ] Prints expected contacts if input matches one contact
  - [ ] Prints expected contacts if input matches some contacts
  - [ ] Prints no contacts if input does not match any contact

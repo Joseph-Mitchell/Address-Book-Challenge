@@ -134,4 +134,18 @@ public class ContactPrinterTests {
                     actual);
         }
     }
+
+    @Nested
+    class PrintMatchingContacts {
+        @Test
+        @DisplayName("Throws exception if name empty")
+        void exceptionIfEmpty() {
+            //Arrange
+            String testInput = "";
+            ArrayList<Contact> testList = new ArrayList<>();
+
+            //Act, Assert
+            assertThrows(IllegalArgumentException.class, () -> ContactPrinter.printMatchingContacts(testList, testInput));
+        }
+    }
 }
