@@ -26,8 +26,8 @@ public class InputReceiver {
 
     public static String receiveString() {
         String candidate;
-        while(true) {
-            if (Validate.string(candidate = input.nextLine())) break;
+        while (!Validate.string(candidate = input.nextLine())) {
+            System.out.println("Please enter at least one character");
         }
 
         return candidate;
