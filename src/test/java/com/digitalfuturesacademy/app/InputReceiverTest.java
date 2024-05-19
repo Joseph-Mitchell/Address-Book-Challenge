@@ -13,6 +13,7 @@ import java.util.InputMismatchException;
 import java.util.LinkedHashMap;
 import java.util.Scanner;
 
+import static com.github.stefanbirkner.systemlambda.SystemLambda.withTextFromSystemIn;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;

@@ -5,11 +5,10 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 
+import static com.github.stefanbirkner.systemlambda.SystemLambda.tapSystemOutNormalized;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
@@ -58,7 +57,7 @@ public class ContactPrinterTests {
 
         @Test
         @DisplayName("Prints contact correctly when no additional details")
-        void printsContactCorrectly() {
+        void printsContactCorrectly() throws Exception {
             //Arrange
             String testFirstName = "Joseph";
             String testLastName = "Mitchell";
@@ -73,14 +72,10 @@ public class ContactPrinterTests {
             when(contactMock.getEmail()).thenReturn(testEmail);
             when(contactMock.getDetails()).thenReturn(testDetails);
 
-            ByteArrayOutputStream testOutput = new ByteArrayOutputStream();
-            System.setOut(new PrintStream(testOutput));
-
             //Act
-            ContactPrinter.printContact(contactMock);
+            String actual = tapSystemOutNormalized(() -> ContactPrinter.printContact(contactMock));
 
             //Assert
-            String actual = testOutput.toString();
             assertEquals("""
                     --------------------
                     First Name: %s
@@ -95,7 +90,7 @@ public class ContactPrinterTests {
 
         @Test
         @DisplayName("Prints contact correctly with details")
-        void printsContactCorrectlyWithDetails() {
+        void printsContactCorrectlyWithDetails() throws Exception {
             //Arrange
             String testFirstName = "Joseph";
             String testLastName = "Mitchell";
@@ -117,14 +112,10 @@ public class ContactPrinterTests {
             when(contactMock.getEmail()).thenReturn(testEmail);
             when(contactMock.getDetails()).thenReturn(testDetails);
 
-            ByteArrayOutputStream testOutput = new ByteArrayOutputStream();
-            System.setOut(new PrintStream(testOutput));
-
             //Act
-            ContactPrinter.printContact(contactMock);
+            String actual = tapSystemOutNormalized(() -> ContactPrinter.printContact(contactMock));
 
             //Assert
-            String actual = testOutput.toString();
             assertEquals("""
                     --------------------
                     First Name: %s

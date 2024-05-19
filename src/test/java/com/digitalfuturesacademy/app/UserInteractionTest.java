@@ -10,26 +10,23 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
+import static com.github.stefanbirkner.systemlambda.SystemLambda.tapSystemOutNormalized;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
 
 public class UserInteractionTest {
-    private PrintStream systemOut = System.out;
-    private ByteArrayOutputStream testOutput = new ByteArrayOutputStream();
     private MockedStatic<InputReceiver> receiverMock;
     private AddressBook addressBookMock;
 
     @BeforeEach
     void beforeEach() {
-        System.setOut(new PrintStream(testOutput));
         receiverMock = Mockito.mockStatic(InputReceiver.class);
         addressBookMock = mock(AddressBook.class);
     }
 
     @AfterEach
     void afterEach() {
-        System.setOut(systemOut);
         receiverMock.close();
         addressBookMock = null;
     }
@@ -207,15 +204,14 @@ public class UserInteractionTest {
     class RemoveContact {
         @Test
         @DisplayName("Prints message if no contacts")
-        void messageIfNoContacts() {
+        void messageIfNoContacts() throws Exception {
             //Arrange
             when(addressBookMock.getContacts()).thenReturn(new ArrayList<>());
 
             //Act
-            UserInteraction.removeContact(addressBookMock);
+            String actual = tapSystemOutNormalized(() -> UserInteraction.removeContact(addressBookMock));
 
             //Assert
-            String actual = testOutput.toString();
             assertEquals("There are no contacts in the address book.\n", actual);
         }
     }
