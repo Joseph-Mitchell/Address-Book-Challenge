@@ -433,6 +433,28 @@ public class UserInteractionTest {
             verify(addressBookMock).removeContact(testInput);
             assertTrue(actual.contains("Contact removed"));
         }
+
+        @DisplayName("Doesn't Call AddressBook.removeContact() if cancelled")
+        void cancelsCorrectly() throws Exception {
+            //Arrange
+            Contact contactMock = mock(Contact.class);
+            ArrayList<Contact> testList = new ArrayList<>();
+            testList.add(contactMock);
+
+            when(addressBookMock.getContacts()).thenReturn(testList);
+
+            int testInput = 1;
+            receiverMock.when(() -> InputReceiver.receiveInt(anyInt())).thenReturn(testInput);
+            receiverMock.when(InputReceiver::receiveYesNo).thenReturn(false);
+
+            //Act
+            String actual = tapSystemOutNormalized(() -> UserInteraction.removeContact(addressBookMock));
+
+            //Assert
+            assertTrue(actual.contains("Remove this contact? (y/n):"));
+            verify(addressBookMock, times(0)).removeContact(any());
+            assertTrue(actual.contains("Contact not removed"));
+        }
     }
 
     @Nested
