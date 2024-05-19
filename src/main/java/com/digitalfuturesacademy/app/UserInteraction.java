@@ -42,6 +42,8 @@ public class UserInteraction {
         }
 
         ContactPrinter.printAllContacts(addressBook.getContacts());
+
+        addressBook.removeContact(InputReceiver.receiveInt(addressBook.getContacts().size() - 1));
     }
 
     public static void editContact(AddressBook addressBook) {}

@@ -18,4 +18,8 @@ public class AddressBook {
 
         contacts.add(contact);
     }
+
+    public void removeContact(int index) {
+
+    }
 }

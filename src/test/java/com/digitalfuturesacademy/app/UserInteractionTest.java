@@ -233,5 +233,25 @@ public class UserInteractionTest {
             //Assert
             printerMock.verify(() -> ContactPrinter.printAllContacts(any()));
         }
+
+        @Test
+        @DisplayName("Calls AddressBook.removeContact() with return value of InputReceiver.receiveInt()")
+        void removesChosenContact() {
+            //Arrange
+            Contact contactMock = mock(Contact.class);
+            ArrayList<Contact> testList = new ArrayList<>();
+            testList.add(contactMock);
+
+            when(addressBookMock.getContacts()).thenReturn(testList);
+
+            int testInput = 1;
+            receiverMock.when(() -> InputReceiver.receiveInt(anyInt())).thenReturn(testInput);
+
+            //Act
+            UserInteraction.removeContact(addressBookMock);
+
+            //Assert
+            verify(addressBookMock).removeContact(testInput);
+        }
     }
 }

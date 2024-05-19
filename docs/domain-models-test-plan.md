@@ -202,8 +202,8 @@ Contact ..> Validate
 
 #### UserInteraction.removeContact()
  - [x] Prints message if no contacts
- - [ ] Calls ContactPrinter.printAllContacts()
- - [ ] Calls AddressBook.removeContact() with return value of InputReceiver.receiveInt()
+ - [x] Calls ContactPrinter.printAllContacts()
+ - [x] Calls AddressBook.removeContact() with return value of InputReceiver.receiveInt()
 
 #### AddressBook.removeContact()
  - [ ] Throws exception if index more than list size
