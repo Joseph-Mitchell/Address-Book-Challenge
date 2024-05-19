@@ -543,4 +543,20 @@ public class UserInteractionTest {
 //            verify(contactMock1).removeDetail(testDetailKey);
 //        }
     }
+
+    @Nested
+    class FindContact {
+        @Test
+        @DisplayName("Prints message if no contacts")
+        void messageIfNoContacts() throws Exception {
+            //Arrange
+            when(addressBookMock.getContacts()).thenReturn(new ArrayList<>());
+
+            //Act
+            String actual = tapSystemOutNormalized(() -> UserInteraction.findContact(addressBookMock));
+
+            //Assert
+            assertEquals("There are no contacts in the address book.\n", actual);
+        }
+    }
 }

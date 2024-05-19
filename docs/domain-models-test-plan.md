@@ -236,8 +236,8 @@ Contact ..> Validate
  - [x] Calls only findContact() if InputReceiver.receiveInt() returns matching int
 
 #### UserInteraction.findContact()
- - [ ] Does not call later methods if contacts list is empty
- - [ ] Calls ContactPrinter.printMatchingContacts()
+ - [x] Prints message if no contacts
+ - [ ] Calls ContactPrinter.printMatchingContacts() with return of InputReceiver.receiveString()
 
 #### ContactPrinter.printMatchingContacts()
  - [ ] Throws exception if name empty

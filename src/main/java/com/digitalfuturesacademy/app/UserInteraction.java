@@ -105,5 +105,8 @@ public class UserInteraction {
         chooseEdit(InputReceiver.receiveInt(4), contact);
     }
 
-    public static void findContact(AddressBook addressBook) {}
+    public static void findContact(AddressBook addressBook) {
+        if (addressBook.getContacts().isEmpty())
+            System.out.println("There are no contacts in the address book.");
+    }
 }
