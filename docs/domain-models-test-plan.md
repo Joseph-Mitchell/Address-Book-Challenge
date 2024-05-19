@@ -218,13 +218,14 @@ Contact ..> Validate
  - [x] Prints message if no contacts
  - [x] Calls ContactPrinter.printAllContacts()
  - [x] Calls ContactPrinter.printContact() with Contact chosen by InputReceiver.receiveInt() return value
- - [x] Calls Contact.setFirstName() with InputReceiver.receiveString() return value if second InputReceiver.receiveInt() returns 0
- - [x] Calls Contact.setLastName() with InputReceiver.receiveString() return value if second InputReceiver.receiveInt() returns 1
- - [x] Calls Contact.setPhone() with InputReceiver.receivePhone() return value if second InputReceiver.receiveInt() returns 2
- - [x] Calls Contact.setEmail() with InputReceiver.receiveEmail() return value if second InputReceiver.receiveInt() returns 3
- - [x] Calls Contact.setDetail() with InputReceiver.receiveString() return value if second InputReceiver.receiveInt() returns more than 3 and InputReceiver.receiveYesNo() returns false
- - [ ] Calls Contact.removeDetail() if second InputReceiver.receiveInt() returns more than 3 and InputReceiver.receiveYesNo() returns true
- - [ ] Contact in address book is modified as expected
+
+#### UserInteraction.editContact(): Choose edit
+ - [x] Calls Contact.setFirstName() with InputReceiver.receiveString() return value if InputReceiver.receiveInt() returns 0
+ - [x] Calls Contact.setLastName() with InputReceiver.receiveString() return value if InputReceiver.receiveInt() returns 1
+ - [x] Calls Contact.setPhone() with InputReceiver.receivePhone() return value if InputReceiver.receiveInt() returns 2
+ - [x] Calls Contact.setEmail() with InputReceiver.receiveEmail() return value if InputReceiver.receiveInt() returns 3
+ - [x] Calls Contact.setDetail() with InputReceiver.receiveString() return value if InputReceiver.receiveInt() returns more than 3 and InputReceiver.receiveYesNo() returns false
+ - [x] Calls Contact.removeDetail() if second InputReceiver.receiveInt() returns more than 3 and InputReceiver.receiveYesNo() returns true
 
 ### User Story 5
 #### UserInteraction.mainMenu()

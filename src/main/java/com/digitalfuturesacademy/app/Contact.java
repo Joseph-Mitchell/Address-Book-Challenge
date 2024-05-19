@@ -64,4 +64,8 @@ public class Contact {
     public void setDetail(String key, String value) {
         details.replace(key, value);
     }
+
+    public void removeDetail(String key) {
+        details.remove(key);
+    }
 }

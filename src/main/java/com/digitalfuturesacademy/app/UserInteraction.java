@@ -2,6 +2,7 @@ package com.digitalfuturesacademy.app;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.Objects;
 
 public class UserInteraction {
     public static void mainMenu(AddressBook addressBook) {
@@ -53,19 +54,7 @@ public class UserInteraction {
         catch (IllegalStateException e) { System.out.println(e.getMessage()); }
     }
 
-    public static void editContact(AddressBook addressBook) {
-        Contact contact;
-
-        try {
-            contact = addressBook.getContact(chooseContact(addressBook.getContacts()));
-            ContactPrinter.printContact(contact);
-        }
-        catch (IllegalStateException e) {
-            System.out.println(e.getMessage());
-            return;
-        }
-
-        int choice = InputReceiver.receiveInt(4);
+    private static void chooseEdit(int choice, Contact contact) {
         switch (choice) {
             case 0:
                 contact.setFirstName(InputReceiver.receiveString());
@@ -81,13 +70,28 @@ public class UserInteraction {
                 break;
             default:
                 if (InputReceiver.receiveYesNo()) {
-
+                    contact.removeDetail(contact.getDetails().keySet().toArray()[choice-4].toString());
                 }
                 else {
                     contact.setDetail(contact.getDetails().keySet().toArray()[choice-4].toString(), InputReceiver.receiveString());
                 }
                 break;
         }
+    }
+
+    public static void editContact(AddressBook addressBook) {
+        Contact contact;
+
+        try {
+            contact = addressBook.getContact(chooseContact(addressBook.getContacts()));
+            ContactPrinter.printContact(contact);
+        }
+        catch (IllegalStateException e) {
+            System.out.println(e.getMessage());
+            return;
+        }
+
+        chooseEdit(InputReceiver.receiveInt(4), contact);
     }
 
     public static void findContact(AddressBook addressBook) {}

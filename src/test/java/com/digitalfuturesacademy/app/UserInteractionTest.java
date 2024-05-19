@@ -430,5 +430,26 @@ public class UserInteractionTest {
             //Assert
             verify(contactMock1).setDetail(testDetailKey, testInput);
         }
+
+        @Test
+        @DisplayName("Calls Contact.setEmail() with InputReceiver.receiveEmail() return value if second InputReceiver.receiveInt() returns 3")
+        void removesContactDetail() {
+            //Arrange
+            LinkedHashMap<String, String> testDetails = new LinkedHashMap<>();
+            String testDetailKey = "Nickname";
+            testDetails.put(testDetailKey, "Joe");
+            testDetails.put("Address", "123 Place St");
+            when(contactMock1.getDetails()).thenReturn(testDetails);
+
+            receiverMock.when(() -> InputReceiver.receiveInt(anyInt())).thenReturn(1, 4);
+
+            receiverMock.when(InputReceiver::receiveYesNo).thenReturn(true);
+
+            //Act
+            UserInteraction.editContact(addressBookMock);
+
+            //Assert
+            verify(contactMock1).removeDetail(testDetailKey);
+        }
     }
 }
