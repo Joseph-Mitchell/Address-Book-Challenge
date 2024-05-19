@@ -274,6 +274,31 @@ public class UserInteractionTest {
 
     @Nested
     class EditContact {
+        Contact contactMock0;
+        Contact contactMock1;
+        Contact contactMock2;
+        ArrayList<Contact> testList;
+
+        @BeforeEach
+        void beforeEach() {
+            contactMock0 = mock(Contact.class);
+            contactMock1 = mock(Contact.class);
+            contactMock2 = mock(Contact.class);
+            testList = new ArrayList<>();
+
+            testList.add(contactMock0);
+            testList.add(contactMock1);
+            testList.add(contactMock2);
+        }
+
+        @AfterEach
+        void afterEach() {
+            contactMock0 = null;
+            contactMock1 = null;
+            contactMock2 = null;
+            testList = null;
+        }
+
         @Test
         @DisplayName("Prints message if no contacts")
         void messageIfNoContacts() throws Exception {
@@ -290,10 +315,6 @@ public class UserInteractionTest {
         @DisplayName("Calls ContactPrinter.printAllContacts()")
         void printsAllContacts() throws Exception {
             //Arrange
-            Contact contactMock = mock(Contact.class);
-            ArrayList<Contact> testList = new ArrayList<>();
-            testList.add(contactMock);
-
             when(addressBookMock.getContacts()).thenReturn(testList);
 
             //Act
@@ -301,6 +322,21 @@ public class UserInteractionTest {
 
             //Assert
             printerMock.verify(() -> ContactPrinter.printAllContacts(any()));
+        }
+
+        @Test
+        @DisplayName("Calls ContactPrinter.printContact() with Contact chosen by InputReceiver.receiveInt() return value")
+        void printsChosenContact() throws Exception {
+            //Arrange
+            when(addressBookMock.getContacts()).thenReturn(testList);
+
+            receiverMock.when(() -> InputReceiver.receiveInt(anyInt())).thenReturn(1);
+
+            //Act
+            UserInteraction.editContact(addressBookMock);
+
+            //Assert
+            printerMock.verify(() -> ContactPrinter.printContact(any()));
         }
     }
 }

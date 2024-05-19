@@ -1,5 +1,6 @@
 package com.digitalfuturesacademy.app;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 public class UserInteraction {
@@ -38,24 +39,29 @@ public class UserInteraction {
         ContactPrinter.printAllContacts(addressBook.getContacts());
     }
 
+    private static int chooseContact(ArrayList<Contact> contacts) {
+        if (contacts.isEmpty())
+            throw new IllegalStateException("There are no contacts in the address book.");
+
+        ContactPrinter.printAllContacts(contacts);
+
+        return InputReceiver.receiveInt(contacts.size() - 1);
+    }
+
     public static void removeContact(AddressBook addressBook) {
-        if (addressBook.getContacts().isEmpty()) {
-            System.out.print("There are no contacts in the address book.\n");
-            return;
-        }
-
-        ContactPrinter.printAllContacts(addressBook.getContacts());
-
-        addressBook.removeContact(InputReceiver.receiveInt(addressBook.getContacts().size() - 1));
+        try { addressBook.removeContact(chooseContact(addressBook.getContacts())); }
+        catch (IllegalStateException e) { System.out.println(e.getMessage()); }
     }
 
     public static void editContact(AddressBook addressBook) {
-        if (addressBook.getContacts().isEmpty()) {
-            System.out.print("There are no contacts in the address book.\n");
+        try {
+            Contact contact = addressBook.getContact(chooseContact(addressBook.getContacts()));
+            ContactPrinter.printContact(contact);
+        }
+        catch (IllegalStateException e) {
+            System.out.println(e.getMessage());
             return;
         }
-
-        ContactPrinter.printAllContacts(addressBook.getContacts());
     }
 
     public static void findContact(AddressBook addressBook) {}
