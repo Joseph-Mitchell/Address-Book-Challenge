@@ -3,7 +3,7 @@ package com.digitalfuturesacademy.app;
 import java.util.ArrayList;
 
 public class AddressBook {
-    private ArrayList<Contact> contacts = new ArrayList<Contact>();
+    private ArrayList<Contact> contacts = new ArrayList<>();
 
     public ArrayList<Contact> getContacts() {
         return contacts;
@@ -20,6 +20,6 @@ public class AddressBook {
     }
 
     public void removeContact(int index) {
-
+        if (index >= contacts.size()) throw new IllegalArgumentException("Index was out of range");
     }
 }

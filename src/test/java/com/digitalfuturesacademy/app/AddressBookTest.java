@@ -46,4 +46,41 @@ public class AddressBookTest {
             assertEquals(contactMock, addressBook.getContact(0));
         }
     }
+
+    @Nested
+    class RemoveContact {
+        AddressBook testAddressBook = new AddressBook();
+        Contact testContact1 = mock(Contact.class);
+        Contact testContact2 = mock(Contact.class);
+
+        @BeforeEach
+        void beforeEach() {
+            testAddressBook = new AddressBook();
+            testContact1 = mock(Contact.class);
+            testContact2 = mock(Contact.class);
+            testAddressBook.addContact(testContact1);
+            testAddressBook.addContact(testContact1);
+        }
+
+        @AfterEach
+        void afterEach() {
+            testAddressBook = null;
+            testContact1 = null;
+            testContact2 = null;
+        }
+
+        @Test
+        @DisplayName("Throws exception if index more than list size")
+        void exceptionIfIndexMoreThanListSize() {
+            //Arrange
+            AddressBook testAddressBook = new AddressBook();
+            Contact testContact1 = mock(Contact.class);
+            Contact testContact2 = mock(Contact.class);
+            testAddressBook.addContact(testContact1);
+            testAddressBook.addContact(testContact1);
+
+            //Act, Assert
+            assertThrows(IllegalArgumentException.class, () -> testAddressBook.removeContact(2));
+        }
+    }
 }

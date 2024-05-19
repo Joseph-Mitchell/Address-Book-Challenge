@@ -206,7 +206,7 @@ Contact ..> Validate
  - [x] Calls AddressBook.removeContact() with return value of InputReceiver.receiveInt()
 
 #### AddressBook.removeContact()
- - [ ] Throws exception if index more than list size
+ - [x] Throws exception if index more than list size
  - [ ] Throws exception if index less than 0
  - [ ] Removes expected element from contacts
 
