@@ -378,6 +378,23 @@ public class UserInteractionTest {
         }
 
         @Test
+        @DisplayName("Calls ContactPrinter.printAllContacts()")
+        void printsContracts() throws Exception {
+            //Arrange
+            Contact contactMock = mock(Contact.class);
+            ArrayList<Contact> testList = new ArrayList<>();
+            testList.add(contactMock);
+
+            when(addressBookMock.getContacts()).thenReturn(testList);
+
+            //Act
+            muteSystemOut(() -> UserInteraction.removeContact(addressBookMock));
+
+            //Assert
+            printerMock.verify(() -> ContactPrinter.printAllContacts(any()));
+        }
+
+        @Test
         @DisplayName("Prints message if no contacts")
         void promptForChoice() throws Exception {
             //Arrange
@@ -391,29 +408,12 @@ public class UserInteractionTest {
             String actual = tapSystemOutNormalized(() -> UserInteraction.removeContact(addressBookMock));
 
             //Assert
-            assertTrue(actual.contains("Please choose which contact to remove by number"));
-        }
-
-        @Test
-        @DisplayName("Calls ContactPrinter.printAllContacts()")
-        void printsContracts() {
-            //Arrange
-            Contact contactMock = mock(Contact.class);
-            ArrayList<Contact> testList = new ArrayList<>();
-            testList.add(contactMock);
-
-            when(addressBookMock.getContacts()).thenReturn(testList);
-
-            //Act
-            UserInteraction.removeContact(addressBookMock);
-
-            //Assert
-            printerMock.verify(() -> ContactPrinter.printAllContacts(any()));
+            assertTrue(actual.contains("Please choose contact by number"));
         }
 
         @Test
         @DisplayName("Calls AddressBook.removeContact() with return value of InputReceiver.receiveInt()")
-        void removesChosenContact() {
+        void removesChosenContact() throws Exception {
             //Arrange
             Contact contactMock = mock(Contact.class);
             ArrayList<Contact> testList = new ArrayList<>();
@@ -423,12 +423,15 @@ public class UserInteractionTest {
 
             int testInput = 1;
             receiverMock.when(() -> InputReceiver.receiveInt(anyInt())).thenReturn(testInput);
+            receiverMock.when(InputReceiver::receiveYesNo).thenReturn(true);
 
             //Act
-            UserInteraction.removeContact(addressBookMock);
+            String actual = tapSystemOutNormalized(() -> UserInteraction.removeContact(addressBookMock));
 
             //Assert
+            assertTrue(actual.contains("Remove this contact? (y/n):"));
             verify(addressBookMock).removeContact(testInput);
+            assertTrue(actual.contains("Contact removed"));
         }
     }
 

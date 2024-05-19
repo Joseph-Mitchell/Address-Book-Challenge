@@ -74,13 +74,22 @@ public class UserInteraction {
 
         ContactPrinter.printAllContacts(contacts);
 
-        System.out.println("Please choose which contact to remove by number");
+        System.out.println("Please choose contact by number");
         return InputReceiver.receiveInt(contacts.size() - 1);
     }
 
     public static void removeContact(AddressBook addressBook) {
-        try { addressBook.removeContact(chooseContact(addressBook.getContacts())); }
-        catch (IllegalStateException e) { System.out.println(e.getMessage()); }
+        try {
+            int index = chooseContact(addressBook.getContacts());
+            ContactPrinter.printContact(addressBook.getContact(index));
+            System.out.println("Remove this contact? (y/n):");
+            if (InputReceiver.receiveYesNo()) {
+                addressBook.removeContact(index);
+                System.out.println("Contact removed");
+            } else {
+                System.out.println("Contact not removed");
+            }
+        } catch (IllegalStateException e) { System.out.println(e.getMessage()); }
     }
 
     private static void editDetail(Contact contact) {

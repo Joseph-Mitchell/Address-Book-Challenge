@@ -308,7 +308,7 @@ As a user, I want to find a contact by searching for it, so that I can find the 
 
 #### UserInteraction.removeContact()
  - [x] Prompt user for choice
- - [ ] Prints confirmation message when contact is removed
+ - [x] Prints confirmation message when contact is removed
  - [ ] Prints confirmation message when canceled
 
 #### ContactPrinter.printAllContacts()
