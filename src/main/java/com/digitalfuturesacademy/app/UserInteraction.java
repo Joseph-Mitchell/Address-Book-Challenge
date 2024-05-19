@@ -73,6 +73,9 @@ public class UserInteraction {
                     String[] detail = InputReceiver.receiveDetail();
                     contact.addDetail(detail[0], detail[1]);
                 }
+                else if (InputReceiver.receiveYesNo()) {
+                    contact.removeDetail(InputReceiver.receiveString());
+                }
                 break;
         }
     }

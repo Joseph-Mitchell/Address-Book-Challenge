@@ -417,12 +417,12 @@ public class UserInteractionTest {
             UserInteraction.editContact(addressBookMock);
 
             //Assert
-            receiverMock.verify(InputReceiver::receiveYesNo);
+            receiverMock.verify(InputReceiver::receiveYesNo, atLeast(1));
         }
 
         @Test
         @DisplayName("Calls Contact.addDetail with return of InputReceiver.receiveDetail() if first InputReceiver.yesNo() returns true")
-        void addDetails() {
+        void addDetail() {
             //Arrange
             String testKey = "TestKey";
             String testValue = "TestValue";
@@ -436,6 +436,27 @@ public class UserInteractionTest {
 
             //Assert
             verify(contactMock1).addDetail(testKey, testValue);
+        }
+
+        @Test
+        @DisplayName("Calls Contact.removeDetail() if second InputReceiver.receiveYesNo() returns true")
+        void removeDetail() {
+            //Arrange
+            LinkedHashMap<String, String> testDetails = new LinkedHashMap<>();
+            String testKey = "Nickname";
+            testDetails.put(testKey, "Joe");
+            testDetails.put("Address", "123 Place St");
+            when(contactMock1.getDetails()).thenReturn(testDetails);
+
+            receiverMock.when(() -> InputReceiver.receiveInt(anyInt())).thenReturn(1, 4);
+            receiverMock.when(InputReceiver::receiveYesNo).thenReturn(false, true);
+            receiverMock.when(InputReceiver::receiveString).thenReturn(testKey);
+
+            //Act
+            UserInteraction.editContact(addressBookMock);
+
+            //Assert
+            verify(contactMock1).removeDetail(testKey);
         }
 
 //        @Test
