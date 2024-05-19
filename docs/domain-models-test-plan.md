@@ -307,13 +307,14 @@ As a user, I want to find a contact by searching for it, so that I can find the 
  - [x] Print message if input was invalid
 
 #### UserInteraction.removeContact()
+ - [ ] Prompt user for choice
  - [ ] Prints confirmation message when contact is removed
+
+#### ContactPrinter.printAllContacts()
+ - [ ] Print numbers for each contact
 
 #### UserInteraction.editContact()
  - [ ] Calls ContactPrinter.printContact() after contact is updated
-
-#### ContactPrinter.printAllContacts()
- - [ ] Print message if no contacts to print
 
 #### ContactPrinter.printMatchingContacts
  - [ ] Print message if no contacts match input
@@ -321,3 +322,4 @@ As a user, I want to find a contact by searching for it, so that I can find the 
 ### User Story 7
 #### UserInteraction.mainMenu()
  - [ ] Exits program if InputReceiver.receiveInt() returns matching int
+ - [ ] Retakes user input if invalid or chosen method returns

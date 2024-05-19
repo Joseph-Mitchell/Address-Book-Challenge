@@ -131,8 +131,10 @@ public class UserInteraction {
     }
 
     public static void findContact(AddressBook addressBook) {
-        if (addressBook.getContacts().isEmpty())
+        if (addressBook.getContacts().isEmpty()) {
             System.out.println("There are no contacts in the address book.");
+            return;
+        }
 
         ContactPrinter.printMatchingContacts(addressBook.getContacts(), InputReceiver.receiveString());
     }
