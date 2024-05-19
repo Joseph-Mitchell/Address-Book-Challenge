@@ -5,6 +5,7 @@ import org.mockito.MockedConstruction;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -158,6 +159,24 @@ public class UserInteractionTest {
 
                 //Assert
                 verify(addressBookMock).addContact(notNull());
+            }
+        }
+    }
+
+    @Nested
+    class DisplayContact {
+        @Test
+        @DisplayName("Calls ContactPrinter.printAllContacts() with list of contacts from addressBook")
+        void callPrintContactsCorrectly() {
+            //Arrange
+            ArrayList<Contact> contacts = new ArrayList<>();
+            when(addressBookMock.getContacts()).thenReturn(contacts);
+            try(MockedStatic<ContactPrinter> printerMock = mockStatic(ContactPrinter.class)) {
+                //Act
+                UserInteraction.displayContacts(addressBookMock);
+
+                //Assert
+                printerMock.verify(() -> ContactPrinter.printAllContacts(contacts));
             }
         }
     }

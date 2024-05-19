@@ -185,7 +185,7 @@ Contact ..> Validate
  - [x] Calls only displayContacts() if InputReceiver.receiveInt() returns matching int
 
 #### UserInteraction.displayContacts()
- - [ ] Calls ContactPrinter.printAllContacts() with list of contacts from addressBook
+ - [x] Calls ContactPrinter.printAllContacts() with list of contacts from addressBook
 
 #### ContactPrinter.printAllContacts()
  - [ ] Throws exception if List is null

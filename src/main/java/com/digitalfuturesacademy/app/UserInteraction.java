@@ -28,7 +28,9 @@ public class UserInteraction {
         addressBook.addContact(contact);
     }
 
-    public static void displayContacts(AddressBook addressBook) {}
+    public static void displayContacts(AddressBook addressBook) {
+        ContactPrinter.printAllContacts(addressBook.getContacts());
+    }
 
     public static void removeContact(AddressBook addressBook) {}
 
