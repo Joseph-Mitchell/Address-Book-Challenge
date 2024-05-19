@@ -410,7 +410,7 @@ public class InputReceiverTest {
 
         @Test
         @DisplayName("Does not call InputReceiver.receiveDetail() if InputReceiver.yesNo() returns false")
-        void confirmAddDetail() throws Exception {
+        void confirmNewDetail() throws Exception {
             //Arrange
             receiverMock.when(InputReceiver::receiveYesNo).thenReturn(false);
 
@@ -435,6 +435,24 @@ public class InputReceiverTest {
             receiverMock.verify(InputReceiver::receiveDetail, times(1));
         }
 
+        @Test
+        @DisplayName("Confirm adding detail")
+        void confirmAddDetail() throws Exception {
+            //Arrange
+            String testKey = "TestKey";
+            String testValue = "TestValue";
+            receiverMock.when(InputReceiver::receiveYesNo).thenReturn(true, true, false);
+            receiverMock.when(InputReceiver::receiveDetail).thenReturn(new String[] {testKey, testValue});
+
+            //Act
+            String actual = tapSystemOutNormalized(InputReceiver::receiveDetails);
+
+            //Assert
+            assertTrue(actual.contains("%s: %s".formatted(testKey, testValue)));
+            assertTrue(actual.contains("Add this detail? (y/n):"));
+            assertTrue(actual.contains("Detail added"));
+        }
+
         @ParameterizedTest
         @ValueSource(ints = {1, 2, 5, 7})
         @DisplayName("Calls InputReceiver.receiveDetail() as many times as InputReceiver.yesNo() returns true")
@@ -442,7 +460,7 @@ public class InputReceiverTest {
             //Arrange
             receiverMock.when(InputReceiver::receiveYesNo).thenAnswer(new Answer<Boolean>() {
                 int count = 0;
-                public Boolean answer(InvocationOnMock invocation) {return count++ < times;}
+                public Boolean answer(InvocationOnMock invocation) {return count++ < times*2;}
             });
             receiverMock.when(InputReceiver::receiveDetail).thenReturn(new String[] {"", ""});
 
@@ -460,7 +478,7 @@ public class InputReceiverTest {
             String testKey = "Nickname";
             String testValue = "Joe";
 
-            receiverMock.when(InputReceiver::receiveYesNo).thenReturn(true, false);
+            receiverMock.when(InputReceiver::receiveYesNo).thenReturn(true, true, false);
             receiverMock.when(InputReceiver::receiveDetail).thenReturn(new String[] {testKey, testValue});
 
             //Act

@@ -297,7 +297,7 @@ As a user, I want to find a contact by searching for it, so that I can find the 
 
 #### InputReceiver.receiveDetails()
  - [x] Print message asking if user wants to add detail
- - [ ] Confirm adding detail
+ - [x] Confirm adding detail
 
 #### InputReceiver.receiveDetail()
  - [x] Prompts user for each input

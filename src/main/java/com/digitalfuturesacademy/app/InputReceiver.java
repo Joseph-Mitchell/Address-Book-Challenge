@@ -77,7 +77,15 @@ public class InputReceiver {
             if (!receiveYesNo()) return details;
 
             String[] detail = receiveDetail();
-            details.put(detail[0], detail[1]);
+            System.out.printf("%s: %s%n", detail[0], detail[1]);
+            System.out.println("Add this detail? (y/n):");
+
+            if (receiveYesNo()) {
+                details.put(detail[0], detail[1]);
+                System.out.println("Detail added");
+            } else {
+                System.out.println("Detail not added");
+            }
         }
     }
 }
