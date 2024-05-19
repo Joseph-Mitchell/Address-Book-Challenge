@@ -1,8 +1,6 @@
 package com.digitalfuturesacademy.app;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.mockito.MockedStatic;
 
 import static com.github.stefanbirkner.systemlambda.SystemLambda.tapSystemOutNormalized;
@@ -137,6 +135,39 @@ public class ContactPrinterTests {
 
     @Nested
     class PrintMatchingContacts {
+        String testInput;
+        ArrayList<Contact> testList;
+        Contact mockContact0;
+        Contact mockContact1;
+        Contact mockContact2;
+
+        @BeforeEach
+        void beforeEach() {
+            testList = new ArrayList<>();
+            mockContact0 = mock(Contact.class);
+            mockContact1 = mock(Contact.class);
+            mockContact2 = mock(Contact.class);
+            testList.add(mockContact0);
+            testList.add(mockContact1);
+            testList.add(mockContact2);
+
+            when(mockContact0.getFirstName()).thenReturn("Joseph");
+            when(mockContact0.getLastName()).thenReturn("Mitchell");
+            when(mockContact1.getFirstName()).thenReturn("John");
+            when(mockContact1.getLastName()).thenReturn("Mitchell");
+            when(mockContact2.getFirstName()).thenReturn("John");
+            when(mockContact2.getLastName()).thenReturn("Doe");
+        }
+
+        @AfterEach
+        void afterEach() {
+            testInput = null;
+            testList = null;
+            mockContact0 = null;
+            mockContact1 = null;
+            mockContact2 = null;
+        }
+
         @Test
         @DisplayName("Throws exception if name empty")
         void exceptionIfEmpty() {
@@ -168,6 +199,34 @@ public class ContactPrinterTests {
 
             //Act, Assert
             assertThrows(IllegalArgumentException.class, () -> ContactPrinter.printMatchingContacts(testList, testInput));
+        }
+
+        @Test
+        @DisplayName("Throws exception if contacts null")
+        void exceptionIfContactsNull() {
+            //Arrange
+            String testInput = "Test";
+            ArrayList<Contact> testList = null;
+
+            //Act, Assert
+            assertThrows(IllegalArgumentException.class, () -> ContactPrinter.printMatchingContacts(testList, testInput));
+        }
+
+        @Test
+        @DisplayName("Prints expected contacts if input matches one contact")
+        void oneContactMatches() {
+            //Arrange
+            testInput = "Joseph";
+
+            try(MockedStatic<ContactPrinter> printerMock = mockStatic(ContactPrinter.class)) {
+                printerMock.when(() -> ContactPrinter.printMatchingContacts(any(), any())).thenCallRealMethod();
+
+                //Act
+                ContactPrinter.printMatchingContacts(testList, testInput);
+
+                //Assert
+                printerMock.verify(() -> ContactPrinter.printContact(mockContact0));
+            }
         }
     }
 }

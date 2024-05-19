@@ -243,8 +243,8 @@ Contact ..> Validate
  - [x] Throws exception if name empty
  - [x] Throws exception if name only whitespace
  - [x] Throws exception if name null
- - [ ] Throws exception if contacts null
- - [ ] Prints expected contacts if input matches one contact
+ - [x] Throws exception if contacts null
+ - [x] Prints expected contacts if input matches one contact
  - [ ] Prints expected contacts if input matches some contacts
  - [ ] Prints no contacts if input does not match any contact
  - [ ] Prints expected contacts if input partially matches start of firstName
