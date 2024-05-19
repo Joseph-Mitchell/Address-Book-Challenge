@@ -54,13 +54,21 @@ public class UserInteraction {
     }
 
     public static void editContact(AddressBook addressBook) {
+        Contact contact;
+
         try {
-            Contact contact = addressBook.getContact(chooseContact(addressBook.getContacts()));
+            contact = addressBook.getContact(chooseContact(addressBook.getContacts()));
             ContactPrinter.printContact(contact);
         }
         catch (IllegalStateException e) {
             System.out.println(e.getMessage());
             return;
+        }
+
+        switch (InputReceiver.receiveInt(4)) {
+            case 0:
+                contact.setFirstName(InputReceiver.receiveString());
+                break;
         }
     }
 

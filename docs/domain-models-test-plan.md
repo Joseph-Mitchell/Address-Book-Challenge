@@ -218,7 +218,7 @@ Contact ..> Validate
  - [x] Prints message if no contacts
  - [x] Calls ContactPrinter.printAllContacts()
  - [x] Calls ContactPrinter.printContact() with Contact chosen by InputReceiver.receiveInt() return value
- - [ ] Calls Contact.setFirstName() with InputReceiver.receiveString() return value if second InputReceiver.receiveInt() returns 0
+ - [x] Calls Contact.setFirstName() with InputReceiver.receiveString() return value if second InputReceiver.receiveInt() returns 0
  - [ ] Calls Contact.setLastName() with InputReceiver.receiveString() return value if second InputReceiver.receiveInt() returns 1
  - [ ] Calls Contact.setPhone() with InputReceiver.receivePhone() return value if second InputReceiver.receiveInt() returns 2
  - [ ] Calls Contact.setEmail() with InputReceiver.receiveEmail() return value if second InputReceiver.receiveInt() returns 3

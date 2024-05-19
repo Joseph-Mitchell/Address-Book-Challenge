@@ -21,6 +21,26 @@ public class Contact {
         this.details = details;
     }
 
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setDetails(LinkedHashMap<String, String> details) {
+        this.details = details;
+    }
+
     public String getFirstName() {
         return firstName;
     }

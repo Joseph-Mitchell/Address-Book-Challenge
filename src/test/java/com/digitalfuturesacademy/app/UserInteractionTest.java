@@ -289,6 +289,11 @@ public class UserInteractionTest {
             testList.add(contactMock0);
             testList.add(contactMock1);
             testList.add(contactMock2);
+
+            when(addressBookMock.getContacts()).thenReturn(testList);
+            when(addressBookMock.getContact(0)).thenReturn(contactMock0);
+            when(addressBookMock.getContact(1)).thenReturn(contactMock1);
+            when(addressBookMock.getContact(2)).thenReturn(contactMock2);
         }
 
         @AfterEach
@@ -302,6 +307,8 @@ public class UserInteractionTest {
         @Test
         @DisplayName("Prints message if no contacts")
         void messageIfNoContacts() throws Exception {
+            when(addressBookMock.getContacts()).thenReturn(new ArrayList<>());
+
             //Act
             String actual = tapSystemOutNormalized(() -> {
                 UserInteraction.editContact(addressBookMock);
@@ -314,7 +321,6 @@ public class UserInteractionTest {
         @Test
         @DisplayName("Calls ContactPrinter.printAllContacts()")
         void printsAllContacts() throws Exception {
-            //Arrange
             when(addressBookMock.getContacts()).thenReturn(testList);
 
             //Act
@@ -326,10 +332,8 @@ public class UserInteractionTest {
 
         @Test
         @DisplayName("Calls ContactPrinter.printContact() with Contact chosen by InputReceiver.receiveInt() return value")
-        void printsChosenContact() throws Exception {
+        void printsChosenContact() {
             //Arrange
-            when(addressBookMock.getContacts()).thenReturn(testList);
-
             receiverMock.when(() -> InputReceiver.receiveInt(anyInt())).thenReturn(1);
 
             //Act
@@ -337,6 +341,22 @@ public class UserInteractionTest {
 
             //Assert
             printerMock.verify(() -> ContactPrinter.printContact(any()));
+        }
+
+        @Test
+        @DisplayName("Calls Contact.setFirstName() with InputReceiver.receiveString() return value if second InputReceiver.receiveInt() returns 0")
+        void setsContactName() {
+            //Arrange
+            receiverMock.when(() -> InputReceiver.receiveInt(anyInt())).thenReturn(1, 0);
+
+            String testInput = "Greg";
+            receiverMock.when(InputReceiver::receiveString).thenReturn(testInput);
+
+            //Act
+            UserInteraction.editContact(addressBookMock);
+
+            //Assert
+            verify(contactMock1).setFirstName(testInput);
         }
     }
 }
