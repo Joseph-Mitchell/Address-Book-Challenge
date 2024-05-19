@@ -49,6 +49,10 @@ public class UserInteraction {
     }
 
     public static void displayContacts(AddressBook addressBook) {
+        if (addressBook.getContacts().isEmpty()) {
+            System.out.println("There are no contacts in the address book.");
+            return;
+        }
         ContactPrinter.printAllContacts(addressBook.getContacts());
     }
 

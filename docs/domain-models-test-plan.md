@@ -276,6 +276,9 @@ As a user, I want to find a contact by searching for it, so that I can find the 
 #### InputReceiver.receiveInt()
  - [x] Print message if input was invalid
 
+#### UserInteraction.displayContacts()
+ - [x] Print message if no contacts to print
+
 #### UserInteraction.addContact()
  - [ ] Print confirmation message when contact is added to address book
  - [ ] Print confirmation message when process is cancelled

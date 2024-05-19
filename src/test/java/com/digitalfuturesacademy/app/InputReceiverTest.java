@@ -56,45 +56,46 @@ public class InputReceiverTest {
         @DisplayName("Retakes user input if Validate.int() returns false")
         void retakesInputIfInvalid() throws Exception {
             //Arrange
-            validateMock.when(() -> Validate.integer(anyInt(), anyInt())).thenReturn(false, true);
+            when(inputMock.nextLine()).thenReturn("0");
+            validateMock.when(() -> Validate.integer(any(), anyInt())).thenReturn(false, true);
 
             //Act
             muteSystemOut(() ->InputReceiver.receiveInt(testCap));
 
             //Assert
-            verify(inputMock, times(2)).nextInt();
+            verify(inputMock, times(2)).nextLine();
         }
 
         @Test
         @DisplayName("Retakes user input if input.nextInt() throws exception")
         void retakesInputIfException() throws Exception {
             //Arrange
-            when(inputMock.nextInt()).thenThrow(InputMismatchException.class).thenReturn(0);
+            when(inputMock.nextLine()).thenThrow(InputMismatchException.class).thenReturn("0");
 
-            validateMock.when(() -> Validate.integer(anyInt(), anyInt())).thenReturn(true);
+            validateMock.when(() -> Validate.integer(any(), anyInt())).thenReturn(true);
 
             //Act
             muteSystemOut(() ->InputReceiver.receiveInt(testCap));
 
             //Assert
-            verify(inputMock, times(2)).nextInt();
+            verify(inputMock, times(2)).nextLine();
         }
 
         @Test
         @DisplayName("Returns correct int if Validate.int() returns true and no exceptions thrown")
         void returnsCorrectly() throws Exception {
             //Arrange
-            int testInput = 0;
-            when(inputMock.nextInt()).thenReturn(testInput);
+            String testInput = "0";
+            when(inputMock.nextLine()).thenReturn(testInput);
 
-            validateMock.when(() -> Validate.integer(anyInt(), anyInt())).thenReturn(true);
+            validateMock.when(() -> Validate.integer(any(), anyInt())).thenReturn(true);
 
             //Act
             muteSystemOut(() -> {
                 int actual = InputReceiver.receiveInt(testCap);
 
                 //Assert
-                assertEquals(testInput, actual);
+                assertEquals(0, actual);
             });
         }
 
@@ -103,7 +104,8 @@ public class InputReceiverTest {
         @DisplayName("Print message if input was invalid")
         void printMessageIfBadInput(int cap) throws Exception {
             //Arrange
-            validateMock.when(() -> Validate.integer(anyInt(), anyInt())).thenReturn(false, true);
+            when(inputMock.nextLine()).thenReturn("10");
+            validateMock.when(() -> Validate.integer(any(), anyInt())).thenReturn(false, true);
 
             //Act
             String actual = tapSystemOutNormalized(() -> InputReceiver.receiveInt(cap));

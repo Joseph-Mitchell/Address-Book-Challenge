@@ -23,7 +23,7 @@ public class ValidateTest {
         @DisplayName("Returns false if int less than 0")
         void falseIfLessThan0() {
             //Arrange
-            int testInput = -1;
+            String testInput = "-1";
 
             //Act
             actual = Validate.integer(testInput, VALID_CAP);
@@ -36,7 +36,7 @@ public class ValidateTest {
         @DisplayName("Returns false if int more than cap")
         void falseIfMoreThanCap() {
             //Arrange
-            int testInput = 6;
+            String testInput = "6";
 
             //Act
             actual = Validate.integer(testInput, VALID_CAP);
@@ -49,7 +49,7 @@ public class ValidateTest {
         @DisplayName("Returns true if int valid")
         void trueIfValid() {
             //Arrange
-            int testInput = 4;
+            String testInput = "4";
 
             //Act
             actual = Validate.integer(testInput, VALID_CAP);
@@ -62,7 +62,7 @@ public class ValidateTest {
         @DisplayName("Returns true if int 0 and cap 0")
         void trueIfInput0AndCap0() {
             //Arrange
-            int testInput = 0;
+            String testInput = "0";
 
             //Act
             actual = Validate.integer(testInput, 0);

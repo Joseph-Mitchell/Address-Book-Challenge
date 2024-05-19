@@ -4,8 +4,11 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 
 public class Validate {
-    public static boolean integer(int candidate, int cap) {
-        return candidate >= 0 && candidate <= cap;
+    public static boolean integer(String candidate, int cap) {
+        try {
+            int parsedCandidate = Integer.parseInt(candidate);
+            return parsedCandidate >= 0 && parsedCandidate <= cap;
+        } catch (Exception e) { return false; }
     }
 
     public static boolean string(String candidate) {

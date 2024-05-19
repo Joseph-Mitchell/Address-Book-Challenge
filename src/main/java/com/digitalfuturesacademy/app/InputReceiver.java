@@ -13,15 +13,15 @@ public class InputReceiver {
     public static int receiveInt(int cap) throws IllegalArgumentException {
         if (cap < 0) throw new IllegalArgumentException("Cap cannot be negative");
 
-        int candidate;
+        String candidate;
         while(true) {
             try {
-                if (Validate.integer(candidate = input.nextInt(), cap)) break;
+                if (Validate.integer(candidate = input.nextLine(), cap)) break;
             } catch (Exception ignored) {}
+            System.out.printf("Please enter a number between 0 and %s%n", cap);
         }
-        System.out.printf("Please enter a number between 0 and %s%n", cap);
 
-        return candidate;
+        return Integer.parseInt(candidate);
     }
 
     public static String receiveString() {

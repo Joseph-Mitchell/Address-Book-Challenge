@@ -245,16 +245,32 @@ public class UserInteractionTest {
     class DisplayContacts {
         @Test
         @DisplayName("Calls ContactPrinter.printAllContacts() with list of contacts from addressBook")
-        void callPrintContactsCorrectly() {
+        void callPrintContactsCorrectly() throws Exception {
+            //Arrange
+            Contact contactMock = mock(Contact.class);
+            ArrayList<Contact> contacts = new ArrayList<>();
+            contacts.add(contactMock);
+            when(addressBookMock.getContacts()).thenReturn(contacts);
+
+            //Act
+            muteSystemOut(() -> UserInteraction.displayContacts(addressBookMock));
+
+            //Assert
+            printerMock.verify(() -> ContactPrinter.printAllContacts(contacts));
+        }
+
+        @Test
+        @DisplayName("Print message if no contacts to print")
+        void printMessageIfNoContacts() throws Exception {
             //Arrange
             ArrayList<Contact> contacts = new ArrayList<>();
             when(addressBookMock.getContacts()).thenReturn(contacts);
 
             //Act
-            UserInteraction.displayContacts(addressBookMock);
+            String actual = tapSystemOutNormalized(() -> UserInteraction.displayContacts(addressBookMock));
 
             //Assert
-            printerMock.verify(() -> ContactPrinter.printAllContacts(contacts));
+            assertEquals("There are no contacts in the address book.\n", actual);
         }
     }
 
