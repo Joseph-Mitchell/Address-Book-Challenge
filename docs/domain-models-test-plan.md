@@ -242,7 +242,7 @@ Contact ..> Validate
 #### ContactPrinter.printMatchingContacts()
  - [x] Throws exception if name empty
  - [x] Throws exception if name only whitespace
- - [ ] Throws exception if name null
+ - [x] Throws exception if name null
  - [ ] Throws exception if contacts null
  - [ ] Prints expected contacts if input matches one contact
  - [ ] Prints expected contacts if input matches some contacts

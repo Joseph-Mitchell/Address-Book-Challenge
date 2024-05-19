@@ -158,5 +158,16 @@ public class ContactPrinterTests {
             //Act, Assert
             assertThrows(IllegalArgumentException.class, () -> ContactPrinter.printMatchingContacts(testList, testInput));
         }
+
+        @Test
+        @DisplayName("Throws exception if name null")
+        void exceptionIfNull() {
+            //Arrange
+            String testInput = null;
+            ArrayList<Contact> testList = new ArrayList<>();
+
+            //Act, Assert
+            assertThrows(IllegalArgumentException.class, () -> ContactPrinter.printMatchingContacts(testList, testInput));
+        }
     }
 }
