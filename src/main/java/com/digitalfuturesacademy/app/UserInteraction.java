@@ -74,6 +74,7 @@ public class UserInteraction {
 
         ContactPrinter.printAllContacts(contacts);
 
+        System.out.println("Please choose which contact to remove by number");
         return InputReceiver.receiveInt(contacts.size() - 1);
     }
 

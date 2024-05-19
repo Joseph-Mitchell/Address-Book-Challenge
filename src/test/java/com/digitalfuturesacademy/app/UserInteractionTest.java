@@ -378,6 +378,23 @@ public class UserInteractionTest {
         }
 
         @Test
+        @DisplayName("Prints message if no contacts")
+        void promptForChoice() throws Exception {
+            //Arrange
+            Contact contactMock = mock(Contact.class);
+            ArrayList<Contact> testList = new ArrayList<>();
+            testList.add(contactMock);
+
+            when(addressBookMock.getContacts()).thenReturn(testList);
+
+            //Act
+            String actual = tapSystemOutNormalized(() -> UserInteraction.removeContact(addressBookMock));
+
+            //Assert
+            assertTrue(actual.contains("Please choose which contact to remove by number"));
+        }
+
+        @Test
         @DisplayName("Calls ContactPrinter.printAllContacts()")
         void printsContracts() {
             //Arrange
@@ -693,6 +710,8 @@ public class UserInteractionTest {
             receiverMock.when(InputReceiver::receiveString).thenReturn(testInput);
 
             ArrayList<Contact> testList = new ArrayList<>();
+            Contact contactMock = mock(Contact.class);
+            testList.add(contactMock);
             when(addressBookMock.getContacts()).thenReturn(testList);
 
             //Act
