@@ -189,7 +189,7 @@ Contact ..> Validate
 
 #### ContactPrinter.printAllContacts()
  - [x] Throws exception if List is null
- - [ ] Calls printContact() for each element in contacts
+ - [x] Calls printContact() for each element in contacts
 
 #### ContactPrinter.printContact()
  - [ ] Throws exception if Contact is null
