@@ -13,6 +13,7 @@ import java.util.LinkedHashMap;
 import static com.github.stefanbirkner.systemlambda.SystemLambda.muteSystemOut;
 import static com.github.stefanbirkner.systemlambda.SystemLambda.tapSystemOutNormalized;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
 
@@ -184,11 +185,11 @@ public class UserInteractionTest {
 
         @Test
         @DisplayName("Calls all expected methods in InputReceiver")
-        void callsInputReceiver() {
+        void callsInputReceiver() throws Exception {
             //Arrange
             try(MockedConstruction<Contact> contactMock = Mockito.mockConstruction(Contact.class)) {
                 //Act
-                UserInteraction.addContact(addressBookMock);
+                muteSystemOut(() -> UserInteraction.addContact(addressBookMock));
 
                 //Assert
                 receiverMock.verify(InputReceiver::receiveString, times(2));
@@ -207,18 +208,18 @@ public class UserInteractionTest {
                 String actual = tapSystemOutNormalized(() -> UserInteraction.addContact(addressBookMock));
 
                 //Assert
-                assertEquals("""
+                assertTrue(actual.contains("""
                         First Name:
                         Last Name:
                         Phone:
                         Email:
-                        """, actual);
+                        """));
             }
         }
 
         @Test
         @DisplayName("Calls Contact constructor with expected parameters")
-        void callsContactConstructor() {
+        void callsContactConstructor() throws Exception {
             //Arrange
             try (MockedConstruction<Contact> contactMock = mockConstruction(Contact.class, (mock, context) -> {
                 when(mock.getFirstName()).thenReturn((String)context.arguments().get(0));
@@ -234,7 +235,7 @@ public class UserInteractionTest {
                 receiverMock.when(InputReceiver::receiveDetails).thenReturn(testDetails);
 
                 //Act
-                UserInteraction.addContact(addressBookMock);
+                muteSystemOut(() -> UserInteraction.addContact(addressBookMock));
 
                 //Assert
                 assertEquals(testFirstName, contactMock.constructed().get(0).getFirstName());
@@ -246,15 +247,56 @@ public class UserInteractionTest {
         }
 
         @Test
-        @DisplayName("Calls AddressBook.addContact()")
-        void callsAddressBookAddContact() {
+        @DisplayName("Confirm adding contact with user")
+        void confirmWithUser() throws Exception {
             //Arrange
+            try (MockedConstruction<Contact> contactMock = mockConstruction(Contact.class, (mock, context) -> {
+                when(mock.getFirstName()).thenReturn((String)context.arguments().get(0));
+                when(mock.getLastName()).thenReturn((String)context.arguments().get(1));
+                when(mock.getPhone()).thenReturn((String)context.arguments().get(2));
+                when(mock.getEmail()).thenReturn((String)context.arguments().get(3));
+                when(mock.getDetails()).thenReturn((LinkedHashMap<String, String>) context.arguments().get(4));
+            })) {
+                receiverMock.when(InputReceiver::receiveString).thenReturn(testFirstName, testLastName);
+                receiverMock.when(InputReceiver::receivePhone).thenReturn(testPhone);
+                receiverMock.when(InputReceiver::receiveEmail).thenReturn(testEmail);
+                receiverMock.when(InputReceiver::receiveDetails).thenReturn(testDetails);
+
+                //Act
+                String actual = tapSystemOutNormalized(() -> UserInteraction.addContact(addressBookMock));
+
+                //Assert
+                assertTrue(actual.contains("Add this contact? (y/n):"));
+                printerMock.verify(() -> ContactPrinter.printContact(any()));
+                receiverMock.verify(InputReceiver::receiveYesNo);
+            }
+        }
+
+        @Test
+        @DisplayName("Calls AddressBook.addContact()")
+        void callsAddressBookAddContact() throws Exception {
+            //Arrange
+            receiverMock.when(InputReceiver::receiveYesNo).thenReturn(true);
             try(MockedConstruction<Contact> contactMock = Mockito.mockConstruction(Contact.class)) {
                 //Act
-                UserInteraction.addContact(addressBookMock);
+                muteSystemOut(() -> UserInteraction.addContact(addressBookMock));
 
                 //Assert
                 verify(addressBookMock).addContact(notNull());
+            }
+        }
+
+        @Test
+        @DisplayName("AddressBook.addContact() not called if user cancels")
+        void doNotAddIfUserCancels() throws Exception {
+            //Arrange
+            receiverMock.when(InputReceiver::receiveYesNo).thenReturn(false);
+            try(MockedConstruction<Contact> contactMock = Mockito.mockConstruction(Contact.class)) {
+                //Act
+                muteSystemOut(() -> UserInteraction.addContact(addressBookMock));
+
+                //Assert
+                verify(addressBookMock, times(0)).addContact(any());
             }
         }
     }

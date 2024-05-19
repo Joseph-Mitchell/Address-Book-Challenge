@@ -83,7 +83,8 @@ public class ContactPrinterTests {
                     Phone: %s
                     
                     Email: %s
-                    --------------------""".formatted(testFirstName, testLastName, testPhone, testEmail), actual);
+                    --------------------
+                    """.formatted(testFirstName, testLastName, testPhone, testEmail), actual);
         }
 
         @Test
@@ -127,7 +128,8 @@ public class ContactPrinterTests {
                     %s: %s
                     
                     %s: %s
-                    --------------------""".formatted(testFirstName, testLastName, testPhone, testEmail,
+                    --------------------
+                    """.formatted(testFirstName, testLastName, testPhone, testEmail,
                                                       testKey1, testValue1, testKey2, testValue2),
                     actual);
         }

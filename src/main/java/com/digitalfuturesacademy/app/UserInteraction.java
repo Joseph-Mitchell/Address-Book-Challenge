@@ -49,7 +49,11 @@ public class UserInteraction {
 
         Contact contact = new Contact(firstName, lastName, phone, email, details);
 
-        addressBook.addContact(contact);
+        ContactPrinter.printContact(contact);
+        System.out.println("Add this contact? (y/n):");
+
+        if (InputReceiver.receiveYesNo())
+            addressBook.addContact(contact);
     }
 
     public static void displayContacts(AddressBook addressBook) {

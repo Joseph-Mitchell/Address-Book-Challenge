@@ -23,7 +23,7 @@ public class ContactPrinter {
             output = output.concat("\n%s: %s\n".formatted(e.getKey(), e.getValue()));
         }
 
-        output += "--------------------";
+        output += "--------------------\n";
 
         System.out.print(output);
     }
