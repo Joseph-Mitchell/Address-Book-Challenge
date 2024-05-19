@@ -453,6 +453,24 @@ public class InputReceiverTest {
             assertTrue(actual.contains("Detail added"));
         }
 
+        @Test
+        @DisplayName("Cancel adding detail")
+        void cancelAddDetail() throws Exception {
+            //Arrange
+            String testKey = "TestKey";
+            String testValue = "TestValue";
+            receiverMock.when(InputReceiver::receiveYesNo).thenReturn(true, false, false);
+            receiverMock.when(InputReceiver::receiveDetail).thenReturn(new String[] {testKey, testValue});
+
+            //Act
+            String actual = tapSystemOutNormalized(InputReceiver::receiveDetails);
+
+            //Assert
+            assertTrue(actual.contains("%s: %s".formatted(testKey, testValue)));
+            assertTrue(actual.contains("Add this detail? (y/n):"));
+            assertTrue(actual.contains("Detail not added"));
+        }
+
         @ParameterizedTest
         @ValueSource(ints = {1, 2, 5, 7})
         @DisplayName("Calls InputReceiver.receiveDetail() as many times as InputReceiver.yesNo() returns true")
