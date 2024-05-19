@@ -349,7 +349,7 @@ public class UserInteractionTest {
             //Arrange
             receiverMock.when(() -> InputReceiver.receiveInt(anyInt())).thenReturn(1, 0);
 
-            String testInput = "Greg";
+            String testInput = "Test";
             receiverMock.when(InputReceiver::receiveString).thenReturn(testInput);
 
             //Act
@@ -357,6 +357,22 @@ public class UserInteractionTest {
 
             //Assert
             verify(contactMock1).setFirstName(testInput);
+        }
+
+        @Test
+        @DisplayName("Calls Contact.setLastName() with InputReceiver.receiveString() return value if second InputReceiver.receiveInt() returns 1")
+        void setsContactLastName() {
+            //Arrange
+            receiverMock.when(() -> InputReceiver.receiveInt(anyInt())).thenReturn(1, 1);
+
+            String testInput = "Test";
+            receiverMock.when(InputReceiver::receiveString).thenReturn(testInput);
+
+            //Act
+            UserInteraction.editContact(addressBookMock);
+
+            //Assert
+            verify(contactMock1).setLastName(testInput);
         }
     }
 }

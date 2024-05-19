@@ -69,6 +69,9 @@ public class UserInteraction {
             case 0:
                 contact.setFirstName(InputReceiver.receiveString());
                 break;
+            case 1:
+                contact.setLastName(InputReceiver.receiveString());
+                break;
         }
     }
 
