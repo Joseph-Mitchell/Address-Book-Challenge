@@ -301,6 +301,20 @@ public class UserInteractionTest {
         }
 
         @Test
+        @DisplayName("Print confirmation message when process is cancelled")
+        void printMessageWhenCanceled() throws Exception {
+            //Arrange
+            receiverMock.when(InputReceiver::receiveYesNo).thenReturn(false);
+            try(MockedConstruction<Contact> contactMock = Mockito.mockConstruction(Contact.class)) {
+                //Act
+                String actual = tapSystemOutNormalized(() -> UserInteraction.addContact(addressBookMock));
+
+                //Assert
+                assertTrue(actual.contains("Contact was not added"));
+            }
+        }
+
+        @Test
         @DisplayName("AddressBook.addContact() not called if user cancels")
         void doNotAddIfUserCancels() throws Exception {
             //Arrange

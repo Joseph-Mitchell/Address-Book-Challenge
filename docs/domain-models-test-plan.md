@@ -284,7 +284,7 @@ As a user, I want to find a contact by searching for it, so that I can find the 
  - [x] Confirm adding contact with user
  - [x] AddressBook.addContact() not called if user cancels
  - [x] Print confirmation message when contact is added to address book
- - [ ] Print confirmation message when process is cancelled
+ - [x] Print confirmation message when process is cancelled
 
 #### UserInteraction.removeContact()
  - [ ] Prints confirmation message when contact is removed

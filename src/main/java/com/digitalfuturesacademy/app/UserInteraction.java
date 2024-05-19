@@ -55,6 +55,8 @@ public class UserInteraction {
         if (InputReceiver.receiveYesNo()) {
             addressBook.addContact(contact);
             System.out.println("Contact was added");
+        } else {
+            System.out.println("Contact was not added");
         }
     }
 
