@@ -192,8 +192,8 @@ Contact ..> Validate
  - [x] Calls printContact() for each element in contacts
 
 #### ContactPrinter.printContact()
- - [ ] Throws exception if Contact is null
- - [ ] Prints contact correctly when no additional details
+ - [x] Throws exception if Contact is null
+ - [x] Prints contact correctly when no additional details
  - [ ] Prints contact correctly when at least one additional detail
 
 ### User Story 3
