@@ -10,17 +10,14 @@ public class ContactPrinter {
         String output = """
                 --------------------
                 First Name: %s
-                
                 Last Name: %s
-                
                 Phone: %s
-                
                 Email: %s
                 """.formatted(contact.getFirstName(), contact.getLastName(),
                                                   contact.getPhone(), contact.getEmail());
 
         for (Map.Entry<String, String> e : contact.getDetails().entrySet()) {
-            output = output.concat("\n%s: %s\n".formatted(e.getKey(), e.getValue()));
+            output = output.concat("%s: %s\n".formatted(e.getKey(), e.getValue()));
         }
 
         output += "--------------------\n";

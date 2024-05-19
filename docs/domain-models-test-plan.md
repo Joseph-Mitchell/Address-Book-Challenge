@@ -315,10 +315,12 @@ As a user, I want to find a contact by searching for it, so that I can find the 
  - [x] Print numbers for each contact
 
 #### UserInteraction.editContact()
- - [ ] Calls ContactPrinter.printContact() after contact is updated
-
-#### ContactPrinter.printMatchingContacts
- - [ ] Print message if no contacts match input
+ - [x] Prompts choice of attribute to edit
+ - [ ] Prompts input for each default attribute
+ - [ ] Prompts user choice for detail removal and addition
+ - [ ] Confirm detail added
+ - [ ] Prompt user choice for detail to remove
+ - [ ] Prompt user choice for detail to edit and value
 
 ### User Story 7
 #### UserInteraction.mainMenu()

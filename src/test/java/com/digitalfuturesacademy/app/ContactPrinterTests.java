@@ -78,11 +78,8 @@ public class ContactPrinterTests {
             assertEquals("""
                     --------------------
                     First Name: %s
-                    
                     Last Name: %s
-                    
                     Phone: %s
-                    
                     Email: %s
                     --------------------
                     """.formatted(testFirstName, testLastName, testPhone, testEmail), actual);
@@ -119,15 +116,10 @@ public class ContactPrinterTests {
             assertEquals("""
                     --------------------
                     First Name: %s
-                    
                     Last Name: %s
-                    
                     Phone: %s
-                    
                     Email: %s
-                    
                     %s: %s
-                    
                     %s: %s
                     --------------------
                     """.formatted(testFirstName, testLastName, testPhone, testEmail,

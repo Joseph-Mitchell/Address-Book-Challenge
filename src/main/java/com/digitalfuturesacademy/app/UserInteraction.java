@@ -119,7 +119,7 @@ public class UserInteraction {
             case 3:
                 contact.setEmail(InputReceiver.receiveEmail());
                 break;
-            default:
+            case 4:
                 editDetail(contact);
                 break;
         }
@@ -137,6 +137,8 @@ public class UserInteraction {
             return;
         }
 
+        System.out.println("Choose an attribute to edit:");
+        System.out.println("0: First Name\n1: Last Name\n2: Phone\n3: Email\n4: Edit a custom detail");
         chooseEdit(InputReceiver.receiveInt(4), contact);
     }
 

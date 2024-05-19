@@ -527,6 +527,20 @@ public class UserInteractionTest {
         }
 
         @Test
+        @DisplayName("Prompts choice of attribute to edit")
+        void promptChooseAttribute() throws Exception {
+            //Arrange
+            receiverMock.when(() -> InputReceiver.receiveInt(anyInt())).thenReturn(1);
+
+            //Act
+            String actual = tapSystemOutNormalized(() -> UserInteraction.editContact(addressBookMock));
+
+            //Assert
+            assertTrue(actual.contains("Choose an attribute to edit:"));
+            assertTrue(actual.contains("0: First Name\n1: Last Name\n2: Phone\n3: Email\n4: Edit a custom detail"));
+        }
+
+        @Test
         @DisplayName("Calls Contact.setFirstName() with InputReceiver.receiveString() return value if second InputReceiver.receiveInt() returns 0")
         void setsContactName() throws Exception {
             //Arrange
