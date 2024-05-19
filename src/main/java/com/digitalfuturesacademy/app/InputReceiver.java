@@ -61,7 +61,9 @@ public class InputReceiver {
     }
 
     public static String[] receiveDetail() {
+        System.out.println("Detail Type (e.g. Address, Nickname, Favourite Color):");
         String key = receiveString();
+        System.out.println("Enter Detail:");
         String value = receiveString();
 
         return new String[] {key, value};

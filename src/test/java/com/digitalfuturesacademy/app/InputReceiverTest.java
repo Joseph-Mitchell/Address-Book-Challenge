@@ -342,8 +342,8 @@ public class InputReceiverTest {
     @Nested
     class ReceiveDetail {
         @Test
-        @DisplayName("Returns LinkedHashMap with key value given by InputReceiver.receiveString() calls")
-        void returnsCorrectly() {
+        @DisplayName("Returns ArrayList with values given by InputReceiver.receiveString() calls")
+        void returnsCorrectly() throws Exception {
             //Arrange
             try (MockedStatic<InputReceiver> receiverMock = Mockito.mockStatic(InputReceiver.class)) {
                 String testKey = "Nickname";
@@ -352,12 +352,30 @@ public class InputReceiverTest {
                 receiverMock.when(InputReceiver::receiveString).thenReturn(testKey, testValue);
 
                 //Act
-                String[] actual = InputReceiver.receiveDetail();
+                muteSystemOut(() -> {
+                    String[] actual = InputReceiver.receiveDetail();
+
+                    //Assert
+                    receiverMock.verify(InputReceiver::receiveString, times(2));
+                    assertEquals(actual[0], testKey);
+                    assertEquals(actual[1], testValue);
+                });
+            }
+        }
+
+        @Test
+        @DisplayName("Prompts user for each input")
+        void promptsInput() throws Exception {
+            //Arrange
+            try (MockedStatic<InputReceiver> receiverMock = Mockito.mockStatic(InputReceiver.class)) {
+                receiverMock.when(InputReceiver::receiveDetail).thenCallRealMethod();
+
+                //Act
+                String actual = tapSystemOutNormalized(InputReceiver::receiveDetail);
 
                 //Assert
-                receiverMock.verify(InputReceiver::receiveString, times(2));
-                assertEquals(actual[0], testKey);
-                assertEquals(actual[1], testValue);
+                assertTrue(actual.contains("Detail Type (e.g. Address, Nickname, Favourite Color):"));
+                assertTrue(actual.contains("Enter Detail:"));
             }
         }
     }
