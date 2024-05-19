@@ -36,7 +36,12 @@ public class UserInteraction {
     }
 
     public static void removeContact(AddressBook addressBook) {
-        System.out.print("There are no contacts in the address book.\n");
+        if (addressBook.getContacts().isEmpty()) {
+            System.out.print("There are no contacts in the address book.\n");
+            return;
+        }
+
+        ContactPrinter.printAllContacts(addressBook.getContacts());
     }
 
     public static void editContact(AddressBook addressBook) {}

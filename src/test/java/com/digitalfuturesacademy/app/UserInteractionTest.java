@@ -17,17 +17,20 @@ import static org.mockito.Mockito.*;
 
 public class UserInteractionTest {
     private MockedStatic<InputReceiver> receiverMock;
+    private MockedStatic<ContactPrinter> printerMock;
     private AddressBook addressBookMock;
 
     @BeforeEach
     void beforeEach() {
-        receiverMock = Mockito.mockStatic(InputReceiver.class);
+        receiverMock = mockStatic(InputReceiver.class);
+        printerMock = mockStatic(ContactPrinter.class);
         addressBookMock = mock(AddressBook.class);
     }
 
     @AfterEach
     void afterEach() {
         receiverMock.close();
+        printerMock.close();
         addressBookMock = null;
     }
 
@@ -190,13 +193,12 @@ public class UserInteractionTest {
             //Arrange
             ArrayList<Contact> contacts = new ArrayList<>();
             when(addressBookMock.getContacts()).thenReturn(contacts);
-            try(MockedStatic<ContactPrinter> printerMock = mockStatic(ContactPrinter.class)) {
-                //Act
-                UserInteraction.displayContacts(addressBookMock);
 
-                //Assert
-                printerMock.verify(() -> ContactPrinter.printAllContacts(contacts));
-            }
+            //Act
+            UserInteraction.displayContacts(addressBookMock);
+
+            //Assert
+            printerMock.verify(() -> ContactPrinter.printAllContacts(contacts));
         }
     }
 
@@ -213,6 +215,23 @@ public class UserInteractionTest {
 
             //Assert
             assertEquals("There are no contacts in the address book.\n", actual);
+        }
+
+        @Test
+        @DisplayName("Calls ContactPrinter.printAllContacts()")
+        void printsContracts() {
+            //Arrange
+            Contact contactMock = mock(Contact.class);
+            ArrayList<Contact> testList = new ArrayList<>();
+            testList.add(contactMock);
+
+            when(addressBookMock.getContacts()).thenReturn(testList);
+
+            //Act
+            UserInteraction.removeContact(addressBookMock);
+
+            //Assert
+            printerMock.verify(() -> ContactPrinter.printAllContacts(any()));
         }
     }
 }
