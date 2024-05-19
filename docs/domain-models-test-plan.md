@@ -280,6 +280,7 @@ As a user, I want to find a contact by searching for it, so that I can find the 
  - [x] Print message if no contacts to print
 
 #### UserInteraction.addContact()
+ - [x] Prompts user for each input
  - [ ] Print confirmation message when contact is added to address book
  - [ ] Print confirmation message when process is cancelled
 

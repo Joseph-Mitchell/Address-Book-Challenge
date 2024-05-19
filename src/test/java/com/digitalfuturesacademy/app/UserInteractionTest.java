@@ -199,6 +199,24 @@ public class UserInteractionTest {
         }
 
         @Test
+        @DisplayName("Prompts user for each input")
+        void promptForInput() throws Exception {
+            //Arrange
+            try(MockedConstruction<Contact> contactMock = Mockito.mockConstruction(Contact.class)) {
+                //Act
+                String actual = tapSystemOutNormalized(() -> UserInteraction.addContact(addressBookMock));
+
+                //Assert
+                assertEquals("""
+                        First Name:
+                        Last Name:
+                        Phone:
+                        Email:
+                        """, actual);
+            }
+        }
+
+        @Test
         @DisplayName("Calls Contact constructor with expected parameters")
         void callsContactConstructor() {
             //Arrange

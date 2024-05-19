@@ -37,9 +37,13 @@ public class UserInteraction {
     }
 
     public static void addContact(AddressBook addressBook) {
+        System.out.println("First Name:");
         String firstName = InputReceiver.receiveString();
+        System.out.println("Last Name:");
         String lastName = InputReceiver.receiveString();
+        System.out.println("Phone:");
         String phone = InputReceiver.receivePhone();
+        System.out.println("Email:");
         String email = InputReceiver.receiveEmail();
         LinkedHashMap<String, String> details = InputReceiver.receiveDetails();
 
