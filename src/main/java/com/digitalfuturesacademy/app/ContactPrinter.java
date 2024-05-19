@@ -42,7 +42,7 @@ public class ContactPrinter {
         String prepared = comparitor.strip().toLowerCase();
 
         for (Contact c : contacts) {
-            if (c.getFirstName().toLowerCase().contains(prepared)) printContact(c);
+            if (c.getFirstName().toLowerCase().contains(prepared) || c.getLastName().toLowerCase().contains(prepared)) printContact(c);
         }
     }
 }
