@@ -35,7 +35,9 @@ public class UserInteraction {
         ContactPrinter.printAllContacts(addressBook.getContacts());
     }
 
-    public static void removeContact(AddressBook addressBook) {}
+    public static void removeContact(AddressBook addressBook) {
+        System.out.print("There are no contacts in the address book.\n");
+    }
 
     public static void editContact(AddressBook addressBook) {}
 

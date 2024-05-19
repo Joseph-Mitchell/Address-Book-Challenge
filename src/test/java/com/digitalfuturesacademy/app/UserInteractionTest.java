@@ -5,6 +5,8 @@ import org.mockito.MockedConstruction;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
@@ -13,18 +15,21 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
 
 public class UserInteractionTest {
+    private PrintStream systemOut = System.out;
+    private ByteArrayOutputStream testOutput = new ByteArrayOutputStream();
     private MockedStatic<InputReceiver> receiverMock;
     private AddressBook addressBookMock;
 
     @BeforeEach
     void beforeEach() {
+        System.setOut(new PrintStream(testOutput));
         receiverMock = Mockito.mockStatic(InputReceiver.class);
-
         addressBookMock = mock(AddressBook.class);
     }
 
     @AfterEach
     void afterEach() {
+        System.setOut(systemOut);
         receiverMock.close();
         addressBookMock = null;
     }
@@ -181,7 +186,7 @@ public class UserInteractionTest {
     }
 
     @Nested
-    class DisplayContact {
+    class DisplayContacts {
         @Test
         @DisplayName("Calls ContactPrinter.printAllContacts() with list of contacts from addressBook")
         void callPrintContactsCorrectly() {
@@ -195,6 +200,23 @@ public class UserInteractionTest {
                 //Assert
                 printerMock.verify(() -> ContactPrinter.printAllContacts(contacts));
             }
+        }
+    }
+
+    @Nested
+    class RemoveContact {
+        @Test
+        @DisplayName("Prints message if no contacts")
+        void messageIfNoContacts() {
+            //Arrange
+            when(addressBookMock.getContacts()).thenReturn(new ArrayList<>());
+
+            //Act
+            UserInteraction.removeContact(addressBookMock);
+
+            //Assert
+            String actual = testOutput.toString();
+            assertEquals("There are no contacts in the address book.\n", actual);
         }
     }
 }

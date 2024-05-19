@@ -198,10 +198,10 @@ Contact ..> Validate
 
 ### User Story 3
 #### UserInteraction.mainMenu()
- - [ ] Calls only removeContact() if InputReceiver.receiveInt() returns matching int
+ - [x] Calls only removeContact() if InputReceiver.receiveInt() returns matching int
 
 #### UserInteraction.removeContact()
- - [ ] Does not call later methods if contacts list is empty
+ - [x] Prints message if no contacts
  - [ ] Calls ContactPrinter.printAllContacts()
  - [ ] Calls AddressBook.removeContact() with return value of InputReceiver.receiveInt()
 
