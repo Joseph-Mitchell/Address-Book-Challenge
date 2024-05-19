@@ -247,7 +247,7 @@ Contact ..> Validate
  - [x] Prints expected contacts if input matches one contact
  - [x] Prints expected contacts if input matches some contacts
  - [x] Prints no contacts if input does not match any contact
- - [ ] Prints expected contacts if input partially matches start of firstName
+ - [x] Prints expected contacts if input partially matches start of firstName
  - [ ] Prints expected contacts if input partially matches end of firstName
  - [ ] Prints expected contacts if input partially matches middle of firstName
  - [ ] Print expected contacts if input fully of partially matches lastName

@@ -39,8 +39,10 @@ public class ContactPrinter {
     public static void printMatchingContacts(ArrayList<Contact> contacts, String comparitor) throws IllegalArgumentException {
         if (!Validate.string(comparitor) || contacts == null) throw new IllegalArgumentException();
 
+        String prepared = comparitor.strip().toLowerCase();
+
         for (Contact c : contacts) {
-            if (c.getFirstName().contains(comparitor)) printContact(c);
+            if (c.getFirstName().toLowerCase().contains(prepared)) printContact(c);
         }
     }
 }
