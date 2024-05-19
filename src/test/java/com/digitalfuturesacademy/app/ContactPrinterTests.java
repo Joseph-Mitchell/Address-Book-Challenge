@@ -246,5 +246,22 @@ public class ContactPrinterTests {
                 printerMock.verify(() -> ContactPrinter.printContact(mockContact2));
             }
         }
+
+        @Test
+        @DisplayName("Prints no contacts if input does not match any contact")
+        void noContactsMatch() {
+            //Arrange
+            testInput = "z";
+
+            try(MockedStatic<ContactPrinter> printerMock = mockStatic(ContactPrinter.class)) {
+                printerMock.when(() -> ContactPrinter.printMatchingContacts(any(), any())).thenCallRealMethod();
+
+                //Act
+                ContactPrinter.printMatchingContacts(testList, testInput);
+
+                //Assert
+                printerMock.verify(() -> ContactPrinter.printContact(any()), times(0));
+            }
+        }
     }
 }
