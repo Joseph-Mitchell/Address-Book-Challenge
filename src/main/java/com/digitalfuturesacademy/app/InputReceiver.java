@@ -19,6 +19,7 @@ public class InputReceiver {
                 if (Validate.integer(candidate = input.nextInt(), cap)) break;
             } catch (Exception ignored) {}
         }
+        System.out.printf("Please enter a number between 0 and %s%n", cap);
 
         return candidate;
     }

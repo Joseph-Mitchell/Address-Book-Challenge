@@ -13,7 +13,7 @@ import java.util.InputMismatchException;
 import java.util.LinkedHashMap;
 import java.util.Scanner;
 
-import static com.github.stefanbirkner.systemlambda.SystemLambda.withTextFromSystemIn;
+import static com.github.stefanbirkner.systemlambda.SystemLambda.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
@@ -54,12 +54,12 @@ public class InputReceiverTest {
 
         @Test
         @DisplayName("Retakes user input if Validate.int() returns false")
-        void retakesInputIfInvalid() {
+        void retakesInputIfInvalid() throws Exception {
             //Arrange
             validateMock.when(() -> Validate.integer(anyInt(), anyInt())).thenReturn(false, true);
 
             //Act
-            InputReceiver.receiveInt(testCap);
+            muteSystemOut(() ->InputReceiver.receiveInt(testCap));
 
             //Assert
             verify(inputMock, times(2)).nextInt();
@@ -67,14 +67,14 @@ public class InputReceiverTest {
 
         @Test
         @DisplayName("Retakes user input if input.nextInt() throws exception")
-        void retakesInputIfException() {
+        void retakesInputIfException() throws Exception {
             //Arrange
             when(inputMock.nextInt()).thenThrow(InputMismatchException.class).thenReturn(0);
 
             validateMock.when(() -> Validate.integer(anyInt(), anyInt())).thenReturn(true);
 
             //Act
-            InputReceiver.receiveInt(testCap);
+            muteSystemOut(() ->InputReceiver.receiveInt(testCap));
 
             //Assert
             verify(inputMock, times(2)).nextInt();
@@ -82,7 +82,7 @@ public class InputReceiverTest {
 
         @Test
         @DisplayName("Returns correct int if Validate.int() returns true and no exceptions thrown")
-        void returnsCorrectly() {
+        void returnsCorrectly() throws Exception {
             //Arrange
             int testInput = 0;
             when(inputMock.nextInt()).thenReturn(testInput);
@@ -90,10 +90,26 @@ public class InputReceiverTest {
             validateMock.when(() -> Validate.integer(anyInt(), anyInt())).thenReturn(true);
 
             //Act
-            int actual = InputReceiver.receiveInt(testCap);
+            muteSystemOut(() -> {
+                int actual = InputReceiver.receiveInt(testCap);
+
+                //Assert
+                assertEquals(testInput, actual);
+            });
+        }
+
+        @ParameterizedTest
+        @ValueSource(ints = {5, 3, 6, 8})
+        @DisplayName("Print message if input was invalid")
+        void printMessageIfBadInput(int cap) throws Exception {
+            //Arrange
+            validateMock.when(() -> Validate.integer(anyInt(), anyInt())).thenReturn(false, true);
+
+            //Act
+            String actual = tapSystemOutNormalized(() -> InputReceiver.receiveInt(cap));
 
             //Assert
-            assertEquals(testInput, actual);
+            assertEquals("Please enter a number between 0 and %s\n".formatted(cap), actual);
         }
     }
 
