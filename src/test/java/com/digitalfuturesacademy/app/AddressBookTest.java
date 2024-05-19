@@ -72,15 +72,15 @@ public class AddressBookTest {
         @Test
         @DisplayName("Throws exception if index more than list size")
         void exceptionIfIndexMoreThanListSize() {
-            //Arrange
-            AddressBook testAddressBook = new AddressBook();
-            Contact testContact1 = mock(Contact.class);
-            Contact testContact2 = mock(Contact.class);
-            testAddressBook.addContact(testContact1);
-            testAddressBook.addContact(testContact1);
-
             //Act, Assert
             assertThrows(IllegalArgumentException.class, () -> testAddressBook.removeContact(2));
+        }
+
+        @Test
+        @DisplayName("Throws exception if index less than 0")
+        void exceptionIfIndexLessThan0() {
+            //Act, Assert
+            assertThrows(IllegalArgumentException.class, () -> testAddressBook.removeContact(-1));
         }
     }
 }

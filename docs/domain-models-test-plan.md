@@ -207,7 +207,7 @@ Contact ..> Validate
 
 #### AddressBook.removeContact()
  - [x] Throws exception if index more than list size
- - [ ] Throws exception if index less than 0
+ - [x] Throws exception if index less than 0
  - [ ] Removes expected element from contacts
 
 ### User Story 4
