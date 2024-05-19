@@ -21,5 +21,7 @@ public class AddressBook {
 
     public void removeContact(int index) {
         if (index < 0 || index >= contacts.size()) throw new IllegalArgumentException("Index was out of range");
+
+        contacts.remove(index);
     }
 }

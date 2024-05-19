@@ -2,6 +2,8 @@ package com.digitalfuturesacademy.app;
 
 import org.junit.jupiter.api.*;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
@@ -50,23 +52,23 @@ public class AddressBookTest {
     @Nested
     class RemoveContact {
         AddressBook testAddressBook = new AddressBook();
-        Contact testContact1 = mock(Contact.class);
-        Contact testContact2 = mock(Contact.class);
+        Contact contactMock1 = mock(Contact.class);
+        Contact contactMock2 = mock(Contact.class);
 
         @BeforeEach
         void beforeEach() {
             testAddressBook = new AddressBook();
-            testContact1 = mock(Contact.class);
-            testContact2 = mock(Contact.class);
-            testAddressBook.addContact(testContact1);
-            testAddressBook.addContact(testContact1);
+            contactMock1 = mock(Contact.class);
+            contactMock2 = mock(Contact.class);
+            testAddressBook.addContact(contactMock1);
+            testAddressBook.addContact(contactMock2);
         }
 
         @AfterEach
         void afterEach() {
             testAddressBook = null;
-            testContact1 = null;
-            testContact2 = null;
+            contactMock1 = null;
+            contactMock2 = null;
         }
 
         @Test
@@ -81,6 +83,20 @@ public class AddressBookTest {
         void exceptionIfIndexLessThan0() {
             //Act, Assert
             assertThrows(IllegalArgumentException.class, () -> testAddressBook.removeContact(-1));
+        }
+
+        @Test
+        @DisplayName("Removes expected element from contacts")
+        void removesContact() {
+            //Arrange
+            ArrayList<Contact> expected = new ArrayList<>();
+            expected.add(contactMock1);
+
+            //Act
+            testAddressBook.removeContact(1);
+
+            //Assert
+            assertEquals(expected, testAddressBook.getContacts());
         }
     }
 }
