@@ -324,6 +324,9 @@ As a user, I want to find a contact by searching for it, so that I can find the 
 #### UserInteraction.findContact()
  - [x] Prompt user to input search term
 
+#### ContactPrinter.printMatchingContacts()
+ - [x] Print message if no contacts found
+
 ### User Story 7
 #### UserInteraction.mainMenu()
  - [ ] Exits program if InputReceiver.receiveInt() returns matching int

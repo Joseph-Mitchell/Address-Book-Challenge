@@ -39,8 +39,14 @@ public class ContactPrinter {
 
         String prepared = comparitor.strip().toLowerCase();
 
+        boolean anyMatch = false;
         for (Contact c : contacts) {
-            if (c.getFirstName().toLowerCase().contains(prepared) || c.getLastName().toLowerCase().contains(prepared)) printContact(c);
+            if (c.getFirstName().toLowerCase().contains(prepared) || c.getLastName().toLowerCase().contains(prepared)) {
+                printContact(c);
+                anyMatch = true;
+            }
         }
+
+        if (!anyMatch) System.out.println("No contacts found");
     }
 }

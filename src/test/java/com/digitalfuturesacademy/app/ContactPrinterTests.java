@@ -244,7 +244,7 @@ public class ContactPrinterTests {
 
         @Test
         @DisplayName("Prints no contacts if input does not match any contact")
-        void noContactsMatch() {
+        void noContactsMatch() throws Exception {
             //Arrange
             testInput = "z";
 
@@ -252,10 +252,11 @@ public class ContactPrinterTests {
                 printerMock.when(() -> ContactPrinter.printMatchingContacts(any(), any())).thenCallRealMethod();
 
                 //Act
-                ContactPrinter.printMatchingContacts(testList, testInput);
+                String actual = tapSystemOutNormalized(() -> ContactPrinter.printMatchingContacts(testList, testInput));
 
                 //Assert
                 printerMock.verify(() -> ContactPrinter.printContact(any()), times(0));
+                assertTrue(actual.contains("No contacts found"));
             }
         }
 
