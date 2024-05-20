@@ -319,7 +319,7 @@ As a user, I want to find a contact by searching for it, so that I can find the 
  - [x] Prompts input for each default attribute
  - [x] Prompts user choice for detail removal and addition
  - [x] Prompt user choice for detail to remove
- - [ ] Prompt user choice for detail to edit and value
+ - [x] Prompt user choice for detail to edit and value
 
 ### User Story 7
 #### UserInteraction.mainMenu()

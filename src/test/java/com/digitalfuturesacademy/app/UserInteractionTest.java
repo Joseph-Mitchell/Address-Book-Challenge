@@ -659,7 +659,7 @@ public class UserInteractionTest {
 
             //Assert
             assertTrue(actual.contains("Do you want to remove a custom detail? (y/n):"));
-            assertTrue(actual.contains("Input the name of the detail you want to remove:"));
+            assertTrue(actual.contains("Enter the name of the detail you want to remove:"));
             verify(contactMock1).removeDetail(testKey);
             assertTrue(actual.contains("If detail existed, it was removed:"));
         }
@@ -680,10 +680,13 @@ public class UserInteractionTest {
             receiverMock.when(InputReceiver::receiveString).thenReturn(testKey, testValue);
 
             //Act
-            muteSystemOut(() -> UserInteraction.editContact(addressBookMock));
+            String actual = tapSystemOutNormalized(() -> UserInteraction.editContact(addressBookMock));
 
             //Assert
+            assertTrue(actual.contains("Enter the name of the detail you want to edit:"));
+            assertTrue(actual.contains("Enter new value for the detail:"));
             verify(contactMock1).setDetail(testKey, testValue);
+            assertTrue(actual.contains("If detail existed, it was edited:"));
         }
     }
 

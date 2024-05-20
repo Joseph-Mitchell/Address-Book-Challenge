@@ -92,21 +92,37 @@ public class UserInteraction {
         } catch (IllegalStateException e) { System.out.println(e.getMessage()); }
     }
 
+    private static void addDetail(Contact contact) {
+        String[] detail = InputReceiver.receiveDetail();
+        contact.addDetail(detail[0], detail[1]);
+    }
+
+    private static void removeDetail(Contact contact) {
+        System.out.println("Enter the name of the detail you want to remove:");
+        contact.removeDetail(InputReceiver.receiveString());
+        System.out.println("If detail existed, it was removed:");
+    }
+
     private static void editDetail(Contact contact) {
+        System.out.println("Enter the name of the detail you want to edit:");
+        String key = InputReceiver.receiveString();
+        System.out.println("Enter new value for the detail:");
+        contact.setDetail(key, InputReceiver.receiveString());
+        System.out.println("If detail existed, it was edited:");
+    }
+
+    private static void chooseDetailOption(Contact contact) {
         System.out.println("Do you want to add a new custom detail? (y/n):");
         if (InputReceiver.receiveYesNo()) {
-            String[] detail = InputReceiver.receiveDetail();
-            contact.addDetail(detail[0], detail[1]);
+            addDetail(contact);
             return;
         }
         System.out.println("Do you want to remove a custom detail? (y/n):");
         if (InputReceiver.receiveYesNo()) {
-            System.out.println("Input the name of the detail you want to remove:");
-            contact.removeDetail(InputReceiver.receiveString());
-            System.out.println("If detail existed, it was removed:");
+            removeDetail(contact);
             return;
         }
-        contact.setDetail(InputReceiver.receiveString(), InputReceiver.receiveString());
+        editDetail(contact);
     }
 
     private static void chooseEdit(int choice, Contact contact) {
@@ -128,7 +144,7 @@ public class UserInteraction {
                 contact.setEmail(InputReceiver.receiveEmail());
                 break;
             case 4:
-                editDetail(contact);
+                chooseDetailOption(contact);
                 break;
         }
         System.out.println("Attribute was edited");
