@@ -8,6 +8,7 @@ import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.LinkedHashMap;
 import java.util.Scanner;
@@ -162,17 +163,16 @@ public class InputReceiverTest {
 
     @Nested
     class ReceivePhone {
-        @Test
-        @DisplayName("Retakes user input if Validate.phone() returns false")
-        void retakesInput() throws Exception {
-            //Arrange
-            validateMock.when(() -> Validate.phone(any())).thenReturn(false).thenReturn(true);
+        AddressBook addressBookMock;
 
-            //Act
-            muteSystemOut(InputReceiver::receivePhone);
+        @BeforeEach
+        void beforeEach() {
+            addressBookMock = mock(AddressBook.class);
+        }
 
-            //Assert
-            verify(inputMock, times(2)).nextLine();
+        @AfterEach
+        void afterEach() {
+            addressBookMock = null;
         }
 
         @Test
@@ -182,10 +182,29 @@ public class InputReceiverTest {
             validateMock.when(() -> Validate.phone(any())).thenReturn(false).thenReturn(true);
 
             //Act
-            String actual = tapSystemOutNormalized(InputReceiver::receivePhone);
+            String actual = tapSystemOutNormalized(() -> InputReceiver.receivePhone(addressBookMock));
 
             //Assert
             assertTrue(actual.contains("Please enter a number"));
+        }
+
+        @Test
+        @DisplayName("Retakes user input if matched existing contact phone")
+        void printMessageIfExisting() throws Exception {
+            //Arrange
+            when(inputMock.nextLine()).thenReturn("0").thenReturn("1");
+            validateMock.when(() -> Validate.phone(any())).thenReturn(true).thenReturn(true);
+            Contact contactMock = mock(Contact.class);
+            when(contactMock.getPhone()).thenReturn("0");
+            ArrayList<Contact> testList = new ArrayList<>();
+            testList.add(contactMock);
+            when(addressBookMock.getContacts()).thenReturn(testList);
+
+            //Act
+            String actual = tapSystemOutNormalized(() -> InputReceiver.receivePhone(addressBookMock));
+
+            //Assert
+            assertTrue(actual.contains("Phone already used by another contact"));
         }
 
         @Test
@@ -198,7 +217,7 @@ public class InputReceiverTest {
             validateMock.when(() -> Validate.phone(any())).thenReturn(true);
 
             //Act
-            String actual = InputReceiver.receivePhone();
+            String actual = InputReceiver.receivePhone(addressBookMock);
 
             //Assert
             verify(inputMock, times(1)).nextLine();

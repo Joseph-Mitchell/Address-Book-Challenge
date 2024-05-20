@@ -42,7 +42,7 @@ public class UserInteraction {
         System.out.println("Last Name:");
         String lastName = InputReceiver.receiveString();
         System.out.println("Phone:");
-        String phone = InputReceiver.receivePhone();
+        String phone = InputReceiver.receivePhone(addressBook);
         System.out.println("Email:");
         String email = InputReceiver.receiveEmail();
         LinkedHashMap<String, String> details = InputReceiver.receiveDetails();
@@ -125,7 +125,7 @@ public class UserInteraction {
         editDetail(contact);
     }
 
-    private static void chooseEdit(int choice, Contact contact) {
+    private static void chooseEdit(int choice, Contact contact, AddressBook addressBook) {
         switch (choice) {
             case 0:
                 System.out.println("Enter new First Name:");
@@ -137,7 +137,7 @@ public class UserInteraction {
                 break;
             case 2:
                 System.out.println("Enter new Phone:");
-                contact.setPhone(InputReceiver.receivePhone());
+                contact.setPhone(InputReceiver.receivePhone(addressBook));
                 break;
             case 3:
                 System.out.println("Enter new Email:");
@@ -164,7 +164,7 @@ public class UserInteraction {
 
         System.out.println("Choose an attribute to edit:");
         System.out.println("0: First Name\n1: Last Name\n2: Phone\n3: Email\n4: Edit a custom detail");
-        chooseEdit(InputReceiver.receiveInt(4), contact);
+        chooseEdit(InputReceiver.receiveInt(4), contact, addressBook);
     }
 
     public static void findContact(AddressBook addressBook) {

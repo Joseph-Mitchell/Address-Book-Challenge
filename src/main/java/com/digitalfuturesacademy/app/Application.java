@@ -12,7 +12,7 @@ public class Application {
 
         LinkedHashMap<String, String> details2 = new LinkedHashMap<>();
         details2.put("Company", "Digital Futures");
-        Contact contact2 = new Contact("Ed", "Wright", "09876543210", "ed@digitalfutures.com", details2);
+        Contact contact2 = new Contact("Joseph", "Lastname", "09876543210", "joseph@gmail.com", details2);
 
         LinkedHashMap<String, String> details3 = new LinkedHashMap<>();
         details3.put("Species", "Unknown");

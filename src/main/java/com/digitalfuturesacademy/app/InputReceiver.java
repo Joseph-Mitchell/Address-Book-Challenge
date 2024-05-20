@@ -33,12 +33,22 @@ public class InputReceiver {
         return candidate;
     }
 
-    public static String receivePhone() {
+    public static String receivePhone(AddressBook addressBook) {
         String candidate;
-        while (!Validate.phone(candidate = input.nextLine())) {
-            System.out.println("Please enter a number");
+        WHILE:
+        while (true) {
+            if(!Validate.phone(candidate = input.nextLine())) {
+                System.out.println("Please enter a number");
+                continue;
+            }
+            for (Contact c : addressBook.getContacts()) {
+                if (c.getPhone().equals(candidate)) {
+                    System.out.println("Phone already used by another contact");
+                    continue WHILE;
+                };
+            }
+            break;
         }
-
         return candidate;
     }
 
