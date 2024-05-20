@@ -4,11 +4,16 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 
 public class Validate {
+    /**
+     @param cap highest value candidate can be (inclusive)
+     */
     public static boolean integer(String candidate, int cap) {
         try {
             int parsedCandidate = Integer.parseInt(candidate);
             return parsedCandidate >= 0 && parsedCandidate <= cap;
-        } catch (Exception e) { return false; }
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public static boolean string(String candidate) {
@@ -29,13 +34,18 @@ public class Validate {
 
     private static boolean checkStringsInCollection(Collection<String> collection) {
         for (String s : collection) {
-            if (s == null || s.isBlank()) return false;
+            if (s == null || s.isBlank()) {
+                return false;
+            }
         }
         return true;
     }
 
     public static boolean details(LinkedHashMap<String, String> candidate) {
-        if (candidate == null) return false;
-        return checkStringsInCollection(candidate.keySet()) && checkStringsInCollection(candidate.values());
+        if (candidate == null) {
+            return false;
+        }
+        return checkStringsInCollection(candidate.keySet())
+                && checkStringsInCollection(candidate.values());
     }
 }

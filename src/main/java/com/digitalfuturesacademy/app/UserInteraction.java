@@ -74,8 +74,9 @@ public class UserInteraction {
     }
 
     private static int chooseContact(ArrayList<Contact> contacts) {
-        if (contacts.isEmpty())
+        if (contacts.isEmpty()) {
             throw new IllegalStateException("There are no contacts in the address book.");
+        }
 
         ContactPrinter.printAllContacts(contacts);
 
@@ -94,7 +95,9 @@ public class UserInteraction {
             } else {
                 System.out.println("Contact not removed");
             }
-        } catch (IllegalStateException e) { System.out.println(e.getMessage()); }
+        } catch (IllegalStateException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private static void addDetail(Contact contact) {
@@ -116,6 +119,10 @@ public class UserInteraction {
         System.out.println("If detail existed, it was edited:");
     }
 
+    /**
+     * Called from chooseEdit
+     * Adds, removes or edits a custom detail for a contact
+     */
     private static void chooseDetailOption(Contact contact) {
         System.out.println("Do you want to add a new custom detail? (y/n):");
         if (InputReceiver.receiveYesNo()) {
@@ -125,12 +132,18 @@ public class UserInteraction {
         System.out.println("Do you want to remove a custom detail? (y/n):");
         if (InputReceiver.receiveYesNo()) {
             removeDetail(contact);
-            return;
+        } else {
+            editDetail(contact);
         }
-        editDetail(contact);
     }
 
-    private static void chooseEdit(int choice, Contact contact, AddressBook addressBook) {
+    /**
+     * Called from editContact
+     * Edits contact detail depending on user choice
+     */
+    private static void chooseEdit(int choice, Contact contact,
+                                   AddressBook addressBook) {
+
         switch (choice) {
             case 0:
                 System.out.println("Enter new First Name:");

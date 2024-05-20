@@ -11,12 +11,17 @@ public class InputReceiver {
     }
 
     public static int receiveInt(int cap) throws IllegalArgumentException {
-        if (cap < 0) throw new IllegalArgumentException("Cap cannot be negative");
-
         String candidate;
+
+        if (cap < 0) {
+            throw new IllegalArgumentException("Cap cannot be negative");
+        }
+
         while(true) {
             try {
-                if (Validate.integer(candidate = input.nextLine(), cap)) break;
+                if (Validate.integer(candidate = input.nextLine(), cap)) {
+                    break;
+                }
             } catch (Exception ignored) {}
             System.out.printf("Please enter a number between 0 and %s%n", cap);
         }
@@ -45,7 +50,7 @@ public class InputReceiver {
                 if (c.getPhone().equals(candidate)) {
                     System.out.println("Phone already used by another contact");
                     continue WHILE;
-                };
+                }
             }
             break;
         }
@@ -65,7 +70,7 @@ public class InputReceiver {
                 if (c.getEmail().equals(candidate)) {
                     System.out.println("Email already used by another contact");
                     continue WHILE;
-                };
+                }
             }
             break;
         }
@@ -92,11 +97,13 @@ public class InputReceiver {
     }
 
     public static LinkedHashMap<String, String> receiveDetails() {
-        LinkedHashMap<String, String> details = new LinkedHashMap<String, String>();
+        LinkedHashMap<String, String> details = new LinkedHashMap<>();
 
         while(true) {
             System.out.println("Add an extra detail? (y/n):");
-            if (!receiveYesNo()) return details;
+            if (!receiveYesNo()) {
+                return details;
+            }
 
             String[] detail = receiveDetail();
             System.out.printf("%s: %s%n", detail[0], detail[1]);
