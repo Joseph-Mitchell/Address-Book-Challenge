@@ -659,7 +659,7 @@ public class UserInteractionTest {
 
             //Assert
             assertTrue(actual.contains("Do you want to remove a custom detail? (y/n):"));
-            assertTrue(actual.contains("Enter the name of the detail you want to remove:"));
+            assertTrue(actual.contains("Enter the name of the detail you want to remove (case sensitive):"));
             verify(contactMock1).removeDetail(testKey);
             assertTrue(actual.contains("If detail existed, it was removed:"));
         }
@@ -683,7 +683,7 @@ public class UserInteractionTest {
             String actual = tapSystemOutNormalized(() -> UserInteraction.editContact(addressBookMock));
 
             //Assert
-            assertTrue(actual.contains("Enter the name of the detail you want to edit:"));
+            assertTrue(actual.contains("Enter the name of the detail you want to edit (case sensitive):"));
             assertTrue(actual.contains("Enter new value for the detail:"));
             verify(contactMock1).setDetail(testKey, testValue);
             assertTrue(actual.contains("If detail existed, it was edited:"));
@@ -718,9 +718,10 @@ public class UserInteractionTest {
             when(addressBookMock.getContacts()).thenReturn(testList);
 
             //Act
-            muteSystemOut(() -> UserInteraction.findContact(addressBookMock));
+            String actual = tapSystemOutNormalized(() -> UserInteraction.findContact(addressBookMock));
 
             //Assert
+            assertTrue(actual.contains("Search by name:"));
             printerMock.verify(() -> ContactPrinter.printMatchingContacts(testList, testInput));
         }
     }

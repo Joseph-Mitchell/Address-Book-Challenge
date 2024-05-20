@@ -98,13 +98,13 @@ public class UserInteraction {
     }
 
     private static void removeDetail(Contact contact) {
-        System.out.println("Enter the name of the detail you want to remove:");
+        System.out.println("Enter the name of the detail you want to remove (case sensitive):");
         contact.removeDetail(InputReceiver.receiveString());
         System.out.println("If detail existed, it was removed:");
     }
 
     private static void editDetail(Contact contact) {
-        System.out.println("Enter the name of the detail you want to edit:");
+        System.out.println("Enter the name of the detail you want to edit (case sensitive):");
         String key = InputReceiver.receiveString();
         System.out.println("Enter new value for the detail:");
         contact.setDetail(key, InputReceiver.receiveString());
@@ -173,6 +173,7 @@ public class UserInteraction {
             return;
         }
 
+        System.out.println("Search by name:");
         ContactPrinter.printMatchingContacts(addressBook.getContacts(), InputReceiver.receiveString());
     }
 }
