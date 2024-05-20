@@ -93,36 +93,45 @@ public class UserInteraction {
     }
 
     private static void editDetail(Contact contact) {
+        System.out.println("Do you want to add a new custom detail? (y/n):");
         if (InputReceiver.receiveYesNo()) {
             String[] detail = InputReceiver.receiveDetail();
             contact.addDetail(detail[0], detail[1]);
+            return;
         }
-        else if (InputReceiver.receiveYesNo()) {
+        System.out.println("Do you want to remove a custom detail? (y/n):");
+        if (InputReceiver.receiveYesNo()) {
+            System.out.println("Input the name of the detail you want to remove:");
             contact.removeDetail(InputReceiver.receiveString());
+            System.out.println("If detail existed, it was removed:");
+            return;
         }
-        else {
-            contact.setDetail(InputReceiver.receiveString(), InputReceiver.receiveString());
-        }
+        contact.setDetail(InputReceiver.receiveString(), InputReceiver.receiveString());
     }
 
     private static void chooseEdit(int choice, Contact contact) {
         switch (choice) {
             case 0:
+                System.out.println("Enter new First Name:");
                 contact.setFirstName(InputReceiver.receiveString());
                 break;
             case 1:
+                System.out.println("Enter new Last Name:");
                 contact.setLastName(InputReceiver.receiveString());
                 break;
             case 2:
+                System.out.println("Enter new Phone:");
                 contact.setPhone(InputReceiver.receivePhone());
                 break;
             case 3:
+                System.out.println("Enter new Email:");
                 contact.setEmail(InputReceiver.receiveEmail());
                 break;
             case 4:
                 editDetail(contact);
                 break;
         }
+        System.out.println("Attribute was edited");
     }
 
     public static void editContact(AddressBook addressBook) {

@@ -316,10 +316,9 @@ As a user, I want to find a contact by searching for it, so that I can find the 
 
 #### UserInteraction.editContact()
  - [x] Prompts choice of attribute to edit
- - [ ] Prompts input for each default attribute
- - [ ] Prompts user choice for detail removal and addition
- - [ ] Confirm detail added
- - [ ] Prompt user choice for detail to remove
+ - [x] Prompts input for each default attribute
+ - [x] Prompts user choice for detail removal and addition
+ - [x] Prompt user choice for detail to remove
  - [ ] Prompt user choice for detail to edit and value
 
 ### User Story 7

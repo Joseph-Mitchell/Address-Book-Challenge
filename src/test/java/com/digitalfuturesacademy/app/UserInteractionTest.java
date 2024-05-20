@@ -10,8 +10,7 @@ import java.util.LinkedHashMap;
 
 import static com.github.stefanbirkner.systemlambda.SystemLambda.muteSystemOut;
 import static com.github.stefanbirkner.systemlambda.SystemLambda.tapSystemOutNormalized;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
 
@@ -550,10 +549,12 @@ public class UserInteractionTest {
             receiverMock.when(InputReceiver::receiveString).thenReturn(testInput);
 
             //Act
-            muteSystemOut(() -> UserInteraction.editContact(addressBookMock));
+            String actual = tapSystemOutNormalized(() -> UserInteraction.editContact(addressBookMock));
 
             //Assert
+            assertTrue(actual.contains("Enter new First Name:"));
             verify(contactMock1).setFirstName(testInput);
+            assertTrue(actual.contains("Attribute was edited"));
         }
 
         @Test
@@ -566,9 +567,10 @@ public class UserInteractionTest {
             receiverMock.when(InputReceiver::receiveString).thenReturn(testInput);
 
             //Act
-            muteSystemOut(() -> UserInteraction.editContact(addressBookMock));
+            String actual = tapSystemOutNormalized(() -> UserInteraction.editContact(addressBookMock));
 
             //Assert
+            assertTrue(actual.contains("Enter new Last Name:"));
             verify(contactMock1).setLastName(testInput);
         }
 
@@ -582,9 +584,10 @@ public class UserInteractionTest {
             receiverMock.when(InputReceiver::receivePhone).thenReturn(testInput);
 
             //Act
-            muteSystemOut(() -> UserInteraction.editContact(addressBookMock));
+            String actual = tapSystemOutNormalized(() -> UserInteraction.editContact(addressBookMock));
 
             //Assert
+            assertTrue(actual.contains("Enter new Phone:"));
             verify(contactMock1).setPhone(testInput);
         }
 
@@ -598,9 +601,10 @@ public class UserInteractionTest {
             receiverMock.when(InputReceiver::receiveEmail).thenReturn(testInput);
 
             //Act
-            muteSystemOut(() -> UserInteraction.editContact(addressBookMock));
+            String actual = tapSystemOutNormalized(() -> UserInteraction.editContact(addressBookMock));
 
             //Assert
+            assertTrue(actual.contains("Enter new Email:"));
             verify(contactMock1).setEmail(testInput);
         }
 
@@ -611,9 +615,10 @@ public class UserInteractionTest {
             receiverMock.when(() -> InputReceiver.receiveInt(anyInt())).thenReturn(1, 4);
 
             //Act
-            muteSystemOut(() -> UserInteraction.editContact(addressBookMock));
+            String actual = tapSystemOutNormalized(() -> UserInteraction.editContact(addressBookMock));
 
             //Assert
+            assertTrue(actual.contains("Do you want to add a new custom detail? (y/n):"));
             receiverMock.verify(InputReceiver::receiveYesNo, atLeast(1));
         }
 
@@ -650,10 +655,13 @@ public class UserInteractionTest {
             receiverMock.when(InputReceiver::receiveString).thenReturn(testKey);
 
             //Act
-            muteSystemOut(() -> UserInteraction.editContact(addressBookMock));
+            String actual = tapSystemOutNormalized(() -> UserInteraction.editContact(addressBookMock));
 
             //Assert
+            assertTrue(actual.contains("Do you want to remove a custom detail? (y/n):"));
+            assertTrue(actual.contains("Input the name of the detail you want to remove:"));
             verify(contactMock1).removeDetail(testKey);
+            assertTrue(actual.contains("If detail existed, it was removed:"));
         }
 
         @Test
