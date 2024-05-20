@@ -1,7 +1,6 @@
 package com.digitalfuturesacademy.app;
 
-import java.util.LinkedHashMap;
-import java.util.Scanner;
+import java.util.*;
 
 public class InputReceiver {
     private static Scanner input = new Scanner(System.in);
@@ -38,43 +37,57 @@ public class InputReceiver {
         return candidate;
     }
 
-    public static String receivePhone(AddressBook addressBook) {
+    /**
+     * Prompts the user to input a phone number, validates the input,
+     * and ensures the phone number is not already in use by another contact.
+     *
+     * @param contacts the list of existing contacts
+     * @return a valid and unique phone number
+     */
+    public static String receivePhone(ArrayList<Contact> contacts) {
         String candidate;
-        WHILE:
+        Set<String> phoneNumbers = new HashSet<>();
+        for (Contact c : contacts) {
+            phoneNumbers.add(c.getPhone());
+        }
+
         while (true) {
-            if(!Validate.phone(candidate = input.nextLine())) {
+            candidate = input.nextLine();
+            if(!Validate.phone(candidate)) {
                 System.out.println("Please enter a number");
-                continue;
-            }
-            for (Contact c : addressBook.getContacts()) {
-                if (c.getPhone().equals(candidate)) {
+            } else if (phoneNumbers.contains(candidate)) {
                     System.out.println("Phone already used by another contact");
-                    continue WHILE;
-                }
+            } else {
+                break;
             }
-            break;
         }
         return candidate;
     }
 
-    public static String receiveEmail(AddressBook addressBook) {
+    /**
+     * Prompts the user to input an email, validates the input,
+     * and ensures the email is not already in use by another contact.
+     *
+     * @param contacts the list of existing contacts
+     * @return a valid and unique email
+     */
+    public static String receiveEmail(ArrayList<Contact> contacts) {
         String candidate;
-
-        WHILE:
-        while (true) {
-            if(!Validate.email(candidate = input.nextLine())) {
-                System.out.println("Please enter an email (e.g.: person@example.com)");
-                continue;
-            }
-            for (Contact c : addressBook.getContacts()) {
-                if (c.getEmail().equals(candidate)) {
-                    System.out.println("Email already used by another contact");
-                    continue WHILE;
-                }
-            }
-            break;
+        Set<String> emails = new HashSet<>();
+        for (Contact c : contacts) {
+            emails.add(c.getEmail());
         }
 
+        while (true) {
+            candidate = input.nextLine();
+            if(!Validate.email(candidate)) {
+                System.out.println("Please enter an email (e.g.: person@example.com)");
+            } else if (emails.contains(candidate)) {
+                System.out.println("Email already used by another contact");
+            } else {
+                break;
+            }
+        }
         return candidate;
     }
 

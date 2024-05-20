@@ -47,9 +47,9 @@ public class UserInteraction {
         System.out.println("Last Name:");
         String lastName = InputReceiver.receiveString();
         System.out.println("Phone:");
-        String phone = InputReceiver.receivePhone(addressBook);
+        String phone = InputReceiver.receivePhone(addressBook.getContacts());
         System.out.println("Email:");
-        String email = InputReceiver.receiveEmail(addressBook);
+        String email = InputReceiver.receiveEmail(addressBook.getContacts());
         LinkedHashMap<String, String> details = InputReceiver.receiveDetails();
 
         Contact contact = new Contact(firstName, lastName, phone, email, details);
@@ -155,11 +155,11 @@ public class UserInteraction {
                 break;
             case 2:
                 System.out.println("Enter new Phone:");
-                contact.setPhone(InputReceiver.receivePhone(addressBook));
+                contact.setPhone(InputReceiver.receivePhone(addressBook.getContacts()));
                 break;
             case 3:
                 System.out.println("Enter new Email:");
-                contact.setEmail(InputReceiver.receiveEmail(addressBook));
+                contact.setEmail(InputReceiver.receiveEmail(addressBook.getContacts()));
                 break;
             case 4:
                 chooseDetailOption(contact);
