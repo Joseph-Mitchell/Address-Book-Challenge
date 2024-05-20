@@ -52,10 +52,22 @@ public class InputReceiver {
         return candidate;
     }
 
-    public static String receiveEmail() {
+    public static String receiveEmail(AddressBook addressBook) {
         String candidate;
-        while (!Validate.email(candidate = input.nextLine())) {
-            System.out.println("Please enter an email e.g.: person@example.com");
+
+        WHILE:
+        while (true) {
+            if(!Validate.email(candidate = input.nextLine())) {
+                System.out.println("Please enter an email (e.g.: person@example.com)");
+                continue;
+            }
+            for (Contact c : addressBook.getContacts()) {
+                if (c.getEmail().equals(candidate)) {
+                    System.out.println("Email already used by another contact");
+                    continue WHILE;
+                };
+            }
+            break;
         }
 
         return candidate;

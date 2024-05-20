@@ -191,7 +191,7 @@ public class UserInteractionTest {
                 //Assert
                 receiverMock.verify(InputReceiver::receiveString, times(2));
                 receiverMock.verify(() -> InputReceiver.receivePhone(any()), times(1));
-                receiverMock.verify(InputReceiver::receiveEmail, times(1));
+                receiverMock.verify(() -> InputReceiver.receiveEmail(any()), times(1));
                 receiverMock.verify(InputReceiver::receiveDetails, times(1));
             }
         }
@@ -228,7 +228,7 @@ public class UserInteractionTest {
 
                 receiverMock.when(InputReceiver::receiveString).thenReturn(testFirstName, testLastName);
                 receiverMock.when(() -> InputReceiver.receivePhone(any())).thenReturn(testPhone);
-                receiverMock.when(InputReceiver::receiveEmail).thenReturn(testEmail);
+                receiverMock.when(() -> InputReceiver.receiveEmail(any())).thenReturn(testEmail);
                 receiverMock.when(InputReceiver::receiveDetails).thenReturn(testDetails);
 
                 //Act
@@ -256,7 +256,7 @@ public class UserInteractionTest {
             })) {
                 receiverMock.when(InputReceiver::receiveString).thenReturn(testFirstName, testLastName);
                 receiverMock.when(() -> InputReceiver.receivePhone(any())).thenReturn(testPhone);
-                receiverMock.when(InputReceiver::receiveEmail).thenReturn(testEmail);
+                receiverMock.when(() -> InputReceiver.receiveEmail(any())).thenReturn(testEmail);
                 receiverMock.when(InputReceiver::receiveDetails).thenReturn(testDetails);
 
                 //Act
@@ -598,7 +598,7 @@ public class UserInteractionTest {
             receiverMock.when(() -> InputReceiver.receiveInt(anyInt())).thenReturn(1, 3);
 
             String testInput = "Test";
-            receiverMock.when(InputReceiver::receiveEmail).thenReturn(testInput);
+            receiverMock.when(() -> InputReceiver.receiveEmail(any())).thenReturn(testInput);
 
             //Act
             String actual = tapSystemOutNormalized(() -> UserInteraction.editContact(addressBookMock));

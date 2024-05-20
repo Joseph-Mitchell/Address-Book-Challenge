@@ -119,7 +119,7 @@ As a user, I want to find a contact by searching for it, so that I can find the 
 
 #### InputReceiver.receiveEmail()
  - [x] Retakes user input if Validate.email() returns false
- - [ ] Retakes user input if matched existing contact email
+ - [x] Retakes user input if matched existing contact email
  - [x] Returns correct String if Validate.email() returns true
 
 #### InputReceiver.receiveYesNo()

@@ -227,6 +227,18 @@ public class InputReceiverTest {
 
     @Nested
     class ReceiveEmail {
+        AddressBook addressBookMock;
+
+        @BeforeEach
+        void beforeEach() {
+            addressBookMock = mock(AddressBook.class);
+        }
+
+        @AfterEach
+        void afterEach() {
+            addressBookMock = null;
+        }
+
         @Test
         @DisplayName("Retakes user input if Validate.email() returns false")
         void retakesInput() throws Exception {
@@ -234,10 +246,29 @@ public class InputReceiverTest {
             validateMock.when(() -> Validate.email(any())).thenReturn(false).thenReturn(true);
 
             //Act
-            muteSystemOut(InputReceiver::receiveEmail);
+            muteSystemOut(() -> InputReceiver.receiveEmail(addressBookMock));
 
             //Assert
             verify(inputMock, times(2)).nextLine();
+        }
+
+        @Test
+        @DisplayName("Retakes user input if matched existing contact email")
+        void printMessageIfExisting() throws Exception {
+            //Arrange
+            when(inputMock.nextLine()).thenReturn("test").thenReturn("testnew");
+            validateMock.when(() -> Validate.email(any())).thenReturn(true);
+            Contact contactMock = mock(Contact.class);
+            when(contactMock.getEmail()).thenReturn("test");
+            ArrayList<Contact> testList = new ArrayList<>();
+            testList.add(contactMock);
+            when(addressBookMock.getContacts()).thenReturn(testList);
+
+            //Act
+            String actual = tapSystemOutNormalized(() -> InputReceiver.receiveEmail(addressBookMock));
+
+            //Assert
+            assertTrue(actual.contains("Email already used by another contact"));
         }
 
         @Test
@@ -247,10 +278,10 @@ public class InputReceiverTest {
             validateMock.when(() -> Validate.email(any())).thenReturn(false).thenReturn(true);
 
             //Act
-            String actual = tapSystemOutNormalized(InputReceiver::receiveEmail);
+            String actual = tapSystemOutNormalized(() -> InputReceiver.receiveEmail(addressBookMock));
 
             //Assert
-            assertTrue(actual.contains("Please enter an email e.g.: person@example.com"));
+            assertTrue(actual.contains("Please enter an email (e.g.: person@example.com)"));
         }
 
         @Test
@@ -263,7 +294,7 @@ public class InputReceiverTest {
             validateMock.when(() -> Validate.email(any())).thenReturn(true);
 
             //Act
-            String actual = InputReceiver.receiveEmail();
+            String actual = InputReceiver.receiveEmail(addressBookMock);
 
             //Assert
             verify(inputMock, times(1)).nextLine();
