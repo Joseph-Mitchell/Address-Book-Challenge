@@ -8,8 +8,7 @@ import org.mockito.Mockito;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
-import static com.github.stefanbirkner.systemlambda.SystemLambda.muteSystemOut;
-import static com.github.stefanbirkner.systemlambda.SystemLambda.tapSystemOutNormalized;
+import static com.github.stefanbirkner.systemlambda.SystemLambda.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
@@ -151,6 +150,16 @@ public class UserInteractionTest {
         }
 
         @Test
+        @DisplayName("Exits program if InputReceiver.receiveInt() returns matching int")
+        void exitsProgram() throws Exception {
+            //Arrange
+            receiverMock.when(() -> InputReceiver.receiveInt(anyInt())).thenReturn(5);
+
+            //Act, Assert
+            catchSystemExit(() -> muteSystemOut(() -> UserInteraction.mainMenu(addressBookMock)));
+        }
+
+        @Test
         @DisplayName("Print message showing options")
         void printOptions() throws Exception {
             //Arrange
@@ -168,6 +177,7 @@ public class UserInteractionTest {
                     2. Remove a contact
                     3. Edit a contact
                     4. Search contacts
+                    5. Exit
                     """, actual);
         }
     }

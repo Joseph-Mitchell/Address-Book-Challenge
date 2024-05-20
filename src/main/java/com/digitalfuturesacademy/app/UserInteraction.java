@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 public class UserInteraction {
-    public static void mainMenu(AddressBook addressBook) {
+    public static void mainMenu(AddressBook addressBook) throws Exception {
         System.out.print("""
                 Please choose an option:
                 
@@ -13,9 +13,10 @@ public class UserInteraction {
                 2. Remove a contact
                 3. Edit a contact
                 4. Search contacts
+                5. Exit
                 """);
 
-        int choice = InputReceiver.receiveInt(4);
+        int choice = InputReceiver.receiveInt(5);
 
         switch(choice) {
             case 0:
@@ -33,6 +34,8 @@ public class UserInteraction {
             case 4:
                 findContact(addressBook);
                 break;
+            case 5:
+                System.exit(0);
         }
     }
 

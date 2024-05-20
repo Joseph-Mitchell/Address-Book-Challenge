@@ -11,7 +11,7 @@ import static org.mockito.Mockito.mockStatic;
 public class ApplicationTest {
     @Test
     @DisplayName("Calls mainMenu")
-    void CallsMainMenu() {
+    void CallsMainMenu() throws Exception {
         //Arrange
         try(MockedStatic<UserInteraction> UIMock = mockStatic(UserInteraction.class)) {
             //Act

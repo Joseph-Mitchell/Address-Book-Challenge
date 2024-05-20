@@ -331,5 +331,5 @@ As a user, I want to find a contact by searching for it, so that I can find the 
 
 ### User Story 7
 #### UserInteraction.mainMenu()
- - [ ] Exits program if InputReceiver.receiveInt() returns matching int
+ - [x] Exits program if InputReceiver.receiveInt() returns matching int
  - [ ] Retakes user input if invalid or chosen method returns
