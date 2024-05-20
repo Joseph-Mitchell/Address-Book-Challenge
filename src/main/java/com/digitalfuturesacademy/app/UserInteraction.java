@@ -4,38 +4,40 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 public class UserInteraction {
-    public static void mainMenu(AddressBook addressBook) throws Exception {
-        System.out.print("""
-                Please choose an option:
-                
-                0. Display contacts
-                1. Add a new contact
-                2. Remove a contact
-                3. Edit a contact
-                4. Search contacts
-                5. Exit
-                """);
+    public static void mainMenu(AddressBook addressBook) {
+        while(true) {
+            System.out.print("""
+                    Please choose an option:
+                    
+                    0. Display contacts
+                    1. Add a new contact
+                    2. Remove a contact
+                    3. Edit a contact
+                    4. Search contacts
+                    5. Exit
+                    """);
 
-        int choice = InputReceiver.receiveInt(5);
+            int choice = InputReceiver.receiveInt(5);
 
-        switch(choice) {
-            case 0:
-                displayContacts(addressBook);
-                break;
-            case 1:
-                addContact(addressBook);
-                break;
-            case 2:
-                removeContact(addressBook);
-                break;
-            case 3:
-                editContact(addressBook);
-                break;
-            case 4:
-                findContact(addressBook);
-                break;
-            case 5:
-                System.exit(0);
+            switch (choice) {
+                case 0:
+                    displayContacts(addressBook);
+                    break;
+                case 1:
+                    addContact(addressBook);
+                    break;
+                case 2:
+                    removeContact(addressBook);
+                    break;
+                case 3:
+                    editContact(addressBook);
+                    break;
+                case 4:
+                    findContact(addressBook);
+                    break;
+                case 5:
+                    System.exit(0);
+            }
         }
     }
 
